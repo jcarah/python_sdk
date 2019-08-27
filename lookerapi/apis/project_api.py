@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -42,7 +42,7 @@ class ProjectApi(object):
 
     def all_git_branches(self, project_id, **kwargs):
         """
-        Get All Git Branchs
+        Get All Git Branches
         ### Get All Git Branches  Returns a list of git branches in the project repository 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -68,7 +68,7 @@ class ProjectApi(object):
 
     def all_git_branches_with_http_info(self, project_id, **kwargs):
         """
-        Get All Git Branchs
+        Get All Git Branches
         ### Get All Git Branches  Returns a list of git branches in the project repository 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -150,7 +150,7 @@ class ProjectApi(object):
     def all_git_connection_tests(self, project_id, **kwargs):
         """
         Get All Git Connection Tests
-        ### Get All Git Connection Tests  Returns a list of tests which can be run against a project's git connection 
+        ### Get All Git Connection Tests  Returns a list of tests which can be run against a project's (or the dependency project for the provided remote_url) git connection. Call [Run Git Connection Test](#!/Project/run_git_connection_test) to execute each test in sequence.  Tests are ordered by increasing specificity. Tests should be run in the order returned because later tests require functionality tested by tests earlier in the test list.  For example, a late-stage test for write access is meaningless if connecting to the git server (an early test) is failing. 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -162,6 +162,7 @@ class ProjectApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project_id: Project Id (required)
+        :param str remote_url: (Optional: leave blank for root project) The remote url for remote dependency to test.
         :return: list[GitConnectionTest]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -176,7 +177,7 @@ class ProjectApi(object):
     def all_git_connection_tests_with_http_info(self, project_id, **kwargs):
         """
         Get All Git Connection Tests
-        ### Get All Git Connection Tests  Returns a list of tests which can be run against a project's git connection 
+        ### Get All Git Connection Tests  Returns a list of tests which can be run against a project's (or the dependency project for the provided remote_url) git connection. Call [Run Git Connection Test](#!/Project/run_git_connection_test) to execute each test in sequence.  Tests are ordered by increasing specificity. Tests should be run in the order returned because later tests require functionality tested by tests earlier in the test list.  For example, a late-stage test for write access is meaningless if connecting to the git server (an early test) is failing. 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -188,12 +189,13 @@ class ProjectApi(object):
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str project_id: Project Id (required)
+        :param str remote_url: (Optional: leave blank for root project) The remote url for remote dependency to test.
         :return: list[GitConnectionTest]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project_id']
+        all_params = ['project_id', 'remote_url']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -221,6 +223,8 @@ class ProjectApi(object):
             path_params['project_id'] = params['project_id']
 
         query_params = {}
+        if 'remote_url' in params:
+            query_params['remote_url'] = params['remote_url']
 
         header_params = {}
 
@@ -469,6 +473,117 @@ class ProjectApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
+    def create_git_branch(self, project_id, **kwargs):
+        """
+        Checkout New Git Branch
+        ### Create and Checkout a Git Branch  Creates and checks out a new branch in the given project repository Only allowed in development mode   - Call `update_session` to select the 'dev' workspace.  Optionally specify a branch name, tag name or commit SHA as the start point in the ref field.   If no ref is specified, HEAD of the current branch will be used as the start point for the new branch.  
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.create_git_branch(project_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :param GitBranch body: Git Branch
+        :return: GitBranch
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.create_git_branch_with_http_info(project_id, **kwargs)
+        else:
+            (data) = self.create_git_branch_with_http_info(project_id, **kwargs)
+            return data
+
+    def create_git_branch_with_http_info(self, project_id, **kwargs):
+        """
+        Checkout New Git Branch
+        ### Create and Checkout a Git Branch  Creates and checks out a new branch in the given project repository Only allowed in development mode   - Call `update_session` to select the 'dev' workspace.  Optionally specify a branch name, tag name or commit SHA as the start point in the ref field.   If no ref is specified, HEAD of the current branch will be used as the start point for the new branch.  
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.create_git_branch_with_http_info(project_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :param GitBranch body: Git Branch
+        :return: GitBranch
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project_id', 'body']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_git_branch" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'project_id' is set
+        if ('project_id' not in params) or (params['project_id'] is None):
+            raise ValueError("Missing the required parameter `project_id` when calling `create_git_branch`")
+
+
+        collection_formats = {}
+
+        resource_path = '/projects/{project_id}/git_branch'.replace('{format}', 'json')
+        path_params = {}
+        if 'project_id' in params:
+            path_params['project_id'] = params['project_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='GitBranch',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
     def create_git_deploy_key(self, project_id, **kwargs):
         """
         Create Deploy Key
@@ -680,6 +795,669 @@ class ProjectApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
+    def delete_git_branch(self, project_id, branch_name, **kwargs):
+        """
+        Delete a Git Branch
+        ### Delete the specified Git Branch  Delete git branch specified in branch_name path param from local and remote of specified project repository 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.delete_git_branch(project_id, branch_name, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :param str branch_name: Branch Name (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.delete_git_branch_with_http_info(project_id, branch_name, **kwargs)
+        else:
+            (data) = self.delete_git_branch_with_http_info(project_id, branch_name, **kwargs)
+            return data
+
+    def delete_git_branch_with_http_info(self, project_id, branch_name, **kwargs):
+        """
+        Delete a Git Branch
+        ### Delete the specified Git Branch  Delete git branch specified in branch_name path param from local and remote of specified project repository 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.delete_git_branch_with_http_info(project_id, branch_name, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :param str branch_name: Branch Name (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project_id', 'branch_name']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_git_branch" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'project_id' is set
+        if ('project_id' not in params) or (params['project_id'] is None):
+            raise ValueError("Missing the required parameter `project_id` when calling `delete_git_branch`")
+        # verify the required parameter 'branch_name' is set
+        if ('branch_name' not in params) or (params['branch_name'] is None):
+            raise ValueError("Missing the required parameter `branch_name` when calling `delete_git_branch`")
+
+
+        collection_formats = {}
+
+        resource_path = '/projects/{project_id}/git_branch/{branch_name}'.replace('{format}', 'json')
+        path_params = {}
+        if 'project_id' in params:
+            path_params['project_id'] = params['project_id']
+        if 'branch_name' in params:
+            path_params['branch_name'] = params['branch_name']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'DELETE',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='str',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def delete_repository_credential(self, root_project_id, credential_id, **kwargs):
+        """
+        Delete Repository Credential
+        ### Repository Credential for a remote dependency  Admin required.  `root_project_id` is required. `credential_id` is required. 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.delete_repository_credential(root_project_id, credential_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str root_project_id: Root Project Id (required)
+        :param str credential_id: Credential Id (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.delete_repository_credential_with_http_info(root_project_id, credential_id, **kwargs)
+        else:
+            (data) = self.delete_repository_credential_with_http_info(root_project_id, credential_id, **kwargs)
+            return data
+
+    def delete_repository_credential_with_http_info(self, root_project_id, credential_id, **kwargs):
+        """
+        Delete Repository Credential
+        ### Repository Credential for a remote dependency  Admin required.  `root_project_id` is required. `credential_id` is required. 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.delete_repository_credential_with_http_info(root_project_id, credential_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str root_project_id: Root Project Id (required)
+        :param str credential_id: Credential Id (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['root_project_id', 'credential_id']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_repository_credential" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'root_project_id' is set
+        if ('root_project_id' not in params) or (params['root_project_id'] is None):
+            raise ValueError("Missing the required parameter `root_project_id` when calling `delete_repository_credential`")
+        # verify the required parameter 'credential_id' is set
+        if ('credential_id' not in params) or (params['credential_id'] is None):
+            raise ValueError("Missing the required parameter `credential_id` when calling `delete_repository_credential`")
+
+
+        collection_formats = {}
+
+        resource_path = '/projects/{root_project_id}/credential/{credential_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'root_project_id' in params:
+            path_params['root_project_id'] = params['root_project_id']
+        if 'credential_id' in params:
+            path_params['credential_id'] = params['credential_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'DELETE',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='str',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def deploy_to_production(self, project_id, **kwargs):
+        """
+        Deploy To Production
+        ### Deploy LookML from this Development Mode Project to Production  Git must have been configured, must be in dev mode and deploy permission required  Deploy is a two / three step process 1. Push commits in current branch of dev mode project to the production branch (origin/master).    Note a. This step is skipped in read-only projects.    Note b. If this step is unsuccessful for any reason (e.g. rejected non-fastforward because production branch has              commits not in current branch), subsequent steps will be skipped. 2. If this is the first deploy of this project, create the production project with git repository. 3. Pull the production branch into the production project.  
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.deploy_to_production(project_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Id of project (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.deploy_to_production_with_http_info(project_id, **kwargs)
+        else:
+            (data) = self.deploy_to_production_with_http_info(project_id, **kwargs)
+            return data
+
+    def deploy_to_production_with_http_info(self, project_id, **kwargs):
+        """
+        Deploy To Production
+        ### Deploy LookML from this Development Mode Project to Production  Git must have been configured, must be in dev mode and deploy permission required  Deploy is a two / three step process 1. Push commits in current branch of dev mode project to the production branch (origin/master).    Note a. This step is skipped in read-only projects.    Note b. If this step is unsuccessful for any reason (e.g. rejected non-fastforward because production branch has              commits not in current branch), subsequent steps will be skipped. 2. If this is the first deploy of this project, create the production project with git repository. 3. Pull the production branch into the production project.  
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.deploy_to_production_with_http_info(project_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Id of project (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project_id']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method deploy_to_production" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'project_id' is set
+        if ('project_id' not in params) or (params['project_id'] is None):
+            raise ValueError("Missing the required parameter `project_id` when calling `deploy_to_production`")
+
+
+        collection_formats = {}
+
+        resource_path = '/projects/{project_id}/deploy_to_production'.replace('{format}', 'json')
+        path_params = {}
+        if 'project_id' in params:
+            path_params['project_id'] = params['project_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='str',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def find_git_branch(self, project_id, branch_name, **kwargs):
+        """
+        Find a Git Branch
+        ### Get the specified Git Branch  Returns the git branch specified in branch_name path param if it exists in the given project repository 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.find_git_branch(project_id, branch_name, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :param str branch_name: Branch Name (required)
+        :return: GitBranch
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.find_git_branch_with_http_info(project_id, branch_name, **kwargs)
+        else:
+            (data) = self.find_git_branch_with_http_info(project_id, branch_name, **kwargs)
+            return data
+
+    def find_git_branch_with_http_info(self, project_id, branch_name, **kwargs):
+        """
+        Find a Git Branch
+        ### Get the specified Git Branch  Returns the git branch specified in branch_name path param if it exists in the given project repository 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.find_git_branch_with_http_info(project_id, branch_name, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :param str branch_name: Branch Name (required)
+        :return: GitBranch
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project_id', 'branch_name']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method find_git_branch" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'project_id' is set
+        if ('project_id' not in params) or (params['project_id'] is None):
+            raise ValueError("Missing the required parameter `project_id` when calling `find_git_branch`")
+        # verify the required parameter 'branch_name' is set
+        if ('branch_name' not in params) or (params['branch_name'] is None):
+            raise ValueError("Missing the required parameter `branch_name` when calling `find_git_branch`")
+
+
+        collection_formats = {}
+
+        resource_path = '/projects/{project_id}/git_branch/{branch_name}'.replace('{format}', 'json')
+        path_params = {}
+        if 'project_id' in params:
+            path_params['project_id'] = params['project_id']
+        if 'branch_name' in params:
+            path_params['branch_name'] = params['branch_name']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='GitBranch',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def get_all_repository_credentials(self, root_project_id, **kwargs):
+        """
+        Get All Repository Credentials
+        ### Get all Repository Credentials for a project  `root_project_id` is required. 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.get_all_repository_credentials(root_project_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str root_project_id: Root Project Id (required)
+        :return: list[RepositoryCredential]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.get_all_repository_credentials_with_http_info(root_project_id, **kwargs)
+        else:
+            (data) = self.get_all_repository_credentials_with_http_info(root_project_id, **kwargs)
+            return data
+
+    def get_all_repository_credentials_with_http_info(self, root_project_id, **kwargs):
+        """
+        Get All Repository Credentials
+        ### Get all Repository Credentials for a project  `root_project_id` is required. 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.get_all_repository_credentials_with_http_info(root_project_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str root_project_id: Root Project Id (required)
+        :return: list[RepositoryCredential]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['root_project_id']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method get_all_repository_credentials" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'root_project_id' is set
+        if ('root_project_id' not in params) or (params['root_project_id'] is None):
+            raise ValueError("Missing the required parameter `root_project_id` when calling `get_all_repository_credentials`")
+
+
+        collection_formats = {}
+
+        resource_path = '/projects/{root_project_id}/credentials'.replace('{format}', 'json')
+        path_params = {}
+        if 'root_project_id' in params:
+            path_params['root_project_id'] = params['root_project_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='list[RepositoryCredential]',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def git_branch(self, project_id, **kwargs):
+        """
+        Get Active Git Branch
+        ### Get the Current Git Branch  Returns the git branch currently checked out in the given project repository 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.git_branch(project_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :return: GitBranch
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.git_branch_with_http_info(project_id, **kwargs)
+        else:
+            (data) = self.git_branch_with_http_info(project_id, **kwargs)
+            return data
+
+    def git_branch_with_http_info(self, project_id, **kwargs):
+        """
+        Get Active Git Branch
+        ### Get the Current Git Branch  Returns the git branch currently checked out in the given project repository 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.git_branch_with_http_info(project_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :return: GitBranch
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project_id']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method git_branch" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'project_id' is set
+        if ('project_id' not in params) or (params['project_id'] is None):
+            raise ValueError("Missing the required parameter `project_id` when calling `git_branch`")
+
+
+        collection_formats = {}
+
+        resource_path = '/projects/{project_id}/git_branch'.replace('{format}', 'json')
+        path_params = {}
+        if 'project_id' in params:
+            path_params['project_id'] = params['project_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='GitBranch',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
     def git_deploy_key(self, project_id, **kwargs):
         """
         Git Deploy Key
@@ -780,6 +1558,113 @@ class ProjectApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type='str',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def manifest(self, project_id, **kwargs):
+        """
+        Get Manifest
+        ### Get A Projects Manifest object  Returns the project with the given project id 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.manifest(project_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :return: Manifest
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.manifest_with_http_info(project_id, **kwargs)
+        else:
+            (data) = self.manifest_with_http_info(project_id, **kwargs)
+            return data
+
+    def manifest_with_http_info(self, project_id, **kwargs):
+        """
+        Get Manifest
+        ### Get A Projects Manifest object  Returns the project with the given project id 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.manifest_with_http_info(project_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :return: Manifest
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project_id']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method manifest" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'project_id' is set
+        if ('project_id' not in params) or (params['project_id'] is None):
+            raise ValueError("Missing the required parameter `project_id` when calling `manifest`")
+
+
+        collection_formats = {}
+
+        resource_path = '/projects/{project_id}/manifest'.replace('{format}', 'json')
+        path_params = {}
+        if 'project_id' in params:
+            path_params['project_id'] = params['project_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='Manifest',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -1455,7 +2340,7 @@ class ProjectApi(object):
     def run_git_connection_test(self, project_id, test_id, **kwargs):
         """
         Run Git Connection Test
-        ### Run a git connection test  Run the named test on the git service used by this project and return the result. This is intended to help debug git connections when things do not work properly, to give more helpful information about why a git url is not working with Looker. They are intended to be run in the order they are returned from the /projects/ID/git_connection_tests endpoint. 
+        ### Run a git connection test  Run the named test on the git service used by this project (or the dependency project for the provided remote_url) and return the result. This is intended to help debug git connections when things do not work properly, to give more helpful information about why a git url is not working with Looker.  Tests should be run in the order they are returned by [Get All Git Connection Tests](#!/Project/all_git_connection_tests). 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -1468,6 +2353,7 @@ class ProjectApi(object):
             for asynchronous request. (optional)
         :param str project_id: Project Id (required)
         :param str test_id: Test Id (required)
+        :param str remote_url: (Optional: leave blank for root project) The remote url for remote dependency to test.
         :return: GitConnectionTestResult
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1482,7 +2368,7 @@ class ProjectApi(object):
     def run_git_connection_test_with_http_info(self, project_id, test_id, **kwargs):
         """
         Run Git Connection Test
-        ### Run a git connection test  Run the named test on the git service used by this project and return the result. This is intended to help debug git connections when things do not work properly, to give more helpful information about why a git url is not working with Looker. They are intended to be run in the order they are returned from the /projects/ID/git_connection_tests endpoint. 
+        ### Run a git connection test  Run the named test on the git service used by this project (or the dependency project for the provided remote_url) and return the result. This is intended to help debug git connections when things do not work properly, to give more helpful information about why a git url is not working with Looker.  Tests should be run in the order they are returned by [Get All Git Connection Tests](#!/Project/all_git_connection_tests). 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -1495,12 +2381,13 @@ class ProjectApi(object):
             for asynchronous request. (optional)
         :param str project_id: Project Id (required)
         :param str test_id: Test Id (required)
+        :param str remote_url: (Optional: leave blank for root project) The remote url for remote dependency to test.
         :return: GitConnectionTestResult
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['project_id', 'test_id']
+        all_params = ['project_id', 'test_id', 'remote_url']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1533,6 +2420,8 @@ class ProjectApi(object):
             path_params['test_id'] = params['test_id']
 
         query_params = {}
+        if 'remote_url' in params:
+            query_params['remote_url'] = params['remote_url']
 
         header_params = {}
 
@@ -1559,6 +2448,120 @@ class ProjectApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type='GitConnectionTestResult',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def update_git_branch(self, project_id, body, **kwargs):
+        """
+        Update Project Git Branch
+        ### Checkout and/or reset --hard an existing Git Branch  Only allowed in development mode   - Call `update_session` to select the 'dev' workspace.  Checkout an existing branch if name field is different from the name of the currently checked out branch.  Optionally specify a branch name, tag name or commit SHA to which the branch should be reset.   **DANGER** hard reset will be force pushed to the remote. Unsaved changes and commits may be permanently lost.  
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_git_branch(project_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :param GitBranch body: Git Branch (required)
+        :return: GitBranch
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.update_git_branch_with_http_info(project_id, body, **kwargs)
+        else:
+            (data) = self.update_git_branch_with_http_info(project_id, body, **kwargs)
+            return data
+
+    def update_git_branch_with_http_info(self, project_id, body, **kwargs):
+        """
+        Update Project Git Branch
+        ### Checkout and/or reset --hard an existing Git Branch  Only allowed in development mode   - Call `update_session` to select the 'dev' workspace.  Checkout an existing branch if name field is different from the name of the currently checked out branch.  Optionally specify a branch name, tag name or commit SHA to which the branch should be reset.   **DANGER** hard reset will be force pushed to the remote. Unsaved changes and commits may be permanently lost.  
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_git_branch_with_http_info(project_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str project_id: Project Id (required)
+        :param GitBranch body: Git Branch (required)
+        :return: GitBranch
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['project_id', 'body']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_git_branch" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'project_id' is set
+        if ('project_id' not in params) or (params['project_id'] is None):
+            raise ValueError("Missing the required parameter `project_id` when calling `update_git_branch`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_git_branch`")
+
+
+        collection_formats = {}
+
+        resource_path = '/projects/{project_id}/git_branch'.replace('{format}', 'json')
+        path_params = {}
+        if 'project_id' in params:
+            path_params['project_id'] = params['project_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'PUT',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='GitBranch',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -1677,6 +2680,127 @@ class ProjectApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type='Project',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def update_repository_credential(self, root_project_id, credential_id, body, **kwargs):
+        """
+        Create Repository Credential
+        ### Configure Repository Credential for a remote dependency  Admin required.  `root_project_id` is required. `credential_id` is required.  
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_repository_credential(root_project_id, credential_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str root_project_id: Root Project Id (required)
+        :param str credential_id: Credential Id (required)
+        :param RepositoryCredential body: Remote Project Information (required)
+        :return: RepositoryCredential
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.update_repository_credential_with_http_info(root_project_id, credential_id, body, **kwargs)
+        else:
+            (data) = self.update_repository_credential_with_http_info(root_project_id, credential_id, body, **kwargs)
+            return data
+
+    def update_repository_credential_with_http_info(self, root_project_id, credential_id, body, **kwargs):
+        """
+        Create Repository Credential
+        ### Configure Repository Credential for a remote dependency  Admin required.  `root_project_id` is required. `credential_id` is required.  
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_repository_credential_with_http_info(root_project_id, credential_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str root_project_id: Root Project Id (required)
+        :param str credential_id: Credential Id (required)
+        :param RepositoryCredential body: Remote Project Information (required)
+        :return: RepositoryCredential
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['root_project_id', 'credential_id', 'body']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_repository_credential" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'root_project_id' is set
+        if ('root_project_id' not in params) or (params['root_project_id'] is None):
+            raise ValueError("Missing the required parameter `root_project_id` when calling `update_repository_credential`")
+        # verify the required parameter 'credential_id' is set
+        if ('credential_id' not in params) or (params['credential_id'] is None):
+            raise ValueError("Missing the required parameter `credential_id` when calling `update_repository_credential`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_repository_credential`")
+
+
+        collection_formats = {}
+
+        resource_path = '/projects/{root_project_id}/credential/{credential_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'root_project_id' in params:
+            path_params['root_project_id'] = params['root_project_id']
+        if 'credential_id' in params:
+            path_params['credential_id'] = params['credential_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'PUT',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='RepositoryCredential',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),

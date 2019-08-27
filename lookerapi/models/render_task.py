@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class RenderTask(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, id=None, created_at=None, finalized_at=None, status=None, status_detail=None, user_id=None, runtime=None, query_runtime=None, render_runtime=None, result_format=None, look_id=None, dashboard_id=None, lookml_dashboard_id=None, query_id=None, width=None, height=None, dashboard_style=None, dashboard_filters=None, can=None):
+    def __init__(self, created_at=None, dashboard_filters=None, dashboard_id=None, dashboard_style=None, finalized_at=None, height=None, id=None, look_id=None, lookml_dashboard_id=None, query_id=None, query_runtime=None, render_runtime=None, result_format=None, runtime=None, status=None, status_detail=None, user_id=None, width=None, can=None):
         """
         RenderTask - a model defined in Swagger
 
@@ -31,91 +31,68 @@ class RenderTask(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'id': 'str',
             'created_at': 'str',
+            'dashboard_filters': 'str',
+            'dashboard_id': 'int',
+            'dashboard_style': 'str',
             'finalized_at': 'str',
-            'status': 'str',
-            'status_detail': 'str',
-            'user_id': 'int',
-            'runtime': 'float',
+            'height': 'int',
+            'id': 'str',
+            'look_id': 'int',
+            'lookml_dashboard_id': 'str',
+            'query_id': 'int',
             'query_runtime': 'float',
             'render_runtime': 'float',
             'result_format': 'str',
-            'look_id': 'int',
-            'dashboard_id': 'int',
-            'lookml_dashboard_id': 'str',
-            'query_id': 'int',
+            'runtime': 'float',
+            'status': 'str',
+            'status_detail': 'str',
+            'user_id': 'int',
             'width': 'int',
-            'height': 'int',
-            'dashboard_style': 'str',
-            'dashboard_filters': 'str',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
-            'id': 'id',
             'created_at': 'created_at',
+            'dashboard_filters': 'dashboard_filters',
+            'dashboard_id': 'dashboard_id',
+            'dashboard_style': 'dashboard_style',
             'finalized_at': 'finalized_at',
-            'status': 'status',
-            'status_detail': 'status_detail',
-            'user_id': 'user_id',
-            'runtime': 'runtime',
+            'height': 'height',
+            'id': 'id',
+            'look_id': 'look_id',
+            'lookml_dashboard_id': 'lookml_dashboard_id',
+            'query_id': 'query_id',
             'query_runtime': 'query_runtime',
             'render_runtime': 'render_runtime',
             'result_format': 'result_format',
-            'look_id': 'look_id',
-            'dashboard_id': 'dashboard_id',
-            'lookml_dashboard_id': 'lookml_dashboard_id',
-            'query_id': 'query_id',
+            'runtime': 'runtime',
+            'status': 'status',
+            'status_detail': 'status_detail',
+            'user_id': 'user_id',
             'width': 'width',
-            'height': 'height',
-            'dashboard_style': 'dashboard_style',
-            'dashboard_filters': 'dashboard_filters',
             'can': 'can'
         }
 
-        self._id = id
         self._created_at = created_at
+        self._dashboard_filters = dashboard_filters
+        self._dashboard_id = dashboard_id
+        self._dashboard_style = dashboard_style
         self._finalized_at = finalized_at
-        self._status = status
-        self._status_detail = status_detail
-        self._user_id = user_id
-        self._runtime = runtime
+        self._height = height
+        self._id = id
+        self._look_id = look_id
+        self._lookml_dashboard_id = lookml_dashboard_id
+        self._query_id = query_id
         self._query_runtime = query_runtime
         self._render_runtime = render_runtime
         self._result_format = result_format
-        self._look_id = look_id
-        self._dashboard_id = dashboard_id
-        self._lookml_dashboard_id = lookml_dashboard_id
-        self._query_id = query_id
+        self._runtime = runtime
+        self._status = status
+        self._status_detail = status_detail
+        self._user_id = user_id
         self._width = width
-        self._height = height
-        self._dashboard_style = dashboard_style
-        self._dashboard_filters = dashboard_filters
         self._can = can
-
-    @property
-    def id(self):
-        """
-        Gets the id of this RenderTask.
-        Id of this render task
-
-        :return: The id of this RenderTask.
-        :rtype: str
-        """
-        return self._id
-
-    @id.setter
-    def id(self, id):
-        """
-        Sets the id of this RenderTask.
-        Id of this render task
-
-        :param id: The id of this RenderTask.
-        :type: str
-        """
-
-        self._id = id
 
     @property
     def created_at(self):
@@ -141,6 +118,75 @@ class RenderTask(object):
         self._created_at = created_at
 
     @property
+    def dashboard_filters(self):
+        """
+        Gets the dashboard_filters of this RenderTask.
+        Filter values to apply to the dashboard queries, in URL query format
+
+        :return: The dashboard_filters of this RenderTask.
+        :rtype: str
+        """
+        return self._dashboard_filters
+
+    @dashboard_filters.setter
+    def dashboard_filters(self, dashboard_filters):
+        """
+        Sets the dashboard_filters of this RenderTask.
+        Filter values to apply to the dashboard queries, in URL query format
+
+        :param dashboard_filters: The dashboard_filters of this RenderTask.
+        :type: str
+        """
+
+        self._dashboard_filters = dashboard_filters
+
+    @property
+    def dashboard_id(self):
+        """
+        Gets the dashboard_id of this RenderTask.
+        Id of dashboard to render
+
+        :return: The dashboard_id of this RenderTask.
+        :rtype: int
+        """
+        return self._dashboard_id
+
+    @dashboard_id.setter
+    def dashboard_id(self, dashboard_id):
+        """
+        Sets the dashboard_id of this RenderTask.
+        Id of dashboard to render
+
+        :param dashboard_id: The dashboard_id of this RenderTask.
+        :type: int
+        """
+
+        self._dashboard_id = dashboard_id
+
+    @property
+    def dashboard_style(self):
+        """
+        Gets the dashboard_style of this RenderTask.
+        Dashboard layout style: single_column or tiled
+
+        :return: The dashboard_style of this RenderTask.
+        :rtype: str
+        """
+        return self._dashboard_style
+
+    @dashboard_style.setter
+    def dashboard_style(self, dashboard_style):
+        """
+        Sets the dashboard_style of this RenderTask.
+        Dashboard layout style: single_column or tiled
+
+        :param dashboard_style: The dashboard_style of this RenderTask.
+        :type: str
+        """
+
+        self._dashboard_style = dashboard_style
+
+    @property
     def finalized_at(self):
         """
         Gets the finalized_at of this RenderTask.
@@ -164,96 +210,119 @@ class RenderTask(object):
         self._finalized_at = finalized_at
 
     @property
-    def status(self):
+    def height(self):
         """
-        Gets the status of this RenderTask.
-        Render task status: enqueued_for_query, querying, enqueued_for_render, rendering, success, failure
+        Gets the height of this RenderTask.
+        Output height in pixels. Flowed layouts may ignore this value.
 
-        :return: The status of this RenderTask.
-        :rtype: str
-        """
-        return self._status
-
-    @status.setter
-    def status(self, status):
-        """
-        Sets the status of this RenderTask.
-        Render task status: enqueued_for_query, querying, enqueued_for_render, rendering, success, failure
-
-        :param status: The status of this RenderTask.
-        :type: str
-        """
-
-        self._status = status
-
-    @property
-    def status_detail(self):
-        """
-        Gets the status_detail of this RenderTask.
-        Additional information about the current status
-
-        :return: The status_detail of this RenderTask.
-        :rtype: str
-        """
-        return self._status_detail
-
-    @status_detail.setter
-    def status_detail(self, status_detail):
-        """
-        Sets the status_detail of this RenderTask.
-        Additional information about the current status
-
-        :param status_detail: The status_detail of this RenderTask.
-        :type: str
-        """
-
-        self._status_detail = status_detail
-
-    @property
-    def user_id(self):
-        """
-        Gets the user_id of this RenderTask.
-        The user account permissions in which the render task will execute
-
-        :return: The user_id of this RenderTask.
+        :return: The height of this RenderTask.
         :rtype: int
         """
-        return self._user_id
+        return self._height
 
-    @user_id.setter
-    def user_id(self, user_id):
+    @height.setter
+    def height(self, height):
         """
-        Sets the user_id of this RenderTask.
-        The user account permissions in which the render task will execute
+        Sets the height of this RenderTask.
+        Output height in pixels. Flowed layouts may ignore this value.
 
-        :param user_id: The user_id of this RenderTask.
+        :param height: The height of this RenderTask.
         :type: int
         """
 
-        self._user_id = user_id
+        self._height = height
 
     @property
-    def runtime(self):
+    def id(self):
         """
-        Gets the runtime of this RenderTask.
-        Total seconds elapsed for render task
+        Gets the id of this RenderTask.
+        Id of this render task
 
-        :return: The runtime of this RenderTask.
-        :rtype: float
+        :return: The id of this RenderTask.
+        :rtype: str
         """
-        return self._runtime
+        return self._id
 
-    @runtime.setter
-    def runtime(self, runtime):
+    @id.setter
+    def id(self, id):
         """
-        Sets the runtime of this RenderTask.
-        Total seconds elapsed for render task
+        Sets the id of this RenderTask.
+        Id of this render task
 
-        :param runtime: The runtime of this RenderTask.
-        :type: float
+        :param id: The id of this RenderTask.
+        :type: str
         """
 
-        self._runtime = runtime
+        self._id = id
+
+    @property
+    def look_id(self):
+        """
+        Gets the look_id of this RenderTask.
+        Id of look to render
+
+        :return: The look_id of this RenderTask.
+        :rtype: int
+        """
+        return self._look_id
+
+    @look_id.setter
+    def look_id(self, look_id):
+        """
+        Sets the look_id of this RenderTask.
+        Id of look to render
+
+        :param look_id: The look_id of this RenderTask.
+        :type: int
+        """
+
+        self._look_id = look_id
+
+    @property
+    def lookml_dashboard_id(self):
+        """
+        Gets the lookml_dashboard_id of this RenderTask.
+        Id of lookml dashboard to render
+
+        :return: The lookml_dashboard_id of this RenderTask.
+        :rtype: str
+        """
+        return self._lookml_dashboard_id
+
+    @lookml_dashboard_id.setter
+    def lookml_dashboard_id(self, lookml_dashboard_id):
+        """
+        Sets the lookml_dashboard_id of this RenderTask.
+        Id of lookml dashboard to render
+
+        :param lookml_dashboard_id: The lookml_dashboard_id of this RenderTask.
+        :type: str
+        """
+
+        self._lookml_dashboard_id = lookml_dashboard_id
+
+    @property
+    def query_id(self):
+        """
+        Gets the query_id of this RenderTask.
+        Id of query to render
+
+        :return: The query_id of this RenderTask.
+        :rtype: int
+        """
+        return self._query_id
+
+    @query_id.setter
+    def query_id(self, query_id):
+        """
+        Sets the query_id of this RenderTask.
+        Id of query to render
+
+        :param query_id: The query_id of this RenderTask.
+        :type: int
+        """
+
+        self._query_id = query_id
 
     @property
     def query_runtime(self):
@@ -325,96 +394,96 @@ class RenderTask(object):
         self._result_format = result_format
 
     @property
-    def look_id(self):
+    def runtime(self):
         """
-        Gets the look_id of this RenderTask.
-        Id of look to render
+        Gets the runtime of this RenderTask.
+        Total seconds elapsed for render task
 
-        :return: The look_id of this RenderTask.
-        :rtype: int
+        :return: The runtime of this RenderTask.
+        :rtype: float
         """
-        return self._look_id
+        return self._runtime
 
-    @look_id.setter
-    def look_id(self, look_id):
+    @runtime.setter
+    def runtime(self, runtime):
         """
-        Sets the look_id of this RenderTask.
-        Id of look to render
+        Sets the runtime of this RenderTask.
+        Total seconds elapsed for render task
 
-        :param look_id: The look_id of this RenderTask.
-        :type: int
+        :param runtime: The runtime of this RenderTask.
+        :type: float
         """
 
-        self._look_id = look_id
+        self._runtime = runtime
 
     @property
-    def dashboard_id(self):
+    def status(self):
         """
-        Gets the dashboard_id of this RenderTask.
-        Id of dashboard to render
+        Gets the status of this RenderTask.
+        Render task status: enqueued_for_query, querying, enqueued_for_render, rendering, success, failure
 
-        :return: The dashboard_id of this RenderTask.
-        :rtype: int
-        """
-        return self._dashboard_id
-
-    @dashboard_id.setter
-    def dashboard_id(self, dashboard_id):
-        """
-        Sets the dashboard_id of this RenderTask.
-        Id of dashboard to render
-
-        :param dashboard_id: The dashboard_id of this RenderTask.
-        :type: int
-        """
-
-        self._dashboard_id = dashboard_id
-
-    @property
-    def lookml_dashboard_id(self):
-        """
-        Gets the lookml_dashboard_id of this RenderTask.
-        Id of lookml dashboard to render
-
-        :return: The lookml_dashboard_id of this RenderTask.
+        :return: The status of this RenderTask.
         :rtype: str
         """
-        return self._lookml_dashboard_id
+        return self._status
 
-    @lookml_dashboard_id.setter
-    def lookml_dashboard_id(self, lookml_dashboard_id):
+    @status.setter
+    def status(self, status):
         """
-        Sets the lookml_dashboard_id of this RenderTask.
-        Id of lookml dashboard to render
+        Sets the status of this RenderTask.
+        Render task status: enqueued_for_query, querying, enqueued_for_render, rendering, success, failure
 
-        :param lookml_dashboard_id: The lookml_dashboard_id of this RenderTask.
+        :param status: The status of this RenderTask.
         :type: str
         """
 
-        self._lookml_dashboard_id = lookml_dashboard_id
+        self._status = status
 
     @property
-    def query_id(self):
+    def status_detail(self):
         """
-        Gets the query_id of this RenderTask.
-        Id of query to render
+        Gets the status_detail of this RenderTask.
+        Additional information about the current status
 
-        :return: The query_id of this RenderTask.
+        :return: The status_detail of this RenderTask.
+        :rtype: str
+        """
+        return self._status_detail
+
+    @status_detail.setter
+    def status_detail(self, status_detail):
+        """
+        Sets the status_detail of this RenderTask.
+        Additional information about the current status
+
+        :param status_detail: The status_detail of this RenderTask.
+        :type: str
+        """
+
+        self._status_detail = status_detail
+
+    @property
+    def user_id(self):
+        """
+        Gets the user_id of this RenderTask.
+        The user account permissions in which the render task will execute
+
+        :return: The user_id of this RenderTask.
         :rtype: int
         """
-        return self._query_id
+        return self._user_id
 
-    @query_id.setter
-    def query_id(self, query_id):
+    @user_id.setter
+    def user_id(self, user_id):
         """
-        Sets the query_id of this RenderTask.
-        Id of query to render
+        Sets the user_id of this RenderTask.
+        The user account permissions in which the render task will execute
 
-        :param query_id: The query_id of this RenderTask.
+        :param user_id: The user_id of this RenderTask.
         :type: int
         """
 
-        self._query_id = query_id
+        self._user_id = user_id
 
     @property
     def width(self):
@@ -438,75 +507,6 @@ class RenderTask(object):
         """
 
         self._width = width
-
-    @property
-    def height(self):
-        """
-        Gets the height of this RenderTask.
-        Output height in pixels. Flowed layouts may ignore this value.
-
-        :return: The height of this RenderTask.
-        :rtype: int
-        """
-        return self._height
-
-    @height.setter
-    def height(self, height):
-        """
-        Sets the height of this RenderTask.
-        Output height in pixels. Flowed layouts may ignore this value.
-
-        :param height: The height of this RenderTask.
-        :type: int
-        """
-
-        self._height = height
-
-    @property
-    def dashboard_style(self):
-        """
-        Gets the dashboard_style of this RenderTask.
-        Dashboard layout style: single_column or tiled
-
-        :return: The dashboard_style of this RenderTask.
-        :rtype: str
-        """
-        return self._dashboard_style
-
-    @dashboard_style.setter
-    def dashboard_style(self, dashboard_style):
-        """
-        Sets the dashboard_style of this RenderTask.
-        Dashboard layout style: single_column or tiled
-
-        :param dashboard_style: The dashboard_style of this RenderTask.
-        :type: str
-        """
-
-        self._dashboard_style = dashboard_style
-
-    @property
-    def dashboard_filters(self):
-        """
-        Gets the dashboard_filters of this RenderTask.
-        Filter values to apply to the dashboard queries, in URL query format
-
-        :return: The dashboard_filters of this RenderTask.
-        :rtype: str
-        """
-        return self._dashboard_filters
-
-    @dashboard_filters.setter
-    def dashboard_filters(self, dashboard_filters):
-        """
-        Sets the dashboard_filters of this RenderTask.
-        Filter values to apply to the dashboard queries, in URL query format
-
-        :param dashboard_filters: The dashboard_filters of this RenderTask.
-        :type: str
-        """
-
-        self._dashboard_filters = dashboard_filters
 
     @property
     def can(self):

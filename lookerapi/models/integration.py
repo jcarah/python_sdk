@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class Integration(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, id=None, integration_hub_id=None, label=None, description=None, enabled=None, params=None, supported_formats=None, supported_action_types=None, supported_formattings=None, supported_visualization_formattings=None, supported_download_settings=None, icon_url=None, required_fields=None, can=None):
+    def __init__(self, id=None, integration_hub_id=None, label=None, description=None, enabled=None, params=None, supported_formats=None, supported_action_types=None, supported_formattings=None, supported_visualization_formattings=None, supported_download_settings=None, icon_url=None, uses_oauth=None, required_fields=None, can=None):
         """
         Integration - a model defined in Swagger
 
@@ -43,6 +43,7 @@ class Integration(object):
             'supported_visualization_formattings': 'list[str]',
             'supported_download_settings': 'list[str]',
             'icon_url': 'str',
+            'uses_oauth': 'bool',
             'required_fields': 'list[IntegrationRequiredField]',
             'can': 'dict(str, bool)'
         }
@@ -60,6 +61,7 @@ class Integration(object):
             'supported_visualization_formattings': 'supported_visualization_formattings',
             'supported_download_settings': 'supported_download_settings',
             'icon_url': 'icon_url',
+            'uses_oauth': 'uses_oauth',
             'required_fields': 'required_fields',
             'can': 'can'
         }
@@ -76,6 +78,7 @@ class Integration(object):
         self._supported_visualization_formattings = supported_visualization_formattings
         self._supported_download_settings = supported_download_settings
         self._icon_url = icon_url
+        self._uses_oauth = uses_oauth
         self._required_fields = required_fields
         self._can = can
 
@@ -221,7 +224,7 @@ class Integration(object):
     def supported_formats(self):
         """
         Gets the supported_formats of this Integration.
-        A list of data formats the integration supports. Valid values are: \"txt\", \"csv\", \"inline_json\", \"json\", \"json_detail\", \"xlsx\", \"html\", \"wysiwyg_pdf\", \"assembled_pdf\", \"wysiwyg_png\", \"csv_zip\".
+        A list of data formats the integration supports. If unspecified, this will default to [\"txt\", \"csv\", \"inline_json\", \"json\", \"json_detail\", \"json_detail_lite_stream\", \"xlsx\", \"html\", \"wysiwyg_pdf\", \"assembled_pdf\", \"wysiwyg_png\", \"csv_zip\"]. Valid values are: \"txt\", \"csv\", \"inline_json\", \"json\", \"json_detail\", \"json_detail_lite_stream\", \"xlsx\", \"html\", \"wysiwyg_pdf\", \"assembled_pdf\", \"wysiwyg_png\", \"csv_zip\".
 
         :return: The supported_formats of this Integration.
         :rtype: list[str]
@@ -232,7 +235,7 @@ class Integration(object):
     def supported_formats(self, supported_formats):
         """
         Sets the supported_formats of this Integration.
-        A list of data formats the integration supports. Valid values are: \"txt\", \"csv\", \"inline_json\", \"json\", \"json_detail\", \"xlsx\", \"html\", \"wysiwyg_pdf\", \"assembled_pdf\", \"wysiwyg_png\", \"csv_zip\".
+        A list of data formats the integration supports. If unspecified, this will default to [\"txt\", \"csv\", \"inline_json\", \"json\", \"json_detail\", \"json_detail_lite_stream\", \"xlsx\", \"html\", \"wysiwyg_pdf\", \"assembled_pdf\", \"wysiwyg_png\", \"csv_zip\"]. Valid values are: \"txt\", \"csv\", \"inline_json\", \"json\", \"json_detail\", \"json_detail_lite_stream\", \"xlsx\", \"html\", \"wysiwyg_pdf\", \"assembled_pdf\", \"wysiwyg_png\", \"csv_zip\".
 
         :param supported_formats: The supported_formats of this Integration.
         :type: list[str]
@@ -267,7 +270,7 @@ class Integration(object):
     def supported_formattings(self):
         """
         Gets the supported_formattings of this Integration.
-        A list of formatting options the integration supports. Valid values are: \"formatted\", \"unformatted\".
+        A list of formatting options the integration supports. If unspecified, this will default to [\"formatted\", \"unformatted\"]. Valid values are: \"formatted\", \"unformatted\".
 
         :return: The supported_formattings of this Integration.
         :rtype: list[str]
@@ -278,7 +281,7 @@ class Integration(object):
     def supported_formattings(self, supported_formattings):
         """
         Sets the supported_formattings of this Integration.
-        A list of formatting options the integration supports. Valid values are: \"formatted\", \"unformatted\".
+        A list of formatting options the integration supports. If unspecified, this will default to [\"formatted\", \"unformatted\"]. Valid values are: \"formatted\", \"unformatted\".
 
         :param supported_formattings: The supported_formattings of this Integration.
         :type: list[str]
@@ -290,7 +293,7 @@ class Integration(object):
     def supported_visualization_formattings(self):
         """
         Gets the supported_visualization_formattings of this Integration.
-        A list of visualization formatting options the integration supports. Valid values are: \"apply\", \"noapply\".
+        A list of visualization formatting options the integration supports. If unspecified, this will default to [\"apply\", \"noapply\"]. Valid values are: \"apply\", \"noapply\".
 
         :return: The supported_visualization_formattings of this Integration.
         :rtype: list[str]
@@ -301,7 +304,7 @@ class Integration(object):
     def supported_visualization_formattings(self, supported_visualization_formattings):
         """
         Sets the supported_visualization_formattings of this Integration.
-        A list of visualization formatting options the integration supports. Valid values are: \"apply\", \"noapply\".
+        A list of visualization formatting options the integration supports. If unspecified, this will default to [\"apply\", \"noapply\"]. Valid values are: \"apply\", \"noapply\".
 
         :param supported_visualization_formattings: The supported_visualization_formattings of this Integration.
         :type: list[str]
@@ -313,7 +316,7 @@ class Integration(object):
     def supported_download_settings(self):
         """
         Gets the supported_download_settings of this Integration.
-        A list of streaming options the integration supports. Valid values are: \"push\", \"url\".
+        A list of all the download mechanisms the integration supports. The order is undefined: Looker will select the most appropriate supported download mechanism for a given query. The integration must ensure it can handle any of the mechanisms it claims to support. If unspecified, this will default to [\"push\"]. Valid values are: \"push\", \"url\".
 
         :return: The supported_download_settings of this Integration.
         :rtype: list[str]
@@ -324,7 +327,7 @@ class Integration(object):
     def supported_download_settings(self, supported_download_settings):
         """
         Sets the supported_download_settings of this Integration.
-        A list of streaming options the integration supports. Valid values are: \"push\", \"url\".
+        A list of all the download mechanisms the integration supports. The order is undefined: Looker will select the most appropriate supported download mechanism for a given query. The integration must ensure it can handle any of the mechanisms it claims to support. If unspecified, this will default to [\"push\"]. Valid values are: \"push\", \"url\".
 
         :param supported_download_settings: The supported_download_settings of this Integration.
         :type: list[str]
@@ -356,10 +359,33 @@ class Integration(object):
         self._icon_url = icon_url
 
     @property
+    def uses_oauth(self):
+        """
+        Gets the uses_oauth of this Integration.
+        Whether the integration uses oauth.
+
+        :return: The uses_oauth of this Integration.
+        :rtype: bool
+        """
+        return self._uses_oauth
+
+    @uses_oauth.setter
+    def uses_oauth(self, uses_oauth):
+        """
+        Sets the uses_oauth of this Integration.
+        Whether the integration uses oauth.
+
+        :param uses_oauth: The uses_oauth of this Integration.
+        :type: bool
+        """
+
+        self._uses_oauth = uses_oauth
+
+    @property
     def required_fields(self):
         """
         Gets the required_fields of this Integration.
-        A list of descriptions of required fields that this integration is compatible with. If there are multiple entries in this list, the integration requires more than one field.
+        A list of descriptions of required fields that this integration is compatible with. If there are multiple entries in this list, the integration requires more than one field. If unspecified, no fields will be required.
 
         :return: The required_fields of this Integration.
         :rtype: list[IntegrationRequiredField]
@@ -370,7 +396,7 @@ class Integration(object):
     def required_fields(self, required_fields):
         """
         Sets the required_fields of this Integration.
-        A list of descriptions of required fields that this integration is compatible with. If there are multiple entries in this list, the integration requires more than one field.
+        A list of descriptions of required fields that this integration is compatible with. If there are multiple entries in this list, the integration requires more than one field. If unspecified, no fields will be required.
 
         :param required_fields: The required_fields of this Integration.
         :type: list[IntegrationRequiredField]

@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -39,117 +39,6 @@ class UserApi(object):
             if not config.api_client:
                 config.api_client = ApiClient()
             self.api_client = config.api_client
-
-    def all_user_access_filters(self, user_id, **kwargs):
-        """
-        Get All Access Filters
-        ### Access filter for the specified user.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.all_user_access_filters(user_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :param str fields: Requested fields.
-        :return: list[AccessFilter]
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.all_user_access_filters_with_http_info(user_id, **kwargs)
-        else:
-            (data) = self.all_user_access_filters_with_http_info(user_id, **kwargs)
-            return data
-
-    def all_user_access_filters_with_http_info(self, user_id, **kwargs):
-        """
-        Get All Access Filters
-        ### Access filter for the specified user.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.all_user_access_filters_with_http_info(user_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :param str fields: Requested fields.
-        :return: list[AccessFilter]
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['user_id', 'fields']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method all_user_access_filters" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'user_id' is set
-        if ('user_id' not in params) or (params['user_id'] is None):
-            raise ValueError("Missing the required parameter `user_id` when calling `all_user_access_filters`")
-
-
-        collection_formats = {}
-
-        resource_path = '/users/{user_id}/access_filters'.replace('{format}', 'json')
-        path_params = {}
-        if 'user_id' in params:
-            path_params['user_id'] = params['user_id']
-
-        query_params = {}
-        if 'fields' in params:
-            query_params['fields'] = params['fields']
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
-        # Authentication setting
-        auth_settings = []
-
-        return self.api_client.call_api(resource_path, 'GET',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type='list[AccessFilter]',
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
 
     def all_user_credentials_api3s(self, user_id, **kwargs):
         """
@@ -706,232 +595,6 @@ class UserApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type='User',
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
-
-    def create_user_access_filter(self, user_id, **kwargs):
-        """
-        Create Access Filter
-        ### Access filter for the specified user.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_user_access_filter(user_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :param AccessFilter body: Access Filter
-        :param str fields: Requested fields.
-        :return: AccessFilter
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.create_user_access_filter_with_http_info(user_id, **kwargs)
-        else:
-            (data) = self.create_user_access_filter_with_http_info(user_id, **kwargs)
-            return data
-
-    def create_user_access_filter_with_http_info(self, user_id, **kwargs):
-        """
-        Create Access Filter
-        ### Access filter for the specified user.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_user_access_filter_with_http_info(user_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :param AccessFilter body: Access Filter
-        :param str fields: Requested fields.
-        :return: AccessFilter
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['user_id', 'body', 'fields']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method create_user_access_filter" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'user_id' is set
-        if ('user_id' not in params) or (params['user_id'] is None):
-            raise ValueError("Missing the required parameter `user_id` when calling `create_user_access_filter`")
-
-
-        collection_formats = {}
-
-        resource_path = '/users/{user_id}/access_filters'.replace('{format}', 'json')
-        path_params = {}
-        if 'user_id' in params:
-            path_params['user_id'] = params['user_id']
-
-        query_params = {}
-        if 'fields' in params:
-            query_params['fields'] = params['fields']
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        if 'body' in params:
-            body_params = params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
-        # Authentication setting
-        auth_settings = []
-
-        return self.api_client.call_api(resource_path, 'POST',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type='AccessFilter',
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
-
-    def create_user_credentials_api(self, user_id, **kwargs):
-        """
-        Create API Credential
-        ### Create API Credential. SUPPORT FOR THIS HAS BEEN REMOVED. 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_user_credentials_api(user_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: Id of user (required)
-        :param CredentialsApi body: API Credential
-        :return: CredentialsApi
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.create_user_credentials_api_with_http_info(user_id, **kwargs)
-        else:
-            (data) = self.create_user_credentials_api_with_http_info(user_id, **kwargs)
-            return data
-
-    def create_user_credentials_api_with_http_info(self, user_id, **kwargs):
-        """
-        Create API Credential
-        ### Create API Credential. SUPPORT FOR THIS HAS BEEN REMOVED. 
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.create_user_credentials_api_with_http_info(user_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: Id of user (required)
-        :param CredentialsApi body: API Credential
-        :return: CredentialsApi
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['user_id', 'body']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method create_user_credentials_api" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'user_id' is set
-        if ('user_id' not in params) or (params['user_id'] is None):
-            raise ValueError("Missing the required parameter `user_id` when calling `create_user_credentials_api`")
-
-
-        collection_formats = {}
-
-        resource_path = '/users/{user_id}/credentials_api'.replace('{format}', 'json')
-        path_params = {}
-        if 'user_id' in params:
-            path_params['user_id'] = params['user_id']
-
-        query_params = {}
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        if 'body' in params:
-            body_params = params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
-        # Authentication setting
-        auth_settings = []
-
-        return self.api_client.call_api(resource_path, 'POST',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type='CredentialsApi',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -1506,120 +1169,6 @@ class UserApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def delete_user_access_filter(self, user_id, access_filter_id, **kwargs):
-        """
-        Delete Access Filter
-        ### Access filter for the specified user.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_user_access_filter(user_id, access_filter_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :param int access_filter_id: id of Access Filter (required)
-        :return: str
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.delete_user_access_filter_with_http_info(user_id, access_filter_id, **kwargs)
-        else:
-            (data) = self.delete_user_access_filter_with_http_info(user_id, access_filter_id, **kwargs)
-            return data
-
-    def delete_user_access_filter_with_http_info(self, user_id, access_filter_id, **kwargs):
-        """
-        Delete Access Filter
-        ### Access filter for the specified user.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_user_access_filter_with_http_info(user_id, access_filter_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :param int access_filter_id: id of Access Filter (required)
-        :return: str
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['user_id', 'access_filter_id']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_user_access_filter" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'user_id' is set
-        if ('user_id' not in params) or (params['user_id'] is None):
-            raise ValueError("Missing the required parameter `user_id` when calling `delete_user_access_filter`")
-        # verify the required parameter 'access_filter_id' is set
-        if ('access_filter_id' not in params) or (params['access_filter_id'] is None):
-            raise ValueError("Missing the required parameter `access_filter_id` when calling `delete_user_access_filter`")
-
-
-        collection_formats = {}
-
-        resource_path = '/users/{user_id}/access_filters/{access_filter_id}'.replace('{format}', 'json')
-        path_params = {}
-        if 'user_id' in params:
-            path_params['user_id'] = params['user_id']
-        if 'access_filter_id' in params:
-            path_params['access_filter_id'] = params['access_filter_id']
-
-        query_params = {}
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
-        # Authentication setting
-        auth_settings = []
-
-        return self.api_client.call_api(resource_path, 'DELETE',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type='str',
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
-
     def delete_user_attribute_user_value(self, user_id, user_attribute_id, **kwargs):
         """
         Delete User Attribute User Value
@@ -1727,113 +1276,6 @@ class UserApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type=None,
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
-
-    def delete_user_credentials_api(self, user_id, **kwargs):
-        """
-        Delete API Credential
-        ### API login information for the specified user. This is for 'API Users' used for the 'old' query API. THIS SUPPORT HAS BEEN REMOVED.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_user_credentials_api(user_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :return: str
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.delete_user_credentials_api_with_http_info(user_id, **kwargs)
-        else:
-            (data) = self.delete_user_credentials_api_with_http_info(user_id, **kwargs)
-            return data
-
-    def delete_user_credentials_api_with_http_info(self, user_id, **kwargs):
-        """
-        Delete API Credential
-        ### API login information for the specified user. This is for 'API Users' used for the 'old' query API. THIS SUPPORT HAS BEEN REMOVED.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.delete_user_credentials_api_with_http_info(user_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :return: str
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['user_id']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method delete_user_credentials_api" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'user_id' is set
-        if ('user_id' not in params) or (params['user_id'] is None):
-            raise ValueError("Missing the required parameter `user_id` when calling `delete_user_credentials_api`")
-
-
-        collection_formats = {}
-
-        resource_path = '/users/{user_id}/credentials_api'.replace('{format}', 'json')
-        path_params = {}
-        if 'user_id' in params:
-            path_params['user_id'] = params['user_id']
-
-        query_params = {}
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
-        # Authentication setting
-        auth_settings = []
-
-        return self.api_client.call_api(resource_path, 'DELETE',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type='str',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -3039,7 +2481,7 @@ class UserApi(object):
     def search_users(self, **kwargs):
         """
         Search Users
-        ### Search users. 
+        ### Search users  Returns all<sup>*</sup> user records that match the given search criteria.  If multiple search params are given and `filter_or` is FALSE or not specified, search params are combined in a logical AND operation. Only rows that match *all* search param criteria will be returned.  If `filter_or` is TRUE, multiple search params are combined in a logical OR operation. Results will include rows that match **any** of the search criteria.  String search params use case-insensitive matching. String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions. example=\"dan%\" will match \"danger\" and \"Danzig\" but not \"David\" example=\"D_m%\" will match \"Damage\" and \"dump\"  Integer search params can accept a single value or a comma separated list of values. The multiple values will be combined under a logical OR operation - results will match at least one of the given values.  Most search params can accept \"IS NULL\" and \"NOT NULL\" as special expressions to match or exclude (respectively) rows where the column is null.  Boolean search params accept only \"true\" and \"false\" as values.   (<sup>*</sup>) Results are always filtered to the level of information the caller is permitted to view. Looker admins can see all user details; normal users in an open system can see names of other users but no details; normal users in a closed system can only see names of other users who are members of the same group as the user.  
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -3050,19 +2492,19 @@ class UserApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str fields: Requested fields.
-        :param int page: Requested page.
-        :param int per_page: Results per page.
+        :param str fields: Include only these fields in the response
+        :param int page: Return only page N of paginated results
+        :param int per_page: Return N rows of data per page
         :param str sorts: Fields to sort by.
         :param int id: Match User Id.
         :param str first_name: Match First name.
         :param str last_name: Match Last name.
-        :param bool verified_looker_employee: Match Verified Looker employee.
-        :param str email: Match Email Address.
-        :param bool is_disabled: Match Is disabled.
-        :param bool filter_or: Do an OR search with parameters
-        :param int content_metadata_id: Id of content metadata to which users must have access
-        :param int group_id: Id of group of which users must be directly members
+        :param bool verified_looker_employee: Search for user accounts associated with Looker employees
+        :param str email: Search for the user with this email address
+        :param bool is_disabled: Search for disabled user accounts
+        :param bool filter_or: Combine given search criteria in a boolean OR expression
+        :param int content_metadata_id: Search for users who have access to this content_metadata item
+        :param int group_id: Search for users who are direct members of this group
         :return: list[User]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3077,7 +2519,7 @@ class UserApi(object):
     def search_users_with_http_info(self, **kwargs):
         """
         Search Users
-        ### Search users. 
+        ### Search users  Returns all<sup>*</sup> user records that match the given search criteria.  If multiple search params are given and `filter_or` is FALSE or not specified, search params are combined in a logical AND operation. Only rows that match *all* search param criteria will be returned.  If `filter_or` is TRUE, multiple search params are combined in a logical OR operation. Results will include rows that match **any** of the search criteria.  String search params use case-insensitive matching. String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions. example=\"dan%\" will match \"danger\" and \"Danzig\" but not \"David\" example=\"D_m%\" will match \"Damage\" and \"dump\"  Integer search params can accept a single value or a comma separated list of values. The multiple values will be combined under a logical OR operation - results will match at least one of the given values.  Most search params can accept \"IS NULL\" and \"NOT NULL\" as special expressions to match or exclude (respectively) rows where the column is null.  Boolean search params accept only \"true\" and \"false\" as values.   (<sup>*</sup>) Results are always filtered to the level of information the caller is permitted to view. Looker admins can see all user details; normal users in an open system can see names of other users but no details; normal users in a closed system can only see names of other users who are members of the same group as the user.  
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -3088,19 +2530,19 @@ class UserApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str fields: Requested fields.
-        :param int page: Requested page.
-        :param int per_page: Results per page.
+        :param str fields: Include only these fields in the response
+        :param int page: Return only page N of paginated results
+        :param int per_page: Return N rows of data per page
         :param str sorts: Fields to sort by.
         :param int id: Match User Id.
         :param str first_name: Match First name.
         :param str last_name: Match Last name.
-        :param bool verified_looker_employee: Match Verified Looker employee.
-        :param str email: Match Email Address.
-        :param bool is_disabled: Match Is disabled.
-        :param bool filter_or: Do an OR search with parameters
-        :param int content_metadata_id: Id of content metadata to which users must have access
-        :param int group_id: Id of group of which users must be directly members
+        :param bool verified_looker_employee: Search for user accounts associated with Looker employees
+        :param str email: Search for the user with this email address
+        :param bool is_disabled: Search for disabled user accounts
+        :param bool filter_or: Combine given search criteria in a boolean OR expression
+        :param int content_metadata_id: Search for users who have access to this content_metadata item
+        :param int group_id: Search for users who are direct members of this group
         :return: list[User]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3191,7 +2633,7 @@ class UserApi(object):
     def search_users_names(self, pattern, **kwargs):
         """
         Search User Names
-        ### Search users where first_name OR last_name OR email matches a string.  The results will be AND'd with any additional search parameters that are (optionally) included. 
+        ### Search for user accounts by name  Returns all user accounts where `first_name` OR `last_name` OR `email` field values match a pattern. The pattern can contain `%` and `_` wildcards as in SQL LIKE expressions.  Any additional search params will be combined into a logical AND expression. 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -3202,17 +2644,17 @@ class UserApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str pattern: Pattern to match. (required)
-        :param str fields: Requested fields.
-        :param int page: Requested page.
-        :param int per_page: Results per page.
-        :param str sorts: Fields to sort by.
-        :param int id: Match User Id.
-        :param str first_name: Match First name.
-        :param str last_name: Match Last name.
-        :param bool verified_looker_employee: Match Verified Looker employee.
-        :param str email: Match Email Address.
-        :param bool is_disabled: Match Is disabled.
+        :param str pattern: Pattern to match (required)
+        :param str fields: Include only these fields in the response
+        :param int page: Return only page N of paginated results
+        :param int per_page: Return N rows of data per page
+        :param str sorts: Fields to sort by
+        :param int id: Match User Id
+        :param str first_name: Match First name
+        :param str last_name: Match Last name
+        :param bool verified_looker_employee: Match Verified Looker employee
+        :param str email: Match Email Address
+        :param bool is_disabled: Include or exclude disabled accounts in the results
         :return: list[User]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3227,7 +2669,7 @@ class UserApi(object):
     def search_users_names_with_http_info(self, pattern, **kwargs):
         """
         Search User Names
-        ### Search users where first_name OR last_name OR email matches a string.  The results will be AND'd with any additional search parameters that are (optionally) included. 
+        ### Search for user accounts by name  Returns all user accounts where `first_name` OR `last_name` OR `email` field values match a pattern. The pattern can contain `%` and `_` wildcards as in SQL LIKE expressions.  Any additional search params will be combined into a logical AND expression. 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -3238,17 +2680,17 @@ class UserApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str pattern: Pattern to match. (required)
-        :param str fields: Requested fields.
-        :param int page: Requested page.
-        :param int per_page: Results per page.
-        :param str sorts: Fields to sort by.
-        :param int id: Match User Id.
-        :param str first_name: Match First name.
-        :param str last_name: Match Last name.
-        :param bool verified_looker_employee: Match Verified Looker employee.
-        :param str email: Match Email Address.
-        :param bool is_disabled: Match Is disabled.
+        :param str pattern: Pattern to match (required)
+        :param str fields: Include only these fields in the response
+        :param int page: Return only page N of paginated results
+        :param int per_page: Return N rows of data per page
+        :param str sorts: Fields to sort by
+        :param int id: Match User Id
+        :param str first_name: Match First name
+        :param str last_name: Match Last name
+        :param bool verified_looker_employee: Match Verified Looker employee
+        :param str email: Match Email Address
+        :param bool is_disabled: Include or exclude disabled accounts in the results
         :return: list[User]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -3692,131 +3134,6 @@ class UserApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def update_user_access_filter(self, user_id, access_filter_id, body, **kwargs):
-        """
-        Update Access Filter
-        ### Access filter for the specified user.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.update_user_access_filter(user_id, access_filter_id, body, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :param int access_filter_id: id of Access Filter (required)
-        :param AccessFilter body: Access Filter (required)
-        :param str fields: Requested fields.
-        :return: AccessFilter
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.update_user_access_filter_with_http_info(user_id, access_filter_id, body, **kwargs)
-        else:
-            (data) = self.update_user_access_filter_with_http_info(user_id, access_filter_id, body, **kwargs)
-            return data
-
-    def update_user_access_filter_with_http_info(self, user_id, access_filter_id, body, **kwargs):
-        """
-        Update Access Filter
-        ### Access filter for the specified user.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.update_user_access_filter_with_http_info(user_id, access_filter_id, body, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :param int access_filter_id: id of Access Filter (required)
-        :param AccessFilter body: Access Filter (required)
-        :param str fields: Requested fields.
-        :return: AccessFilter
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['user_id', 'access_filter_id', 'body', 'fields']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method update_user_access_filter" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'user_id' is set
-        if ('user_id' not in params) or (params['user_id'] is None):
-            raise ValueError("Missing the required parameter `user_id` when calling `update_user_access_filter`")
-        # verify the required parameter 'access_filter_id' is set
-        if ('access_filter_id' not in params) or (params['access_filter_id'] is None):
-            raise ValueError("Missing the required parameter `access_filter_id` when calling `update_user_access_filter`")
-        # verify the required parameter 'body' is set
-        if ('body' not in params) or (params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_user_access_filter`")
-
-
-        collection_formats = {}
-
-        resource_path = '/users/{user_id}/access_filters/{access_filter_id}'.replace('{format}', 'json')
-        path_params = {}
-        if 'user_id' in params:
-            path_params['user_id'] = params['user_id']
-        if 'access_filter_id' in params:
-            path_params['access_filter_id'] = params['access_filter_id']
-
-        query_params = {}
-        if 'fields' in params:
-            query_params['fields'] = params['fields']
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        if 'body' in params:
-            body_params = params['body']
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
-        # Authentication setting
-        auth_settings = []
-
-        return self.api_client.call_api(resource_path, 'PATCH',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type='AccessFilter',
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
-
     def update_user_credentials_email(self, user_id, body, **kwargs):
         """
         Update Email/Password Credential
@@ -4046,124 +3363,6 @@ class UserApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def user_access_filter(self, user_id, access_filter_id, **kwargs):
-        """
-        Get Access Filter
-        ### Access filter for the specified user.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.user_access_filter(user_id, access_filter_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: Id of user (required)
-        :param int access_filter_id: Id of Access Filter (required)
-        :param str fields: Requested fields.
-        :return: AccessFilter
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.user_access_filter_with_http_info(user_id, access_filter_id, **kwargs)
-        else:
-            (data) = self.user_access_filter_with_http_info(user_id, access_filter_id, **kwargs)
-            return data
-
-    def user_access_filter_with_http_info(self, user_id, access_filter_id, **kwargs):
-        """
-        Get Access Filter
-        ### Access filter for the specified user.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.user_access_filter_with_http_info(user_id, access_filter_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: Id of user (required)
-        :param int access_filter_id: Id of Access Filter (required)
-        :param str fields: Requested fields.
-        :return: AccessFilter
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['user_id', 'access_filter_id', 'fields']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method user_access_filter" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'user_id' is set
-        if ('user_id' not in params) or (params['user_id'] is None):
-            raise ValueError("Missing the required parameter `user_id` when calling `user_access_filter`")
-        # verify the required parameter 'access_filter_id' is set
-        if ('access_filter_id' not in params) or (params['access_filter_id'] is None):
-            raise ValueError("Missing the required parameter `access_filter_id` when calling `user_access_filter`")
-
-
-        collection_formats = {}
-
-        resource_path = '/users/{user_id}/access_filters/{access_filter_id}'.replace('{format}', 'json')
-        path_params = {}
-        if 'user_id' in params:
-            path_params['user_id'] = params['user_id']
-        if 'access_filter_id' in params:
-            path_params['access_filter_id'] = params['access_filter_id']
-
-        query_params = {}
-        if 'fields' in params:
-            query_params['fields'] = params['fields']
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
-        # Authentication setting
-        auth_settings = []
-
-        return self.api_client.call_api(resource_path, 'GET',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type='AccessFilter',
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
-
     def user_attribute_user_values(self, user_id, **kwargs):
         """
         Get User Attribute Values
@@ -4281,117 +3480,6 @@ class UserApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type='list[UserAttributeWithValue]',
-                                        auth_settings=auth_settings,
-                                        callback=params.get('callback'),
-                                        _return_http_data_only=params.get('_return_http_data_only'),
-                                        _preload_content=params.get('_preload_content', True),
-                                        _request_timeout=params.get('_request_timeout'),
-                                        collection_formats=collection_formats)
-
-    def user_credentials_api(self, user_id, **kwargs):
-        """
-        Get API Credential
-        ### API login information for the specified user. This is for 'API Users' used for the 'old' query API. THIS SUPPORT HAS BEEN REMOVED.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.user_credentials_api(user_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :param str fields: Requested fields.
-        :return: CredentialsApi
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('callback'):
-            return self.user_credentials_api_with_http_info(user_id, **kwargs)
-        else:
-            (data) = self.user_credentials_api_with_http_info(user_id, **kwargs)
-            return data
-
-    def user_credentials_api_with_http_info(self, user_id, **kwargs):
-        """
-        Get API Credential
-        ### API login information for the specified user. This is for 'API Users' used for the 'old' query API. THIS SUPPORT HAS BEEN REMOVED.
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please define a `callback` function
-        to be invoked when receiving the response.
-        >>> def callback_function(response):
-        >>>     pprint(response)
-        >>>
-        >>> thread = api.user_credentials_api_with_http_info(user_id, callback=callback_function)
-
-        :param callback function: The callback function
-            for asynchronous request. (optional)
-        :param int user_id: id of user (required)
-        :param str fields: Requested fields.
-        :return: CredentialsApi
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['user_id', 'fields']
-        all_params.append('callback')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method user_credentials_api" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'user_id' is set
-        if ('user_id' not in params) or (params['user_id'] is None):
-            raise ValueError("Missing the required parameter `user_id` when calling `user_credentials_api`")
-
-
-        collection_formats = {}
-
-        resource_path = '/users/{user_id}/credentials_api'.replace('{format}', 'json')
-        path_params = {}
-        if 'user_id' in params:
-            path_params['user_id'] = params['user_id']
-
-        query_params = {}
-        if 'fields' in params:
-            query_params['fields'] = params['fields']
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.\
-            select_header_accept(['application/json'])
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.\
-            select_header_content_type(['application/json'])
-
-        # Authentication setting
-        auth_settings = []
-
-        return self.api_client.call_api(resource_path, 'GET',
-                                        path_params,
-                                        query_params,
-                                        header_params,
-                                        body=body_params,
-                                        post_params=form_params,
-                                        files=local_var_files,
-                                        response_type='CredentialsApi',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -5415,7 +4503,7 @@ class UserApi(object):
     def user_for_credential(self, credential_type, credential_id, **kwargs):
         """
         Get User by Credential Id
-        ### Get information about the user with a credential of given type with specific id.  This is used to do things like find users by their embed external_user_id. Or, find the user with a given api3 client_id, etc. The 'credential_type' matchs the 'type' name of the various credential types. It must be one of the values listed in the table below. The 'credential_id' is your unique Id for the user and is specific to each type of credential.  An example using the Ruby sdk might look like:  `sdk.user_for_credential('embed', 'customer-4959425')`  This table shows the supported 'Credential Type' strings. The right column is for reference; it shows which field in the given credential type is actually searched when finding a user with the supplied 'credential_id'.  | Credential Types | Id Field Matched | | ---------------- | ---------------- | | email            | email            | | google           | google_user_id   | | saml             | saml_user_id     | | oidc             | oidc_user_id     | | ldap             | ldap_id          | | api              | token            | | api3             | client_id        | | embed            | external_user_id | | looker_openid    | email            |  NOTE: 'api' is the legacy Looker query API. The API you are currently looking at is 'api3'.  
+        ### Get information about the user with a credential of given type with specific id.  This is used to do things like find users by their embed external_user_id. Or, find the user with a given api3 client_id, etc. The 'credential_type' matchs the 'type' name of the various credential types. It must be one of the values listed in the table below. The 'credential_id' is your unique Id for the user and is specific to each type of credential.  An example using the Ruby sdk might look like:  `sdk.user_for_credential('embed', 'customer-4959425')`  This table shows the supported 'Credential Type' strings. The right column is for reference; it shows which field in the given credential type is actually searched when finding a user with the supplied 'credential_id'.  | Credential Types | Id Field Matched | | ---------------- | ---------------- | | email            | email            | | google           | google_user_id   | | saml             | saml_user_id     | | oidc             | oidc_user_id     | | ldap             | ldap_id          | | api              | token            | | api3             | client_id        | | embed            | external_user_id | | looker_openid    | email            |  NOTE: The 'api' credential type was only used with the legacy Looker query API and is no longer supported. The credential type for API you are currently looking at is 'api3'.  
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -5443,7 +4531,7 @@ class UserApi(object):
     def user_for_credential_with_http_info(self, credential_type, credential_id, **kwargs):
         """
         Get User by Credential Id
-        ### Get information about the user with a credential of given type with specific id.  This is used to do things like find users by their embed external_user_id. Or, find the user with a given api3 client_id, etc. The 'credential_type' matchs the 'type' name of the various credential types. It must be one of the values listed in the table below. The 'credential_id' is your unique Id for the user and is specific to each type of credential.  An example using the Ruby sdk might look like:  `sdk.user_for_credential('embed', 'customer-4959425')`  This table shows the supported 'Credential Type' strings. The right column is for reference; it shows which field in the given credential type is actually searched when finding a user with the supplied 'credential_id'.  | Credential Types | Id Field Matched | | ---------------- | ---------------- | | email            | email            | | google           | google_user_id   | | saml             | saml_user_id     | | oidc             | oidc_user_id     | | ldap             | ldap_id          | | api              | token            | | api3             | client_id        | | embed            | external_user_id | | looker_openid    | email            |  NOTE: 'api' is the legacy Looker query API. The API you are currently looking at is 'api3'.  
+        ### Get information about the user with a credential of given type with specific id.  This is used to do things like find users by their embed external_user_id. Or, find the user with a given api3 client_id, etc. The 'credential_type' matchs the 'type' name of the various credential types. It must be one of the values listed in the table below. The 'credential_id' is your unique Id for the user and is specific to each type of credential.  An example using the Ruby sdk might look like:  `sdk.user_for_credential('embed', 'customer-4959425')`  This table shows the supported 'Credential Type' strings. The right column is for reference; it shows which field in the given credential type is actually searched when finding a user with the supplied 'credential_id'.  | Credential Types | Id Field Matched | | ---------------- | ---------------- | | email            | email            | | google           | google_user_id   | | saml             | saml_user_id     | | oidc             | oidc_user_id     | | ldap             | ldap_id          | | api              | token            | | api3             | client_id        | | embed            | external_user_id | | looker_openid    | email            |  NOTE: The 'api' credential type was only used with the legacy Looker query API and is no longer supported. The credential type for API you are currently looking at is 'api3'.  
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -5533,7 +4621,7 @@ class UserApi(object):
     def user_roles(self, user_id, **kwargs):
         """
         Get User Roles
-        ### Get information about roles of the user with a specific id. 
+        ### Get information about roles of a given user 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -5561,7 +4649,7 @@ class UserApi(object):
     def user_roles_with_http_info(self, user_id, **kwargs):
         """
         Get User Roles
-        ### Get information about roles of the user with a specific id. 
+        ### Get information about roles of a given user 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.

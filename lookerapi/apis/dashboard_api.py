@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -248,55 +248,55 @@ class DashboardApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def create_dashboard_prefetch(self, dashboard_id, **kwargs):
+    def create_dashboard_element(self, **kwargs):
         """
-        Create Dashboard Prefetch
-        ### Create a prefetch for a dashboard with the specified information.  **Deprecated** Use [DataGroups](#!/Datagroup) to manage cache invalidation of groups of queries. 
+        Create DashboardElement
+        ### Create a dashboard element on the dashboard with a specific id.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create_dashboard_prefetch(dashboard_id, callback=callback_function)
+        >>> thread = api.create_dashboard_element(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str dashboard_id: Id of dashboard (required)
-        :param PrefetchDashboardRequest body: Parameters for prefetch request
-        :return: PrefetchDashboardRequest
+        :param DashboardElement body: DashboardElement
+        :param str fields: Requested fields.
+        :return: DashboardElement
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.create_dashboard_prefetch_with_http_info(dashboard_id, **kwargs)
+            return self.create_dashboard_element_with_http_info(**kwargs)
         else:
-            (data) = self.create_dashboard_prefetch_with_http_info(dashboard_id, **kwargs)
+            (data) = self.create_dashboard_element_with_http_info(**kwargs)
             return data
 
-    def create_dashboard_prefetch_with_http_info(self, dashboard_id, **kwargs):
+    def create_dashboard_element_with_http_info(self, **kwargs):
         """
-        Create Dashboard Prefetch
-        ### Create a prefetch for a dashboard with the specified information.  **Deprecated** Use [DataGroups](#!/Datagroup) to manage cache invalidation of groups of queries. 
+        Create DashboardElement
+        ### Create a dashboard element on the dashboard with a specific id.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.create_dashboard_prefetch_with_http_info(dashboard_id, callback=callback_function)
+        >>> thread = api.create_dashboard_element_with_http_info(callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str dashboard_id: Id of dashboard (required)
-        :param PrefetchDashboardRequest body: Parameters for prefetch request
-        :return: PrefetchDashboardRequest
+        :param DashboardElement body: DashboardElement
+        :param str fields: Requested fields.
+        :return: DashboardElement
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['dashboard_id', 'body']
+        all_params = ['body', 'fields']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -307,23 +307,20 @@ class DashboardApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method create_dashboard_prefetch" % key
+                    " to method create_dashboard_element" % key
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'dashboard_id' is set
-        if ('dashboard_id' not in params) or (params['dashboard_id'] is None):
-            raise ValueError("Missing the required parameter `dashboard_id` when calling `create_dashboard_prefetch`")
 
 
         collection_formats = {}
 
-        resource_path = '/dashboards/{dashboard_id}/prefetch'.replace('{format}', 'json')
+        resource_path = '/dashboard_elements'.replace('{format}', 'json')
         path_params = {}
-        if 'dashboard_id' in params:
-            path_params['dashboard_id'] = params['dashboard_id']
 
         query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
 
         header_params = {}
 
@@ -351,7 +348,226 @@ class DashboardApi(object):
                                         body=body_params,
                                         post_params=form_params,
                                         files=local_var_files,
-                                        response_type='PrefetchDashboardRequest',
+                                        response_type='DashboardElement',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def create_dashboard_filter(self, body, **kwargs):
+        """
+        Create Dashboard Filter
+        ### Create a dashboard filter on the dashboard with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.create_dashboard_filter(body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param CreateDashboardFilter body: Dashboard Filter (required)
+        :param str fields: Requested fields
+        :return: DashboardFilter
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.create_dashboard_filter_with_http_info(body, **kwargs)
+        else:
+            (data) = self.create_dashboard_filter_with_http_info(body, **kwargs)
+            return data
+
+    def create_dashboard_filter_with_http_info(self, body, **kwargs):
+        """
+        Create Dashboard Filter
+        ### Create a dashboard filter on the dashboard with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.create_dashboard_filter_with_http_info(body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param CreateDashboardFilter body: Dashboard Filter (required)
+        :param str fields: Requested fields
+        :return: DashboardFilter
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_dashboard_filter" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `create_dashboard_filter`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_filters'.replace('{format}', 'json')
+        path_params = {}
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DashboardFilter',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def create_dashboard_layout(self, **kwargs):
+        """
+        Create DashboardLayout
+        ### Create a dashboard layout on the dashboard with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.create_dashboard_layout(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param DashboardLayout body: DashboardLayout
+        :param str fields: Requested fields.
+        :return: DashboardLayout
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.create_dashboard_layout_with_http_info(**kwargs)
+        else:
+            (data) = self.create_dashboard_layout_with_http_info(**kwargs)
+            return data
+
+    def create_dashboard_layout_with_http_info(self, **kwargs):
+        """
+        Create DashboardLayout
+        ### Create a dashboard layout on the dashboard with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.create_dashboard_layout_with_http_info(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param DashboardLayout body: DashboardLayout
+        :param str fields: Requested fields.
+        :return: DashboardLayout
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['body', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method create_dashboard_layout" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_layouts'.replace('{format}', 'json')
+        path_params = {}
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DashboardLayout',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -470,55 +686,55 @@ class DashboardApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
-    def dashboard_prefetch(self, dashboard_id, **kwargs):
+    def dashboard_dashboard_elements(self, dashboard_id, **kwargs):
         """
-        Get Dashboard Prefetch
-        ### Get a prefetch for a dashboard with the specified information.  **Deprecated** Use [DataGroups](#!/Datagroup) to manage cache invalidation of groups of queries. 
+        Get All DashboardElements
+        ### Get information about all the dashboard elements on a dashboard with a specific id.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.dashboard_prefetch(dashboard_id, callback=callback_function)
+        >>> thread = api.dashboard_dashboard_elements(dashboard_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str dashboard_id: Id of dashboard (required)
-        :param list[PrefetchDashboardFilterValue] dashboard_filters: JSON encoded string of Dashboard filters that were applied to prefetch
-        :return: Prefetch
+        :param str fields: Requested fields.
+        :return: list[DashboardElement]
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.dashboard_prefetch_with_http_info(dashboard_id, **kwargs)
+            return self.dashboard_dashboard_elements_with_http_info(dashboard_id, **kwargs)
         else:
-            (data) = self.dashboard_prefetch_with_http_info(dashboard_id, **kwargs)
+            (data) = self.dashboard_dashboard_elements_with_http_info(dashboard_id, **kwargs)
             return data
 
-    def dashboard_prefetch_with_http_info(self, dashboard_id, **kwargs):
+    def dashboard_dashboard_elements_with_http_info(self, dashboard_id, **kwargs):
         """
-        Get Dashboard Prefetch
-        ### Get a prefetch for a dashboard with the specified information.  **Deprecated** Use [DataGroups](#!/Datagroup) to manage cache invalidation of groups of queries. 
+        Get All DashboardElements
+        ### Get information about all the dashboard elements on a dashboard with a specific id.
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.dashboard_prefetch_with_http_info(dashboard_id, callback=callback_function)
+        >>> thread = api.dashboard_dashboard_elements_with_http_info(dashboard_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
         :param str dashboard_id: Id of dashboard (required)
-        :param list[PrefetchDashboardFilterValue] dashboard_filters: JSON encoded string of Dashboard filters that were applied to prefetch
-        :return: Prefetch
+        :param str fields: Requested fields.
+        :return: list[DashboardElement]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['dashboard_id', 'dashboard_filters']
+        all_params = ['dashboard_id', 'fields']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -529,26 +745,25 @@ class DashboardApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method dashboard_prefetch" % key
+                    " to method dashboard_dashboard_elements" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'dashboard_id' is set
         if ('dashboard_id' not in params) or (params['dashboard_id'] is None):
-            raise ValueError("Missing the required parameter `dashboard_id` when calling `dashboard_prefetch`")
+            raise ValueError("Missing the required parameter `dashboard_id` when calling `dashboard_dashboard_elements`")
 
 
         collection_formats = {}
 
-        resource_path = '/dashboards/{dashboard_id}/prefetch'.replace('{format}', 'json')
+        resource_path = '/dashboards/{dashboard_id}/dashboard_elements'.replace('{format}', 'json')
         path_params = {}
         if 'dashboard_id' in params:
             path_params['dashboard_id'] = params['dashboard_id']
 
         query_params = {}
-        if 'dashboard_filters' in params:
-            query_params['dashboard_filters'] = params['dashboard_filters']
-            collection_formats['dashboard_filters'] = 'csv'
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
 
         header_params = {}
 
@@ -574,7 +789,784 @@ class DashboardApi(object):
                                         body=body_params,
                                         post_params=form_params,
                                         files=local_var_files,
-                                        response_type='Prefetch',
+                                        response_type='list[DashboardElement]',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def dashboard_dashboard_filters(self, dashboard_id, **kwargs):
+        """
+        Get All Dashboard Filters
+        ### Get information about all the dashboard filters on a dashboard with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_dashboard_filters(dashboard_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_id: Id of dashboard (required)
+        :param str fields: Requested fields.
+        :return: list[DashboardFilter]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.dashboard_dashboard_filters_with_http_info(dashboard_id, **kwargs)
+        else:
+            (data) = self.dashboard_dashboard_filters_with_http_info(dashboard_id, **kwargs)
+            return data
+
+    def dashboard_dashboard_filters_with_http_info(self, dashboard_id, **kwargs):
+        """
+        Get All Dashboard Filters
+        ### Get information about all the dashboard filters on a dashboard with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_dashboard_filters_with_http_info(dashboard_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_id: Id of dashboard (required)
+        :param str fields: Requested fields.
+        :return: list[DashboardFilter]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_id', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method dashboard_dashboard_filters" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_id' is set
+        if ('dashboard_id' not in params) or (params['dashboard_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_id` when calling `dashboard_dashboard_filters`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboards/{dashboard_id}/dashboard_filters'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_id' in params:
+            path_params['dashboard_id'] = params['dashboard_id']
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='list[DashboardFilter]',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def dashboard_dashboard_layouts(self, dashboard_id, **kwargs):
+        """
+        Get All DashboardLayouts
+        ### Get information about all the dashboard elements on a dashboard with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_dashboard_layouts(dashboard_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_id: Id of dashboard (required)
+        :param str fields: Requested fields.
+        :return: list[DashboardLayout]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.dashboard_dashboard_layouts_with_http_info(dashboard_id, **kwargs)
+        else:
+            (data) = self.dashboard_dashboard_layouts_with_http_info(dashboard_id, **kwargs)
+            return data
+
+    def dashboard_dashboard_layouts_with_http_info(self, dashboard_id, **kwargs):
+        """
+        Get All DashboardLayouts
+        ### Get information about all the dashboard elements on a dashboard with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_dashboard_layouts_with_http_info(dashboard_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_id: Id of dashboard (required)
+        :param str fields: Requested fields.
+        :return: list[DashboardLayout]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_id', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method dashboard_dashboard_layouts" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_id' is set
+        if ('dashboard_id' not in params) or (params['dashboard_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_id` when calling `dashboard_dashboard_layouts`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboards/{dashboard_id}/dashboard_layouts'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_id' in params:
+            path_params['dashboard_id'] = params['dashboard_id']
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='list[DashboardLayout]',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def dashboard_element(self, dashboard_element_id, **kwargs):
+        """
+        Get DashboardElement
+        ### Get information about the dashboard element with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_element(dashboard_element_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_element_id: Id of dashboard element (required)
+        :param str fields: Requested fields.
+        :return: DashboardElement
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.dashboard_element_with_http_info(dashboard_element_id, **kwargs)
+        else:
+            (data) = self.dashboard_element_with_http_info(dashboard_element_id, **kwargs)
+            return data
+
+    def dashboard_element_with_http_info(self, dashboard_element_id, **kwargs):
+        """
+        Get DashboardElement
+        ### Get information about the dashboard element with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_element_with_http_info(dashboard_element_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_element_id: Id of dashboard element (required)
+        :param str fields: Requested fields.
+        :return: DashboardElement
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_element_id', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method dashboard_element" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_element_id' is set
+        if ('dashboard_element_id' not in params) or (params['dashboard_element_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_element_id` when calling `dashboard_element`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_elements/{dashboard_element_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_element_id' in params:
+            path_params['dashboard_element_id'] = params['dashboard_element_id']
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DashboardElement',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def dashboard_filter(self, dashboard_filter_id, **kwargs):
+        """
+        Get Dashboard Filter
+        ### Get information about the dashboard filters with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_filter(dashboard_filter_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_filter_id: Id of dashboard filters (required)
+        :param str fields: Requested fields.
+        :return: DashboardFilter
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.dashboard_filter_with_http_info(dashboard_filter_id, **kwargs)
+        else:
+            (data) = self.dashboard_filter_with_http_info(dashboard_filter_id, **kwargs)
+            return data
+
+    def dashboard_filter_with_http_info(self, dashboard_filter_id, **kwargs):
+        """
+        Get Dashboard Filter
+        ### Get information about the dashboard filters with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_filter_with_http_info(dashboard_filter_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_filter_id: Id of dashboard filters (required)
+        :param str fields: Requested fields.
+        :return: DashboardFilter
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_filter_id', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method dashboard_filter" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_filter_id' is set
+        if ('dashboard_filter_id' not in params) or (params['dashboard_filter_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_filter_id` when calling `dashboard_filter`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_filters/{dashboard_filter_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_filter_id' in params:
+            path_params['dashboard_filter_id'] = params['dashboard_filter_id']
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DashboardFilter',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def dashboard_layout(self, dashboard_layout_id, **kwargs):
+        """
+        Get DashboardLayout
+        ### Get information about the dashboard layouts with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_layout(dashboard_layout_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_id: Id of dashboard layouts (required)
+        :param str fields: Requested fields.
+        :return: DashboardLayout
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.dashboard_layout_with_http_info(dashboard_layout_id, **kwargs)
+        else:
+            (data) = self.dashboard_layout_with_http_info(dashboard_layout_id, **kwargs)
+            return data
+
+    def dashboard_layout_with_http_info(self, dashboard_layout_id, **kwargs):
+        """
+        Get DashboardLayout
+        ### Get information about the dashboard layouts with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_layout_with_http_info(dashboard_layout_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_id: Id of dashboard layouts (required)
+        :param str fields: Requested fields.
+        :return: DashboardLayout
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_layout_id', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method dashboard_layout" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_layout_id' is set
+        if ('dashboard_layout_id' not in params) or (params['dashboard_layout_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_layout_id` when calling `dashboard_layout`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_layouts/{dashboard_layout_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_layout_id' in params:
+            path_params['dashboard_layout_id'] = params['dashboard_layout_id']
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DashboardLayout',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def dashboard_layout_component(self, dashboard_layout_component_id, **kwargs):
+        """
+        Get DashboardLayoutComponent
+        ### Get information about the dashboard elements with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_layout_component(dashboard_layout_component_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_component_id: Id of dashboard layout component (required)
+        :param str fields: Requested fields.
+        :return: DashboardLayoutComponent
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.dashboard_layout_component_with_http_info(dashboard_layout_component_id, **kwargs)
+        else:
+            (data) = self.dashboard_layout_component_with_http_info(dashboard_layout_component_id, **kwargs)
+            return data
+
+    def dashboard_layout_component_with_http_info(self, dashboard_layout_component_id, **kwargs):
+        """
+        Get DashboardLayoutComponent
+        ### Get information about the dashboard elements with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_layout_component_with_http_info(dashboard_layout_component_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_component_id: Id of dashboard layout component (required)
+        :param str fields: Requested fields.
+        :return: DashboardLayoutComponent
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_layout_component_id', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method dashboard_layout_component" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_layout_component_id' is set
+        if ('dashboard_layout_component_id' not in params) or (params['dashboard_layout_component_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_layout_component_id` when calling `dashboard_layout_component`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_layout_components/{dashboard_layout_component_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_layout_component_id' in params:
+            path_params['dashboard_layout_component_id'] = params['dashboard_layout_component_id']
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DashboardLayoutComponent',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def dashboard_layout_dashboard_layout_components(self, dashboard_layout_id, **kwargs):
+        """
+        Get All DashboardLayoutComponents
+        ### Get information about all the dashboard layout components for a dashboard layout with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_layout_dashboard_layout_components(dashboard_layout_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_id: Id of dashboard layout component (required)
+        :param str fields: Requested fields.
+        :return: list[DashboardLayoutComponent]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.dashboard_layout_dashboard_layout_components_with_http_info(dashboard_layout_id, **kwargs)
+        else:
+            (data) = self.dashboard_layout_dashboard_layout_components_with_http_info(dashboard_layout_id, **kwargs)
+            return data
+
+    def dashboard_layout_dashboard_layout_components_with_http_info(self, dashboard_layout_id, **kwargs):
+        """
+        Get All DashboardLayoutComponents
+        ### Get information about all the dashboard layout components for a dashboard layout with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.dashboard_layout_dashboard_layout_components_with_http_info(dashboard_layout_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_id: Id of dashboard layout component (required)
+        :param str fields: Requested fields.
+        :return: list[DashboardLayoutComponent]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_layout_id', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method dashboard_layout_dashboard_layout_components" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_layout_id' is set
+        if ('dashboard_layout_id' not in params) or (params['dashboard_layout_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_layout_id` when calling `dashboard_layout_dashboard_layout_components`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_layouts/{dashboard_layout_id}/dashboard_layout_components'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_layout_id' in params:
+            path_params['dashboard_layout_id'] = params['dashboard_layout_id']
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='list[DashboardLayoutComponent]',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -689,10 +1681,581 @@ class DashboardApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
+    def delete_dashboard_element(self, dashboard_element_id, **kwargs):
+        """
+        Delete DashboardElement
+        ### Delete a dashboard element with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.delete_dashboard_element(dashboard_element_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_element_id: Id of dashboard element (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.delete_dashboard_element_with_http_info(dashboard_element_id, **kwargs)
+        else:
+            (data) = self.delete_dashboard_element_with_http_info(dashboard_element_id, **kwargs)
+            return data
+
+    def delete_dashboard_element_with_http_info(self, dashboard_element_id, **kwargs):
+        """
+        Delete DashboardElement
+        ### Delete a dashboard element with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.delete_dashboard_element_with_http_info(dashboard_element_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_element_id: Id of dashboard element (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_element_id']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_dashboard_element" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_element_id' is set
+        if ('dashboard_element_id' not in params) or (params['dashboard_element_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_element_id` when calling `delete_dashboard_element`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_elements/{dashboard_element_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_element_id' in params:
+            path_params['dashboard_element_id'] = params['dashboard_element_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'DELETE',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='str',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def delete_dashboard_filter(self, dashboard_filter_id, **kwargs):
+        """
+        Delete Dashboard Filter
+        ### Delete a dashboard filter with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.delete_dashboard_filter(dashboard_filter_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_filter_id: Id of dashboard filter (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.delete_dashboard_filter_with_http_info(dashboard_filter_id, **kwargs)
+        else:
+            (data) = self.delete_dashboard_filter_with_http_info(dashboard_filter_id, **kwargs)
+            return data
+
+    def delete_dashboard_filter_with_http_info(self, dashboard_filter_id, **kwargs):
+        """
+        Delete Dashboard Filter
+        ### Delete a dashboard filter with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.delete_dashboard_filter_with_http_info(dashboard_filter_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_filter_id: Id of dashboard filter (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_filter_id']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_dashboard_filter" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_filter_id' is set
+        if ('dashboard_filter_id' not in params) or (params['dashboard_filter_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_filter_id` when calling `delete_dashboard_filter`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_filters/{dashboard_filter_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_filter_id' in params:
+            path_params['dashboard_filter_id'] = params['dashboard_filter_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'DELETE',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='str',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def delete_dashboard_layout(self, dashboard_layout_id, **kwargs):
+        """
+        Delete DashboardLayout
+        ### Delete a dashboard layout with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.delete_dashboard_layout(dashboard_layout_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_id: Id of dashboard layout (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.delete_dashboard_layout_with_http_info(dashboard_layout_id, **kwargs)
+        else:
+            (data) = self.delete_dashboard_layout_with_http_info(dashboard_layout_id, **kwargs)
+            return data
+
+    def delete_dashboard_layout_with_http_info(self, dashboard_layout_id, **kwargs):
+        """
+        Delete DashboardLayout
+        ### Delete a dashboard layout with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.delete_dashboard_layout_with_http_info(dashboard_layout_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_id: Id of dashboard layout (required)
+        :return: str
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_layout_id']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method delete_dashboard_layout" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_layout_id' is set
+        if ('dashboard_layout_id' not in params) or (params['dashboard_layout_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_layout_id` when calling `delete_dashboard_layout`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_layouts/{dashboard_layout_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_layout_id' in params:
+            path_params['dashboard_layout_id'] = params['dashboard_layout_id']
+
+        query_params = {}
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'DELETE',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='str',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def import_lookml_dashboard(self, lookml_dashboard_id, space_id, **kwargs):
+        """
+        Import LookML Dashboard
+        ### Import a LookML dashboard to a space as a UDD Creates a UDD (a dashboard which exists in the Looker database rather than as a LookML file) from the LookML dashboard and puts it in the space specified. The created UDD will have a lookml_link_id which links to the original LookML dashboard.  To give the imported dashboard specify a (e.g. title: \"my title\") in the body of your request, otherwise the imported dashboard will have the same title as the original LookML dashboard.  For this operation to succeed the user must have permission to see the LookML dashboard in question, and have permission to create content in the space the dashboard is being imported to.  **Sync** a linked UDD with [Sync LookML Dashboard] (#!/Dashboard/sync_lookml_dashboard) **Unlink** a linked UDD by setting lookml_link_id to null with [Update Dashboard](#!/Dashboard/update_dashboard) 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.import_lookml_dashboard(lookml_dashboard_id, space_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str lookml_dashboard_id: Id of LookML dashboard (required)
+        :param str space_id: Id of space to import the dashboard to (required)
+        :param Dashboard body: Dashboard
+        :param bool raw_locale: If true, and this dashboard is localized, export it with the raw keys, not localized.
+        :return: Dashboard
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.import_lookml_dashboard_with_http_info(lookml_dashboard_id, space_id, **kwargs)
+        else:
+            (data) = self.import_lookml_dashboard_with_http_info(lookml_dashboard_id, space_id, **kwargs)
+            return data
+
+    def import_lookml_dashboard_with_http_info(self, lookml_dashboard_id, space_id, **kwargs):
+        """
+        Import LookML Dashboard
+        ### Import a LookML dashboard to a space as a UDD Creates a UDD (a dashboard which exists in the Looker database rather than as a LookML file) from the LookML dashboard and puts it in the space specified. The created UDD will have a lookml_link_id which links to the original LookML dashboard.  To give the imported dashboard specify a (e.g. title: \"my title\") in the body of your request, otherwise the imported dashboard will have the same title as the original LookML dashboard.  For this operation to succeed the user must have permission to see the LookML dashboard in question, and have permission to create content in the space the dashboard is being imported to.  **Sync** a linked UDD with [Sync LookML Dashboard] (#!/Dashboard/sync_lookml_dashboard) **Unlink** a linked UDD by setting lookml_link_id to null with [Update Dashboard](#!/Dashboard/update_dashboard) 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.import_lookml_dashboard_with_http_info(lookml_dashboard_id, space_id, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str lookml_dashboard_id: Id of LookML dashboard (required)
+        :param str space_id: Id of space to import the dashboard to (required)
+        :param Dashboard body: Dashboard
+        :param bool raw_locale: If true, and this dashboard is localized, export it with the raw keys, not localized.
+        :return: Dashboard
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['lookml_dashboard_id', 'space_id', 'body', 'raw_locale']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method import_lookml_dashboard" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'lookml_dashboard_id' is set
+        if ('lookml_dashboard_id' not in params) or (params['lookml_dashboard_id'] is None):
+            raise ValueError("Missing the required parameter `lookml_dashboard_id` when calling `import_lookml_dashboard`")
+        # verify the required parameter 'space_id' is set
+        if ('space_id' not in params) or (params['space_id'] is None):
+            raise ValueError("Missing the required parameter `space_id` when calling `import_lookml_dashboard`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboards/{lookml_dashboard_id}/import/{space_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'lookml_dashboard_id' in params:
+            path_params['lookml_dashboard_id'] = params['lookml_dashboard_id']
+        if 'space_id' in params:
+            path_params['space_id'] = params['space_id']
+
+        query_params = {}
+        if 'raw_locale' in params:
+            query_params['raw_locale'] = params['raw_locale']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'POST',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='Dashboard',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def search_dashboard_elements(self, **kwargs):
+        """
+        Search Dashboard Elements
+        ### Search Dashboard Elements  Returns an **array of DashboardElement objects** that match the specified search criteria.  If multiple search params are given and `filter_or` is FALSE or not specified, search params are combined in a logical AND operation. Only rows that match *all* search param criteria will be returned.  If `filter_or` is TRUE, multiple search params are combined in a logical OR operation. Results will include rows that match **any** of the search criteria.  String search params use case-insensitive matching. String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions. example=\"dan%\" will match \"danger\" and \"Danzig\" but not \"David\" example=\"D_m%\" will match \"Damage\" and \"dump\"  Integer search params can accept a single value or a comma separated list of values. The multiple values will be combined under a logical OR operation - results will match at least one of the given values.  Most search params can accept \"IS NULL\" and \"NOT NULL\" as special expressions to match or exclude (respectively) rows where the column is null.  Boolean search params accept only \"true\" and \"false\" as values.  
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.search_dashboard_elements(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param int dashboard_id: Select elements that refer to a given dashboard id
+        :param int look_id: Select elements that refer to a given look id
+        :param str title: Match the title of element
+        :param bool deleted: Select soft-deleted dashboard elements
+        :param str fields: Requested fields.
+        :param bool filter_or: Combine given search criteria in a boolean OR expression
+        :param str sorts: Fields to sort by. Sortable fields: [:look_id, :dashboard_id, :deleted, :title]
+        :return: list[DashboardElement]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.search_dashboard_elements_with_http_info(**kwargs)
+        else:
+            (data) = self.search_dashboard_elements_with_http_info(**kwargs)
+            return data
+
+    def search_dashboard_elements_with_http_info(self, **kwargs):
+        """
+        Search Dashboard Elements
+        ### Search Dashboard Elements  Returns an **array of DashboardElement objects** that match the specified search criteria.  If multiple search params are given and `filter_or` is FALSE or not specified, search params are combined in a logical AND operation. Only rows that match *all* search param criteria will be returned.  If `filter_or` is TRUE, multiple search params are combined in a logical OR operation. Results will include rows that match **any** of the search criteria.  String search params use case-insensitive matching. String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions. example=\"dan%\" will match \"danger\" and \"Danzig\" but not \"David\" example=\"D_m%\" will match \"Damage\" and \"dump\"  Integer search params can accept a single value or a comma separated list of values. The multiple values will be combined under a logical OR operation - results will match at least one of the given values.  Most search params can accept \"IS NULL\" and \"NOT NULL\" as special expressions to match or exclude (respectively) rows where the column is null.  Boolean search params accept only \"true\" and \"false\" as values.  
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.search_dashboard_elements_with_http_info(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param int dashboard_id: Select elements that refer to a given dashboard id
+        :param int look_id: Select elements that refer to a given look id
+        :param str title: Match the title of element
+        :param bool deleted: Select soft-deleted dashboard elements
+        :param str fields: Requested fields.
+        :param bool filter_or: Combine given search criteria in a boolean OR expression
+        :param str sorts: Fields to sort by. Sortable fields: [:look_id, :dashboard_id, :deleted, :title]
+        :return: list[DashboardElement]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_id', 'look_id', 'title', 'deleted', 'fields', 'filter_or', 'sorts']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method search_dashboard_elements" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_elements/search'.replace('{format}', 'json')
+        path_params = {}
+
+        query_params = {}
+        if 'dashboard_id' in params:
+            query_params['dashboard_id'] = params['dashboard_id']
+        if 'look_id' in params:
+            query_params['look_id'] = params['look_id']
+        if 'title' in params:
+            query_params['title'] = params['title']
+        if 'deleted' in params:
+            query_params['deleted'] = params['deleted']
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+        if 'filter_or' in params:
+            query_params['filter_or'] = params['filter_or']
+        if 'sorts' in params:
+            query_params['sorts'] = params['sorts']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='list[DashboardElement]',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
     def search_dashboards(self, **kwargs):
         """
         Search Dashboards
-        ### Search all dashboards for matching criteria.  Returns an **array of dashboard objects** that match the specified search criteria.  The parameters `limit`, and `offset` are recommended for \"paging\" the returned results.  Get a **single dashboard** by id with [Dashboard](#!/Dashboard/dashboard) 
+        ### Search Dashboards  Returns an **array of dashboard objects** that match the specified search criteria.  If multiple search params are given and `filter_or` is FALSE or not specified, search params are combined in a logical AND operation. Only rows that match *all* search param criteria will be returned.  If `filter_or` is TRUE, multiple search params are combined in a logical OR operation. Results will include rows that match **any** of the search criteria.  String search params use case-insensitive matching. String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions. example=\"dan%\" will match \"danger\" and \"Danzig\" but not \"David\" example=\"D_m%\" will match \"Damage\" and \"dump\"  Integer search params can accept a single value or a comma separated list of values. The multiple values will be combined under a logical OR operation - results will match at least one of the given values.  Most search params can accept \"IS NULL\" and \"NOT NULL\" as special expressions to match or exclude (respectively) rows where the column is null.  Boolean search params accept only \"true\" and \"false\" as values.   The parameters `limit`, and `offset` are recommended for fetching results in page-size chunks.  Get a **single dashboard** by id with [Dashboard](#!/Dashboard/dashboard) 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -703,13 +2266,8 @@ class DashboardApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str fields: Requested fields.
         :param int id: Match dashboard id.
-        :param int page: Requested page.
-        :param int per_page: Results per page.
-        :param int limit: Number of results to return. (used with offset and takes priority over page and per_page)
-        :param int offset: Number of results to skip before returning any. (used with limit and takes priority over page and per_page)
-        :param str sorts: Fields to sort by.
+        :param str slug: Match dashboard slug.
         :param str title: Match Dashboard title.
         :param str description: Match Dashboard description.
         :param int content_favorite_id: Filter on a content favorite id.
@@ -717,6 +2275,14 @@ class DashboardApi(object):
         :param str deleted: Filter on dashboards deleted status.
         :param str user_id: Filter on dashboards created by a particular user.
         :param str view_count: Filter on a particular value of view_count
+        :param int content_metadata_id: Filter on a content favorite id.
+        :param str fields: Requested fields.
+        :param int page: Requested page.
+        :param int per_page: Results per page.
+        :param int limit: Number of results to return. (used with offset and takes priority over page and per_page)
+        :param int offset: Number of results to skip before returning any. (used with limit and takes priority over page and per_page)
+        :param str sorts: One or more fields to sort by. Sortable fields: [:title, :user_id, :id, :created_at, :space_id, :description, :view_count, :favorite_count, :slug, :content_favorite_id, :content_metadata_id, :deleted, :deleted_at, :last_viewed_at]
+        :param bool filter_or: Combine given search criteria in a boolean OR expression
         :return: list[Dashboard]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -731,7 +2297,7 @@ class DashboardApi(object):
     def search_dashboards_with_http_info(self, **kwargs):
         """
         Search Dashboards
-        ### Search all dashboards for matching criteria.  Returns an **array of dashboard objects** that match the specified search criteria.  The parameters `limit`, and `offset` are recommended for \"paging\" the returned results.  Get a **single dashboard** by id with [Dashboard](#!/Dashboard/dashboard) 
+        ### Search Dashboards  Returns an **array of dashboard objects** that match the specified search criteria.  If multiple search params are given and `filter_or` is FALSE or not specified, search params are combined in a logical AND operation. Only rows that match *all* search param criteria will be returned.  If `filter_or` is TRUE, multiple search params are combined in a logical OR operation. Results will include rows that match **any** of the search criteria.  String search params use case-insensitive matching. String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions. example=\"dan%\" will match \"danger\" and \"Danzig\" but not \"David\" example=\"D_m%\" will match \"Damage\" and \"dump\"  Integer search params can accept a single value or a comma separated list of values. The multiple values will be combined under a logical OR operation - results will match at least one of the given values.  Most search params can accept \"IS NULL\" and \"NOT NULL\" as special expressions to match or exclude (respectively) rows where the column is null.  Boolean search params accept only \"true\" and \"false\" as values.   The parameters `limit`, and `offset` are recommended for fetching results in page-size chunks.  Get a **single dashboard** by id with [Dashboard](#!/Dashboard/dashboard) 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -742,13 +2308,8 @@ class DashboardApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param str fields: Requested fields.
         :param int id: Match dashboard id.
-        :param int page: Requested page.
-        :param int per_page: Results per page.
-        :param int limit: Number of results to return. (used with offset and takes priority over page and per_page)
-        :param int offset: Number of results to skip before returning any. (used with limit and takes priority over page and per_page)
-        :param str sorts: Fields to sort by.
+        :param str slug: Match dashboard slug.
         :param str title: Match Dashboard title.
         :param str description: Match Dashboard description.
         :param int content_favorite_id: Filter on a content favorite id.
@@ -756,12 +2317,20 @@ class DashboardApi(object):
         :param str deleted: Filter on dashboards deleted status.
         :param str user_id: Filter on dashboards created by a particular user.
         :param str view_count: Filter on a particular value of view_count
+        :param int content_metadata_id: Filter on a content favorite id.
+        :param str fields: Requested fields.
+        :param int page: Requested page.
+        :param int per_page: Results per page.
+        :param int limit: Number of results to return. (used with offset and takes priority over page and per_page)
+        :param int offset: Number of results to skip before returning any. (used with limit and takes priority over page and per_page)
+        :param str sorts: One or more fields to sort by. Sortable fields: [:title, :user_id, :id, :created_at, :space_id, :description, :view_count, :favorite_count, :slug, :content_favorite_id, :content_metadata_id, :deleted, :deleted_at, :last_viewed_at]
+        :param bool filter_or: Combine given search criteria in a boolean OR expression
         :return: list[Dashboard]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['fields', 'id', 'page', 'per_page', 'limit', 'offset', 'sorts', 'title', 'description', 'content_favorite_id', 'space_id', 'deleted', 'user_id', 'view_count']
+        all_params = ['id', 'slug', 'title', 'description', 'content_favorite_id', 'space_id', 'deleted', 'user_id', 'view_count', 'content_metadata_id', 'fields', 'page', 'per_page', 'limit', 'offset', 'sorts', 'filter_or']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -784,20 +2353,10 @@ class DashboardApi(object):
         path_params = {}
 
         query_params = {}
-        if 'fields' in params:
-            query_params['fields'] = params['fields']
         if 'id' in params:
             query_params['id'] = params['id']
-        if 'page' in params:
-            query_params['page'] = params['page']
-        if 'per_page' in params:
-            query_params['per_page'] = params['per_page']
-        if 'limit' in params:
-            query_params['limit'] = params['limit']
-        if 'offset' in params:
-            query_params['offset'] = params['offset']
-        if 'sorts' in params:
-            query_params['sorts'] = params['sorts']
+        if 'slug' in params:
+            query_params['slug'] = params['slug']
         if 'title' in params:
             query_params['title'] = params['title']
         if 'description' in params:
@@ -812,6 +2371,22 @@ class DashboardApi(object):
             query_params['user_id'] = params['user_id']
         if 'view_count' in params:
             query_params['view_count'] = params['view_count']
+        if 'content_metadata_id' in params:
+            query_params['content_metadata_id'] = params['content_metadata_id']
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+        if 'page' in params:
+            query_params['page'] = params['page']
+        if 'per_page' in params:
+            query_params['per_page'] = params['per_page']
+        if 'limit' in params:
+            query_params['limit'] = params['limit']
+        if 'offset' in params:
+            query_params['offset'] = params['offset']
+        if 'sorts' in params:
+            query_params['sorts'] = params['sorts']
+        if 'filter_or' in params:
+            query_params['filter_or'] = params['filter_or']
 
         header_params = {}
 
@@ -845,10 +2420,128 @@ class DashboardApi(object):
                                         _request_timeout=params.get('_request_timeout'),
                                         collection_formats=collection_formats)
 
+    def sync_lookml_dashboard(self, lookml_dashboard_id, body, **kwargs):
+        """
+        Sync LookML Dashboard
+        ### Update all linked dashboards to match the specified LookML dashboard.  Any UDD (a dashboard which exists in the Looker database rather than as a LookML file) which has a `lookml_link_id` property value referring to a LookML dashboard's id (model::dashboardname) will be updated so that it matches the current state of the LookML dashboard.  For this operation to succeed the user must have permission to view the LookML dashboard, and only linked dashboards that the user has permission to update will be synced.  To **link** or **unlink** a UDD set the `lookml_link_id` property with [Update Dashboard](#!/Dashboard/update_dashboard) 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.sync_lookml_dashboard(lookml_dashboard_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str lookml_dashboard_id: Id of LookML dashboard, in the form 'model::dashboardname' (required)
+        :param Dashboard body: Dashboard (required)
+        :param bool raw_locale: If true, and this dashboard is localized, export it with the raw keys, not localized.
+        :return: list[int]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.sync_lookml_dashboard_with_http_info(lookml_dashboard_id, body, **kwargs)
+        else:
+            (data) = self.sync_lookml_dashboard_with_http_info(lookml_dashboard_id, body, **kwargs)
+            return data
+
+    def sync_lookml_dashboard_with_http_info(self, lookml_dashboard_id, body, **kwargs):
+        """
+        Sync LookML Dashboard
+        ### Update all linked dashboards to match the specified LookML dashboard.  Any UDD (a dashboard which exists in the Looker database rather than as a LookML file) which has a `lookml_link_id` property value referring to a LookML dashboard's id (model::dashboardname) will be updated so that it matches the current state of the LookML dashboard.  For this operation to succeed the user must have permission to view the LookML dashboard, and only linked dashboards that the user has permission to update will be synced.  To **link** or **unlink** a UDD set the `lookml_link_id` property with [Update Dashboard](#!/Dashboard/update_dashboard) 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.sync_lookml_dashboard_with_http_info(lookml_dashboard_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str lookml_dashboard_id: Id of LookML dashboard, in the form 'model::dashboardname' (required)
+        :param Dashboard body: Dashboard (required)
+        :param bool raw_locale: If true, and this dashboard is localized, export it with the raw keys, not localized.
+        :return: list[int]
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['lookml_dashboard_id', 'body', 'raw_locale']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method sync_lookml_dashboard" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'lookml_dashboard_id' is set
+        if ('lookml_dashboard_id' not in params) or (params['lookml_dashboard_id'] is None):
+            raise ValueError("Missing the required parameter `lookml_dashboard_id` when calling `sync_lookml_dashboard`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `sync_lookml_dashboard`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboards/{lookml_dashboard_id}/sync'.replace('{format}', 'json')
+        path_params = {}
+        if 'lookml_dashboard_id' in params:
+            path_params['lookml_dashboard_id'] = params['lookml_dashboard_id']
+
+        query_params = {}
+        if 'raw_locale' in params:
+            query_params['raw_locale'] = params['raw_locale']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'PATCH',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='list[int]',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
     def update_dashboard(self, dashboard_id, body, **kwargs):
         """
         Update Dashboard
-        ### Update the dashboard with the specified id  Changes simple (scalar) properties of the dashboard.  Change dashboard **elements** with [Update Dashboard Element](#!/Dashboard/update_dashboard_element)  Change dashboard **filters** with [Update Dashboard Filter](#!/Dashboard/update_dashboard_filter)  Change dashboard **layouts** with [Update Dashboard Layout](#!/Dashboard/update_dashboard_layout)  Change dashboard **layout components** with [Update Dashboard Layout Component](#!/Dashboard/update_dashboard_layout_components) 
+        ### Update the dashboard with the specified id  Changes simple (scalar) properties of the dashboard. 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -875,7 +2568,7 @@ class DashboardApi(object):
     def update_dashboard_with_http_info(self, dashboard_id, body, **kwargs):
         """
         Update Dashboard
-        ### Update the dashboard with the specified id  Changes simple (scalar) properties of the dashboard.  Change dashboard **elements** with [Update Dashboard Element](#!/Dashboard/update_dashboard_element)  Change dashboard **filters** with [Update Dashboard Filter](#!/Dashboard/update_dashboard_filter)  Change dashboard **layouts** with [Update Dashboard Layout](#!/Dashboard/update_dashboard_layout)  Change dashboard **layout components** with [Update Dashboard Layout Component](#!/Dashboard/update_dashboard_layout_components) 
+        ### Update the dashboard with the specified id  Changes simple (scalar) properties of the dashboard. 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -952,6 +2645,478 @@ class DashboardApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type='Dashboard',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def update_dashboard_element(self, dashboard_element_id, body, **kwargs):
+        """
+        Update DashboardElement
+        ### Update the dashboard element with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_dashboard_element(dashboard_element_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_element_id: Id of dashboard element (required)
+        :param DashboardElement body: DashboardElement (required)
+        :param str fields: Requested fields.
+        :return: DashboardElement
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.update_dashboard_element_with_http_info(dashboard_element_id, body, **kwargs)
+        else:
+            (data) = self.update_dashboard_element_with_http_info(dashboard_element_id, body, **kwargs)
+            return data
+
+    def update_dashboard_element_with_http_info(self, dashboard_element_id, body, **kwargs):
+        """
+        Update DashboardElement
+        ### Update the dashboard element with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_dashboard_element_with_http_info(dashboard_element_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_element_id: Id of dashboard element (required)
+        :param DashboardElement body: DashboardElement (required)
+        :param str fields: Requested fields.
+        :return: DashboardElement
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_element_id', 'body', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_dashboard_element" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_element_id' is set
+        if ('dashboard_element_id' not in params) or (params['dashboard_element_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_element_id` when calling `update_dashboard_element`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_dashboard_element`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_elements/{dashboard_element_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_element_id' in params:
+            path_params['dashboard_element_id'] = params['dashboard_element_id']
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'PATCH',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DashboardElement',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def update_dashboard_filter(self, dashboard_filter_id, body, **kwargs):
+        """
+        Update Dashboard Filter
+        ### Update the dashboard filter with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_dashboard_filter(dashboard_filter_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_filter_id: Id of dashboard filter (required)
+        :param DashboardFilter body: Dashboard Filter (required)
+        :param str fields: Requested fields.
+        :return: DashboardFilter
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.update_dashboard_filter_with_http_info(dashboard_filter_id, body, **kwargs)
+        else:
+            (data) = self.update_dashboard_filter_with_http_info(dashboard_filter_id, body, **kwargs)
+            return data
+
+    def update_dashboard_filter_with_http_info(self, dashboard_filter_id, body, **kwargs):
+        """
+        Update Dashboard Filter
+        ### Update the dashboard filter with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_dashboard_filter_with_http_info(dashboard_filter_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_filter_id: Id of dashboard filter (required)
+        :param DashboardFilter body: Dashboard Filter (required)
+        :param str fields: Requested fields.
+        :return: DashboardFilter
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_filter_id', 'body', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_dashboard_filter" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_filter_id' is set
+        if ('dashboard_filter_id' not in params) or (params['dashboard_filter_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_filter_id` when calling `update_dashboard_filter`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_dashboard_filter`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_filters/{dashboard_filter_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_filter_id' in params:
+            path_params['dashboard_filter_id'] = params['dashboard_filter_id']
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'PATCH',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DashboardFilter',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def update_dashboard_layout(self, dashboard_layout_id, body, **kwargs):
+        """
+        Update DashboardLayout
+        ### Update the dashboard layout with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_dashboard_layout(dashboard_layout_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_id: Id of dashboard layout (required)
+        :param DashboardLayout body: DashboardLayout (required)
+        :param str fields: Requested fields.
+        :return: DashboardLayout
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.update_dashboard_layout_with_http_info(dashboard_layout_id, body, **kwargs)
+        else:
+            (data) = self.update_dashboard_layout_with_http_info(dashboard_layout_id, body, **kwargs)
+            return data
+
+    def update_dashboard_layout_with_http_info(self, dashboard_layout_id, body, **kwargs):
+        """
+        Update DashboardLayout
+        ### Update the dashboard layout with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_dashboard_layout_with_http_info(dashboard_layout_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_id: Id of dashboard layout (required)
+        :param DashboardLayout body: DashboardLayout (required)
+        :param str fields: Requested fields.
+        :return: DashboardLayout
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_layout_id', 'body', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_dashboard_layout" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_layout_id' is set
+        if ('dashboard_layout_id' not in params) or (params['dashboard_layout_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_layout_id` when calling `update_dashboard_layout`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_dashboard_layout`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_layouts/{dashboard_layout_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_layout_id' in params:
+            path_params['dashboard_layout_id'] = params['dashboard_layout_id']
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'PATCH',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DashboardLayout',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def update_dashboard_layout_component(self, dashboard_layout_component_id, body, **kwargs):
+        """
+        Update DashboardLayoutComponent
+        ### Update the dashboard element with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_dashboard_layout_component(dashboard_layout_component_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_component_id: Id of dashboard layout component (required)
+        :param DashboardLayoutComponent body: DashboardLayoutComponent (required)
+        :param str fields: Requested fields.
+        :return: DashboardLayoutComponent
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.update_dashboard_layout_component_with_http_info(dashboard_layout_component_id, body, **kwargs)
+        else:
+            (data) = self.update_dashboard_layout_component_with_http_info(dashboard_layout_component_id, body, **kwargs)
+            return data
+
+    def update_dashboard_layout_component_with_http_info(self, dashboard_layout_component_id, body, **kwargs):
+        """
+        Update DashboardLayoutComponent
+        ### Update the dashboard element with a specific id.
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.update_dashboard_layout_component_with_http_info(dashboard_layout_component_id, body, callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str dashboard_layout_component_id: Id of dashboard layout component (required)
+        :param DashboardLayoutComponent body: DashboardLayoutComponent (required)
+        :param str fields: Requested fields.
+        :return: DashboardLayoutComponent
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['dashboard_layout_component_id', 'body', 'fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method update_dashboard_layout_component" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'dashboard_layout_component_id' is set
+        if ('dashboard_layout_component_id' not in params) or (params['dashboard_layout_component_id'] is None):
+            raise ValueError("Missing the required parameter `dashboard_layout_component_id` when calling `update_dashboard_layout_component`")
+        # verify the required parameter 'body' is set
+        if ('body' not in params) or (params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_dashboard_layout_component`")
+
+
+        collection_formats = {}
+
+        resource_path = '/dashboard_layout_components/{dashboard_layout_component_id}'.replace('{format}', 'json')
+        path_params = {}
+        if 'dashboard_layout_component_id' in params:
+            path_params['dashboard_layout_component_id'] = params['dashboard_layout_component_id']
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'body' in params:
+            body_params = params['body']
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'PATCH',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='DashboardLayoutComponent',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),

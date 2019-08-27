@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -14,19 +14,28 @@
 from __future__ import absolute_import
 
 # import models into sdk package
-from .models.access_filter import AccessFilter
 from .models.access_token import AccessToken
 from .models.api_session import ApiSession
 from .models.api_version import ApiVersion
 from .models.api_version_element import ApiVersionElement
 from .models.backup_configuration import BackupConfiguration
+from .models.color_collection import ColorCollection
+from .models.color_stop import ColorStop
 from .models.content_favorite import ContentFavorite
 from .models.content_meta import ContentMeta
 from .models.content_meta_group_user import ContentMetaGroupUser
+from .models.content_validation import ContentValidation
+from .models.content_validation_dashboard import ContentValidationDashboard
+from .models.content_validation_dashboard_element import ContentValidationDashboardElement
+from .models.content_validation_dashboard_filter import ContentValidationDashboardFilter
+from .models.content_validation_look import ContentValidationLook
+from .models.content_validation_space import ContentValidationSpace
+from .models.content_validator_error import ContentValidatorError
 from .models.content_view import ContentView
+from .models.continuous_palette import ContinuousPalette
+from .models.create_dashboard_filter import CreateDashboardFilter
 from .models.create_dashboard_render_task import CreateDashboardRenderTask
 from .models.create_query_task import CreateQueryTask
-from .models.credentials_api import CredentialsApi
 from .models.credentials_api3 import CredentialsApi3
 from .models.credentials_email import CredentialsEmail
 from .models.credentials_embed import CredentialsEmbed
@@ -51,11 +60,14 @@ from .models.data_action_form_field import DataActionFormField
 from .models.data_action_form_select_option import DataActionFormSelectOption
 from .models.data_action_request import DataActionRequest
 from .models.data_action_response import DataActionResponse
+from .models.data_action_user_state import DataActionUserState
 from .models.datagroup import Datagroup
 from .models.dialect import Dialect
 from .models.dialect_info import DialectInfo
 from .models.dialect_info_options import DialectInfoOptions
+from .models.discrete_palette import DiscretePalette
 from .models.error import Error
+from .models.folder import Folder
 from .models.git_branch import GitBranch
 from .models.git_connection_test import GitConnectionTest
 from .models.git_connection_test_result import GitConnectionTestResult
@@ -63,13 +75,19 @@ from .models.git_status import GitStatus
 from .models.group import Group
 from .models.group_id_for_group_inclusion import GroupIdForGroupInclusion
 from .models.group_id_for_group_user_inclusion import GroupIdForGroupUserInclusion
+from .models.homepage import Homepage
 from .models.homepage_item import HomepageItem
 from .models.homepage_section import HomepageSection
+from .models.imported_project import ImportedProject
 from .models.integration import Integration
 from .models.integration_hub import IntegrationHub
 from .models.integration_param import IntegrationParam
 from .models.integration_required_field import IntegrationRequiredField
+from .models.integration_test_result import IntegrationTestResult
+from .models.internal_help_resources import InternalHelpResources
+from .models.internal_help_resources_content import InternalHelpResourcesContent
 from .models.ldap_config import LDAPConfig
+from .models.ldap_config_test_issue import LDAPConfigTestIssue
 from .models.ldap_config_test_result import LDAPConfigTestResult
 from .models.ldap_group_read import LDAPGroupRead
 from .models.ldap_group_write import LDAPGroupWrite
@@ -77,6 +95,8 @@ from .models.ldap_user import LDAPUser
 from .models.ldap_user_attribute_read import LDAPUserAttributeRead
 from .models.ldap_user_attribute_write import LDAPUserAttributeWrite
 from .models.legacy_feature import LegacyFeature
+from .models.locale import Locale
+from .models.localization_settings import LocalizationSettings
 from .models.look import Look
 from .models.look_basic import LookBasic
 from .models.look_model import LookModel
@@ -99,6 +119,10 @@ from .models.lookml_model_explore_joins import LookmlModelExploreJoins
 from .models.lookml_model_explore_set import LookmlModelExploreSet
 from .models.lookml_model_explore_supported_measure_type import LookmlModelExploreSupportedMeasureType
 from .models.lookml_model_nav_explore import LookmlModelNavExplore
+from .models.manifest import Manifest
+from .models.merge_fields import MergeFields
+from .models.merge_query import MergeQuery
+from .models.merge_query_source_query import MergeQuerySourceQuery
 from .models.model_set import ModelSet
 from .models.models_not_validated import ModelsNotValidated
 from .models.oidc_config import OIDCConfig
@@ -106,12 +130,9 @@ from .models.oidc_group_read import OIDCGroupRead
 from .models.oidc_group_write import OIDCGroupWrite
 from .models.oidc_user_attribute_read import OIDCUserAttributeRead
 from .models.oidc_user_attribute_write import OIDCUserAttributeWrite
+from .models.password_config import PasswordConfig
 from .models.permission import Permission
 from .models.permission_set import PermissionSet
-from .models.prefetch import Prefetch
-from .models.prefetch_access_filter_value import PrefetchAccessFilterValue
-from .models.prefetch_dashboard_filter_value import PrefetchDashboardFilterValue
-from .models.prefetch_dashboard_request import PrefetchDashboardRequest
 from .models.project import Project
 from .models.project_error import ProjectError
 from .models.project_file import ProjectFile
@@ -121,6 +142,7 @@ from .models.project_workspace import ProjectWorkspace
 from .models.query import Query
 from .models.query_task import QueryTask
 from .models.render_task import RenderTask
+from .models.repository_credential import RepositoryCredential
 from .models.result_maker_filterables import ResultMakerFilterables
 from .models.result_maker_filterables_listen import ResultMakerFilterablesListen
 from .models.result_maker_with_id_vis_config_and_dynamic_fields import ResultMakerWithIdVisConfigAndDynamicFields
@@ -135,11 +157,14 @@ from .models.saml_user_attribute_write import SamlUserAttributeWrite
 from .models.scheduled_plan import ScheduledPlan
 from .models.scheduled_plan_destination import ScheduledPlanDestination
 from .models.session import Session
+from .models.session_config import SessionConfig
 from .models.snippet import Snippet
 from .models.space import Space
 from .models.space_base import SpaceBase
 from .models.sql_query import SqlQuery
 from .models.sql_query_create import SqlQueryCreate
+from .models.theme import Theme
+from .models.theme_settings import ThemeSettings
 from .models.timezone import Timezone
 from .models.user import User
 from .models.user_attribute import UserAttribute
@@ -155,12 +180,14 @@ from .models.workspace import Workspace
 # import apis into sdk package
 from .apis.api_auth_api import ApiAuthApi
 from .apis.auth_api import AuthApi
+from .apis.color_collection_api import ColorCollectionApi
 from .apis.config_api import ConfigApi
 from .apis.connection_api import ConnectionApi
 from .apis.content_api import ContentApi
 from .apis.dashboard_api import DashboardApi
 from .apis.data_action_api import DataActionApi
 from .apis.datagroup_api import DatagroupApi
+from .apis.folder_api import FolderApi
 from .apis.group_api import GroupApi
 from .apis.homepage_api import HomepageApi
 from .apis.integration_api import IntegrationApi
@@ -170,11 +197,10 @@ from .apis.project_api import ProjectApi
 from .apis.query_api import QueryApi
 from .apis.render_task_api import RenderTaskApi
 from .apis.role_api import RoleApi
-from .apis.running_queries_api import RunningQueriesApi
 from .apis.scheduled_plan_api import ScheduledPlanApi
 from .apis.session_api import SessionApi
 from .apis.space_api import SpaceApi
-from .apis.sql_query_api import SqlQueryApi
+from .apis.theme_api import ThemeApi
 from .apis.user_api import UserApi
 from .apis.user_attribute_api import UserAttributeApi
 from .apis.workspace_api import WorkspaceApi

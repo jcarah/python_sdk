@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class CredentialsLDAP(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, email=None, ldap_id=None, ldap_dn=None, created_at=None, logged_in_at=None, is_disabled=None, type=None, url=None, can=None):
+    def __init__(self, created_at=None, email=None, is_disabled=None, ldap_dn=None, ldap_id=None, logged_in_at=None, type=None, url=None, can=None):
         """
         CredentialsLDAP - a model defined in Swagger
 
@@ -31,107 +31,38 @@ class CredentialsLDAP(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'email': 'str',
-            'ldap_id': 'str',
-            'ldap_dn': 'str',
             'created_at': 'str',
-            'logged_in_at': 'str',
+            'email': 'str',
             'is_disabled': 'bool',
+            'ldap_dn': 'str',
+            'ldap_id': 'str',
+            'logged_in_at': 'str',
             'type': 'str',
             'url': 'str',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
-            'email': 'email',
-            'ldap_id': 'ldap_id',
-            'ldap_dn': 'ldap_dn',
             'created_at': 'created_at',
-            'logged_in_at': 'logged_in_at',
+            'email': 'email',
             'is_disabled': 'is_disabled',
+            'ldap_dn': 'ldap_dn',
+            'ldap_id': 'ldap_id',
+            'logged_in_at': 'logged_in_at',
             'type': 'type',
             'url': 'url',
             'can': 'can'
         }
 
-        self._email = email
-        self._ldap_id = ldap_id
-        self._ldap_dn = ldap_dn
         self._created_at = created_at
-        self._logged_in_at = logged_in_at
+        self._email = email
         self._is_disabled = is_disabled
+        self._ldap_dn = ldap_dn
+        self._ldap_id = ldap_id
+        self._logged_in_at = logged_in_at
         self._type = type
         self._url = url
         self._can = can
-
-    @property
-    def email(self):
-        """
-        Gets the email of this CredentialsLDAP.
-        EMail address
-
-        :return: The email of this CredentialsLDAP.
-        :rtype: str
-        """
-        return self._email
-
-    @email.setter
-    def email(self, email):
-        """
-        Sets the email of this CredentialsLDAP.
-        EMail address
-
-        :param email: The email of this CredentialsLDAP.
-        :type: str
-        """
-
-        self._email = email
-
-    @property
-    def ldap_id(self):
-        """
-        Gets the ldap_id of this CredentialsLDAP.
-        LDAP Unique ID for this user
-
-        :return: The ldap_id of this CredentialsLDAP.
-        :rtype: str
-        """
-        return self._ldap_id
-
-    @ldap_id.setter
-    def ldap_id(self, ldap_id):
-        """
-        Sets the ldap_id of this CredentialsLDAP.
-        LDAP Unique ID for this user
-
-        :param ldap_id: The ldap_id of this CredentialsLDAP.
-        :type: str
-        """
-
-        self._ldap_id = ldap_id
-
-    @property
-    def ldap_dn(self):
-        """
-        Gets the ldap_dn of this CredentialsLDAP.
-        LDAP Distinguished name for this user (as-of the last login)
-
-        :return: The ldap_dn of this CredentialsLDAP.
-        :rtype: str
-        """
-        return self._ldap_dn
-
-    @ldap_dn.setter
-    def ldap_dn(self, ldap_dn):
-        """
-        Sets the ldap_dn of this CredentialsLDAP.
-        LDAP Distinguished name for this user (as-of the last login)
-
-        :param ldap_dn: The ldap_dn of this CredentialsLDAP.
-        :type: str
-        """
-
-        self._ldap_dn = ldap_dn
 
     @property
     def created_at(self):
@@ -157,27 +88,27 @@ class CredentialsLDAP(object):
         self._created_at = created_at
 
     @property
-    def logged_in_at(self):
+    def email(self):
         """
-        Gets the logged_in_at of this CredentialsLDAP.
-        Timestamp for most recent login using credential
+        Gets the email of this CredentialsLDAP.
+        EMail address
 
-        :return: The logged_in_at of this CredentialsLDAP.
+        :return: The email of this CredentialsLDAP.
         :rtype: str
         """
-        return self._logged_in_at
+        return self._email
 
-    @logged_in_at.setter
-    def logged_in_at(self, logged_in_at):
+    @email.setter
+    def email(self, email):
         """
-        Sets the logged_in_at of this CredentialsLDAP.
-        Timestamp for most recent login using credential
+        Sets the email of this CredentialsLDAP.
+        EMail address
 
-        :param logged_in_at: The logged_in_at of this CredentialsLDAP.
+        :param email: The email of this CredentialsLDAP.
         :type: str
         """
 
-        self._logged_in_at = logged_in_at
+        self._email = email
 
     @property
     def is_disabled(self):
@@ -201,6 +132,75 @@ class CredentialsLDAP(object):
         """
 
         self._is_disabled = is_disabled
+
+    @property
+    def ldap_dn(self):
+        """
+        Gets the ldap_dn of this CredentialsLDAP.
+        LDAP Distinguished name for this user (as-of the last login)
+
+        :return: The ldap_dn of this CredentialsLDAP.
+        :rtype: str
+        """
+        return self._ldap_dn
+
+    @ldap_dn.setter
+    def ldap_dn(self, ldap_dn):
+        """
+        Sets the ldap_dn of this CredentialsLDAP.
+        LDAP Distinguished name for this user (as-of the last login)
+
+        :param ldap_dn: The ldap_dn of this CredentialsLDAP.
+        :type: str
+        """
+
+        self._ldap_dn = ldap_dn
+
+    @property
+    def ldap_id(self):
+        """
+        Gets the ldap_id of this CredentialsLDAP.
+        LDAP Unique ID for this user
+
+        :return: The ldap_id of this CredentialsLDAP.
+        :rtype: str
+        """
+        return self._ldap_id
+
+    @ldap_id.setter
+    def ldap_id(self, ldap_id):
+        """
+        Sets the ldap_id of this CredentialsLDAP.
+        LDAP Unique ID for this user
+
+        :param ldap_id: The ldap_id of this CredentialsLDAP.
+        :type: str
+        """
+
+        self._ldap_id = ldap_id
+
+    @property
+    def logged_in_at(self):
+        """
+        Gets the logged_in_at of this CredentialsLDAP.
+        Timestamp for most recent login using credential
+
+        :return: The logged_in_at of this CredentialsLDAP.
+        :rtype: str
+        """
+        return self._logged_in_at
+
+    @logged_in_at.setter
+    def logged_in_at(self, logged_in_at):
+        """
+        Sets the logged_in_at of this CredentialsLDAP.
+        Timestamp for most recent login using credential
+
+        :param logged_in_at: The logged_in_at of this CredentialsLDAP.
+        :type: str
+        """
+
+        self._logged_in_at = logged_in_at
 
     @property
     def type(self):

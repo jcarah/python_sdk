@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class SpaceBase(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, id=None, content_metadata_id=None, creator_id=None, name=None, is_personal=None, is_personal_descendant=None, is_shared_root=None, is_users_root=None, is_root=None, is_user_root=None, is_embed=None, is_embed_shared_root=None, is_embed_users_root=None, external_id=None, can=None):
+    def __init__(self, child_count=None, content_metadata_id=None, creator_id=None, external_id=None, id=None, is_embed=None, is_embed_shared_root=None, is_embed_users_root=None, is_personal=None, is_personal_descendant=None, is_shared_root=None, is_users_root=None, name=None, parent_id=None, can=None):
         """
         SpaceBase - a model defined in Swagger
 
@@ -31,79 +31,79 @@ class SpaceBase(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'id': 'str',
+            'child_count': 'int',
             'content_metadata_id': 'int',
             'creator_id': 'int',
-            'name': 'str',
+            'external_id': 'str',
+            'id': 'str',
+            'is_embed': 'bool',
+            'is_embed_shared_root': 'bool',
+            'is_embed_users_root': 'bool',
             'is_personal': 'bool',
             'is_personal_descendant': 'bool',
             'is_shared_root': 'bool',
             'is_users_root': 'bool',
-            'is_root': 'bool',
-            'is_user_root': 'bool',
-            'is_embed': 'bool',
-            'is_embed_shared_root': 'bool',
-            'is_embed_users_root': 'bool',
-            'external_id': 'str',
+            'name': 'str',
+            'parent_id': 'str',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
-            'id': 'id',
+            'child_count': 'child_count',
             'content_metadata_id': 'content_metadata_id',
             'creator_id': 'creator_id',
-            'name': 'name',
+            'external_id': 'external_id',
+            'id': 'id',
+            'is_embed': 'is_embed',
+            'is_embed_shared_root': 'is_embed_shared_root',
+            'is_embed_users_root': 'is_embed_users_root',
             'is_personal': 'is_personal',
             'is_personal_descendant': 'is_personal_descendant',
             'is_shared_root': 'is_shared_root',
             'is_users_root': 'is_users_root',
-            'is_root': 'is_root',
-            'is_user_root': 'is_user_root',
-            'is_embed': 'is_embed',
-            'is_embed_shared_root': 'is_embed_shared_root',
-            'is_embed_users_root': 'is_embed_users_root',
-            'external_id': 'external_id',
+            'name': 'name',
+            'parent_id': 'parent_id',
             'can': 'can'
         }
 
-        self._id = id
+        self._child_count = child_count
         self._content_metadata_id = content_metadata_id
         self._creator_id = creator_id
-        self._name = name
+        self._external_id = external_id
+        self._id = id
+        self._is_embed = is_embed
+        self._is_embed_shared_root = is_embed_shared_root
+        self._is_embed_users_root = is_embed_users_root
         self._is_personal = is_personal
         self._is_personal_descendant = is_personal_descendant
         self._is_shared_root = is_shared_root
         self._is_users_root = is_users_root
-        self._is_root = is_root
-        self._is_user_root = is_user_root
-        self._is_embed = is_embed
-        self._is_embed_shared_root = is_embed_shared_root
-        self._is_embed_users_root = is_embed_users_root
-        self._external_id = external_id
+        self._name = name
+        self._parent_id = parent_id
         self._can = can
 
     @property
-    def id(self):
+    def child_count(self):
         """
-        Gets the id of this SpaceBase.
-        Unique Id
+        Gets the child_count of this SpaceBase.
+        Children Count
 
-        :return: The id of this SpaceBase.
-        :rtype: str
+        :return: The child_count of this SpaceBase.
+        :rtype: int
         """
-        return self._id
+        return self._child_count
 
-    @id.setter
-    def id(self, id):
+    @child_count.setter
+    def child_count(self, child_count):
         """
-        Sets the id of this SpaceBase.
-        Unique Id
+        Sets the child_count of this SpaceBase.
+        Children Count
 
-        :param id: The id of this SpaceBase.
-        :type: str
+        :param child_count: The child_count of this SpaceBase.
+        :type: int
         """
 
-        self._id = id
+        self._child_count = child_count
 
     @property
     def content_metadata_id(self):
@@ -152,27 +152,119 @@ class SpaceBase(object):
         self._creator_id = creator_id
 
     @property
-    def name(self):
+    def external_id(self):
         """
-        Gets the name of this SpaceBase.
-        Unique Name
+        Gets the external_id of this SpaceBase.
+        Embedder's Id if this space was autogenerated as an embedding shared space via 'external_group_id' in an SSO embed login
 
-        :return: The name of this SpaceBase.
+        :return: The external_id of this SpaceBase.
         :rtype: str
         """
-        return self._name
+        return self._external_id
 
-    @name.setter
-    def name(self, name):
+    @external_id.setter
+    def external_id(self, external_id):
         """
-        Sets the name of this SpaceBase.
-        Unique Name
+        Sets the external_id of this SpaceBase.
+        Embedder's Id if this space was autogenerated as an embedding shared space via 'external_group_id' in an SSO embed login
 
-        :param name: The name of this SpaceBase.
+        :param external_id: The external_id of this SpaceBase.
         :type: str
         """
 
-        self._name = name
+        self._external_id = external_id
+
+    @property
+    def id(self):
+        """
+        Gets the id of this SpaceBase.
+        Unique Id
+
+        :return: The id of this SpaceBase.
+        :rtype: str
+        """
+        return self._id
+
+    @id.setter
+    def id(self, id):
+        """
+        Sets the id of this SpaceBase.
+        Unique Id
+
+        :param id: The id of this SpaceBase.
+        :type: str
+        """
+
+        self._id = id
+
+    @property
+    def is_embed(self):
+        """
+        Gets the is_embed of this SpaceBase.
+        Space is an embed space
+
+        :return: The is_embed of this SpaceBase.
+        :rtype: bool
+        """
+        return self._is_embed
+
+    @is_embed.setter
+    def is_embed(self, is_embed):
+        """
+        Sets the is_embed of this SpaceBase.
+        Space is an embed space
+
+        :param is_embed: The is_embed of this SpaceBase.
+        :type: bool
+        """
+
+        self._is_embed = is_embed
+
+    @property
+    def is_embed_shared_root(self):
+        """
+        Gets the is_embed_shared_root of this SpaceBase.
+        Space is the root embed shared space
+
+        :return: The is_embed_shared_root of this SpaceBase.
+        :rtype: bool
+        """
+        return self._is_embed_shared_root
+
+    @is_embed_shared_root.setter
+    def is_embed_shared_root(self, is_embed_shared_root):
+        """
+        Sets the is_embed_shared_root of this SpaceBase.
+        Space is the root embed shared space
+
+        :param is_embed_shared_root: The is_embed_shared_root of this SpaceBase.
+        :type: bool
+        """
+
+        self._is_embed_shared_root = is_embed_shared_root
+
+    @property
+    def is_embed_users_root(self):
+        """
+        Gets the is_embed_users_root of this SpaceBase.
+        Space is the root embed users space
+
+        :return: The is_embed_users_root of this SpaceBase.
+        :rtype: bool
+        """
+        return self._is_embed_users_root
+
+    @is_embed_users_root.setter
+    def is_embed_users_root(self, is_embed_users_root):
+        """
+        Sets the is_embed_users_root of this SpaceBase.
+        Space is the root embed users space
+
+        :param is_embed_users_root: The is_embed_users_root of this SpaceBase.
+        :type: bool
+        """
+
+        self._is_embed_users_root = is_embed_users_root
 
     @property
     def is_personal(self):
@@ -267,142 +359,52 @@ class SpaceBase(object):
         self._is_users_root = is_users_root
 
     @property
-    def is_root(self):
+    def name(self):
         """
-        Gets the is_root of this SpaceBase.
-        (DEPRECATED) Space is the root shared space (alias of is_shared_root)
+        Gets the name of this SpaceBase.
+        Unique Name
 
-        :return: The is_root of this SpaceBase.
-        :rtype: bool
-        """
-        return self._is_root
-
-    @is_root.setter
-    def is_root(self, is_root):
-        """
-        Sets the is_root of this SpaceBase.
-        (DEPRECATED) Space is the root shared space (alias of is_shared_root)
-
-        :param is_root: The is_root of this SpaceBase.
-        :type: bool
-        """
-
-        self._is_root = is_root
-
-    @property
-    def is_user_root(self):
-        """
-        Gets the is_user_root of this SpaceBase.
-        (DEPRECATED) Space is the root user space (alias of is_users_root
-
-        :return: The is_user_root of this SpaceBase.
-        :rtype: bool
-        """
-        return self._is_user_root
-
-    @is_user_root.setter
-    def is_user_root(self, is_user_root):
-        """
-        Sets the is_user_root of this SpaceBase.
-        (DEPRECATED) Space is the root user space (alias of is_users_root
-
-        :param is_user_root: The is_user_root of this SpaceBase.
-        :type: bool
-        """
-
-        self._is_user_root = is_user_root
-
-    @property
-    def is_embed(self):
-        """
-        Gets the is_embed of this SpaceBase.
-        Space is an embed space
-
-        :return: The is_embed of this SpaceBase.
-        :rtype: bool
-        """
-        return self._is_embed
-
-    @is_embed.setter
-    def is_embed(self, is_embed):
-        """
-        Sets the is_embed of this SpaceBase.
-        Space is an embed space
-
-        :param is_embed: The is_embed of this SpaceBase.
-        :type: bool
-        """
-
-        self._is_embed = is_embed
-
-    @property
-    def is_embed_shared_root(self):
-        """
-        Gets the is_embed_shared_root of this SpaceBase.
-        Space is the root embed shared space
-
-        :return: The is_embed_shared_root of this SpaceBase.
-        :rtype: bool
-        """
-        return self._is_embed_shared_root
-
-    @is_embed_shared_root.setter
-    def is_embed_shared_root(self, is_embed_shared_root):
-        """
-        Sets the is_embed_shared_root of this SpaceBase.
-        Space is the root embed shared space
-
-        :param is_embed_shared_root: The is_embed_shared_root of this SpaceBase.
-        :type: bool
-        """
-
-        self._is_embed_shared_root = is_embed_shared_root
-
-    @property
-    def is_embed_users_root(self):
-        """
-        Gets the is_embed_users_root of this SpaceBase.
-        Space is the root embed users space
-
-        :return: The is_embed_users_root of this SpaceBase.
-        :rtype: bool
-        """
-        return self._is_embed_users_root
-
-    @is_embed_users_root.setter
-    def is_embed_users_root(self, is_embed_users_root):
-        """
-        Sets the is_embed_users_root of this SpaceBase.
-        Space is the root embed users space
-
-        :param is_embed_users_root: The is_embed_users_root of this SpaceBase.
-        :type: bool
-        """
-
-        self._is_embed_users_root = is_embed_users_root
-
-    @property
-    def external_id(self):
-        """
-        Gets the external_id of this SpaceBase.
-        Embedder's Id if this space was autogenerated as an embedding shared space via 'external_group_id' in an SSO embed login
-
-        :return: The external_id of this SpaceBase.
+        :return: The name of this SpaceBase.
         :rtype: str
         """
-        return self._external_id
+        return self._name
 
-    @external_id.setter
-    def external_id(self, external_id):
+    @name.setter
+    def name(self, name):
         """
-        Sets the external_id of this SpaceBase.
-        Embedder's Id if this space was autogenerated as an embedding shared space via 'external_group_id' in an SSO embed login
+        Sets the name of this SpaceBase.
+        Unique Name
 
-        :param external_id: The external_id of this SpaceBase.
+        :param name: The name of this SpaceBase.
         :type: str
         """
 
-        self._external_id = external_id
+        self._name = name
+
+    @property
+    def parent_id(self):
+        """
+        Gets the parent_id of this SpaceBase.
+        Id of Parent
+
+        :return: The parent_id of this SpaceBase.
+        :rtype: str
+        """
+        return self._parent_id
+
+    @parent_id.setter
+    def parent_id(self, parent_id):
+        """
+        Sets the parent_id of this SpaceBase.
+        Id of Parent
+
+        :param parent_id: The parent_id of this SpaceBase.
+        :type: str
+        """
+        if parent_id is None:
+            raise ValueError("Invalid value for `parent_id`, must not be `None`")
+
+        self._parent_id = parent_id
 
     @property
     def can(self):

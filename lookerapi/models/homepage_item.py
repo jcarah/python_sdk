@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class HomepageItem(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, id=None, homepage_section_id=None, order=None, title=None, custom_title=None, use_custom_title=None, description=None, custom_description=None, use_custom_description=None, url=None, custom_url=None, use_custom_url=None, image_url=None, custom_image_url=None, custom_image_data_base64=None, use_custom_image=None, look_id=None, dashboard_id=None, lookml_dashboard_id=None, view_count=None, favorite_count=None, content_created_by=None, content_updated_at=None, content_favorite_id=None, content_metadata_id=None, section_fetch_time=None, can=None):
+    def __init__(self, content_created_by=None, content_favorite_id=None, content_metadata_id=None, content_updated_at=None, custom_description=None, custom_image_data_base64=None, custom_image_url=None, custom_title=None, custom_url=None, dashboard_id=None, description=None, favorite_count=None, homepage_section_id=None, id=None, image_url=None, location=None, look_id=None, lookml_dashboard_id=None, order=None, section_fetch_time=None, title=None, url=None, use_custom_description=None, use_custom_image=None, use_custom_title=None, use_custom_url=None, view_count=None, can=None):
         """
         HomepageItem - a model defined in Swagger
 
@@ -31,575 +31,95 @@ class HomepageItem(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'id': 'str',
-            'homepage_section_id': 'str',
-            'order': 'int',
-            'title': 'str',
-            'custom_title': 'str',
-            'use_custom_title': 'bool',
-            'description': 'str',
-            'custom_description': 'str',
-            'use_custom_description': 'bool',
-            'url': 'str',
-            'custom_url': 'str',
-            'use_custom_url': 'bool',
-            'image_url': 'str',
-            'custom_image_url': 'str',
-            'custom_image_data_base64': 'str',
-            'use_custom_image': 'bool',
-            'look_id': 'int',
-            'dashboard_id': 'int',
-            'lookml_dashboard_id': 'str',
-            'view_count': 'int',
-            'favorite_count': 'int',
             'content_created_by': 'str',
-            'content_updated_at': 'str',
             'content_favorite_id': 'int',
             'content_metadata_id': 'int',
+            'content_updated_at': 'str',
+            'custom_description': 'str',
+            'custom_image_data_base64': 'str',
+            'custom_image_url': 'str',
+            'custom_title': 'str',
+            'custom_url': 'str',
+            'dashboard_id': 'int',
+            'description': 'str',
+            'favorite_count': 'int',
+            'homepage_section_id': 'str',
+            'id': 'str',
+            'image_url': 'str',
+            'location': 'str',
+            'look_id': 'int',
+            'lookml_dashboard_id': 'str',
+            'order': 'int',
             'section_fetch_time': 'float',
+            'title': 'str',
+            'url': 'str',
+            'use_custom_description': 'bool',
+            'use_custom_image': 'bool',
+            'use_custom_title': 'bool',
+            'use_custom_url': 'bool',
+            'view_count': 'int',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
-            'id': 'id',
-            'homepage_section_id': 'homepage_section_id',
-            'order': 'order',
-            'title': 'title',
-            'custom_title': 'custom_title',
-            'use_custom_title': 'use_custom_title',
-            'description': 'description',
-            'custom_description': 'custom_description',
-            'use_custom_description': 'use_custom_description',
-            'url': 'url',
-            'custom_url': 'custom_url',
-            'use_custom_url': 'use_custom_url',
-            'image_url': 'image_url',
-            'custom_image_url': 'custom_image_url',
-            'custom_image_data_base64': 'custom_image_data_base64',
-            'use_custom_image': 'use_custom_image',
-            'look_id': 'look_id',
-            'dashboard_id': 'dashboard_id',
-            'lookml_dashboard_id': 'lookml_dashboard_id',
-            'view_count': 'view_count',
-            'favorite_count': 'favorite_count',
             'content_created_by': 'content_created_by',
-            'content_updated_at': 'content_updated_at',
             'content_favorite_id': 'content_favorite_id',
             'content_metadata_id': 'content_metadata_id',
+            'content_updated_at': 'content_updated_at',
+            'custom_description': 'custom_description',
+            'custom_image_data_base64': 'custom_image_data_base64',
+            'custom_image_url': 'custom_image_url',
+            'custom_title': 'custom_title',
+            'custom_url': 'custom_url',
+            'dashboard_id': 'dashboard_id',
+            'description': 'description',
+            'favorite_count': 'favorite_count',
+            'homepage_section_id': 'homepage_section_id',
+            'id': 'id',
+            'image_url': 'image_url',
+            'location': 'location',
+            'look_id': 'look_id',
+            'lookml_dashboard_id': 'lookml_dashboard_id',
+            'order': 'order',
             'section_fetch_time': 'section_fetch_time',
+            'title': 'title',
+            'url': 'url',
+            'use_custom_description': 'use_custom_description',
+            'use_custom_image': 'use_custom_image',
+            'use_custom_title': 'use_custom_title',
+            'use_custom_url': 'use_custom_url',
+            'view_count': 'view_count',
             'can': 'can'
         }
 
-        self._id = id
-        self._homepage_section_id = homepage_section_id
-        self._order = order
-        self._title = title
-        self._custom_title = custom_title
-        self._use_custom_title = use_custom_title
-        self._description = description
-        self._custom_description = custom_description
-        self._use_custom_description = use_custom_description
-        self._url = url
-        self._custom_url = custom_url
-        self._use_custom_url = use_custom_url
-        self._image_url = image_url
-        self._custom_image_url = custom_image_url
-        self._custom_image_data_base64 = custom_image_data_base64
-        self._use_custom_image = use_custom_image
-        self._look_id = look_id
-        self._dashboard_id = dashboard_id
-        self._lookml_dashboard_id = lookml_dashboard_id
-        self._view_count = view_count
-        self._favorite_count = favorite_count
         self._content_created_by = content_created_by
-        self._content_updated_at = content_updated_at
         self._content_favorite_id = content_favorite_id
         self._content_metadata_id = content_metadata_id
-        self._section_fetch_time = section_fetch_time
-        self._can = can
-
-    @property
-    def id(self):
-        """
-        Gets the id of this HomepageItem.
-        Unique Id
-
-        :return: The id of this HomepageItem.
-        :rtype: str
-        """
-        return self._id
-
-    @id.setter
-    def id(self, id):
-        """
-        Sets the id of this HomepageItem.
-        Unique Id
-
-        :param id: The id of this HomepageItem.
-        :type: str
-        """
-
-        self._id = id
-
-    @property
-    def homepage_section_id(self):
-        """
-        Gets the homepage_section_id of this HomepageItem.
-        Associated Homepage Section
-
-        :return: The homepage_section_id of this HomepageItem.
-        :rtype: str
-        """
-        return self._homepage_section_id
-
-    @homepage_section_id.setter
-    def homepage_section_id(self, homepage_section_id):
-        """
-        Sets the homepage_section_id of this HomepageItem.
-        Associated Homepage Section
-
-        :param homepage_section_id: The homepage_section_id of this HomepageItem.
-        :type: str
-        """
-
-        self._homepage_section_id = homepage_section_id
-
-    @property
-    def order(self):
-        """
-        Gets the order of this HomepageItem.
-        An arbitrary integer representing the sort order within the section
-
-        :return: The order of this HomepageItem.
-        :rtype: int
-        """
-        return self._order
-
-    @order.setter
-    def order(self, order):
-        """
-        Sets the order of this HomepageItem.
-        An arbitrary integer representing the sort order within the section
-
-        :param order: The order of this HomepageItem.
-        :type: int
-        """
-
-        self._order = order
-
-    @property
-    def title(self):
-        """
-        Gets the title of this HomepageItem.
-        The actual title for display
-
-        :return: The title of this HomepageItem.
-        :rtype: str
-        """
-        return self._title
-
-    @title.setter
-    def title(self, title):
-        """
-        Sets the title of this HomepageItem.
-        The actual title for display
-
-        :param title: The title of this HomepageItem.
-        :type: str
-        """
-
-        self._title = title
-
-    @property
-    def custom_title(self):
-        """
-        Gets the custom_title of this HomepageItem.
-        Custom title entered by the user, if present
-
-        :return: The custom_title of this HomepageItem.
-        :rtype: str
-        """
-        return self._custom_title
-
-    @custom_title.setter
-    def custom_title(self, custom_title):
-        """
-        Sets the custom_title of this HomepageItem.
-        Custom title entered by the user, if present
-
-        :param custom_title: The custom_title of this HomepageItem.
-        :type: str
-        """
-
-        self._custom_title = custom_title
-
-    @property
-    def use_custom_title(self):
-        """
-        Gets the use_custom_title of this HomepageItem.
-        Whether the custom title should be used instead of the content title, if the item is associated with content
-
-        :return: The use_custom_title of this HomepageItem.
-        :rtype: bool
-        """
-        return self._use_custom_title
-
-    @use_custom_title.setter
-    def use_custom_title(self, use_custom_title):
-        """
-        Sets the use_custom_title of this HomepageItem.
-        Whether the custom title should be used instead of the content title, if the item is associated with content
-
-        :param use_custom_title: The use_custom_title of this HomepageItem.
-        :type: bool
-        """
-
-        self._use_custom_title = use_custom_title
-
-    @property
-    def description(self):
-        """
-        Gets the description of this HomepageItem.
-        The actual description for display
-
-        :return: The description of this HomepageItem.
-        :rtype: str
-        """
-        return self._description
-
-    @description.setter
-    def description(self, description):
-        """
-        Sets the description of this HomepageItem.
-        The actual description for display
-
-        :param description: The description of this HomepageItem.
-        :type: str
-        """
-
-        self._description = description
-
-    @property
-    def custom_description(self):
-        """
-        Gets the custom_description of this HomepageItem.
-        Custom description entered by the user, if present
-
-        :return: The custom_description of this HomepageItem.
-        :rtype: str
-        """
-        return self._custom_description
-
-    @custom_description.setter
-    def custom_description(self, custom_description):
-        """
-        Sets the custom_description of this HomepageItem.
-        Custom description entered by the user, if present
-
-        :param custom_description: The custom_description of this HomepageItem.
-        :type: str
-        """
-
+        self._content_updated_at = content_updated_at
         self._custom_description = custom_description
-
-    @property
-    def use_custom_description(self):
-        """
-        Gets the use_custom_description of this HomepageItem.
-        Whether the custom description should be used instead of the content description, if the item is associated with content
-
-        :return: The use_custom_description of this HomepageItem.
-        :rtype: bool
-        """
-        return self._use_custom_description
-
-    @use_custom_description.setter
-    def use_custom_description(self, use_custom_description):
-        """
-        Sets the use_custom_description of this HomepageItem.
-        Whether the custom description should be used instead of the content description, if the item is associated with content
-
-        :param use_custom_description: The use_custom_description of this HomepageItem.
-        :type: bool
-        """
-
-        self._use_custom_description = use_custom_description
-
-    @property
-    def url(self):
-        """
-        Gets the url of this HomepageItem.
-        The actual url for display
-
-        :return: The url of this HomepageItem.
-        :rtype: str
-        """
-        return self._url
-
-    @url.setter
-    def url(self, url):
-        """
-        Sets the url of this HomepageItem.
-        The actual url for display
-
-        :param url: The url of this HomepageItem.
-        :type: str
-        """
-
-        self._url = url
-
-    @property
-    def custom_url(self):
-        """
-        Gets the custom_url of this HomepageItem.
-        Custom url entered by the user, if present
-
-        :return: The custom_url of this HomepageItem.
-        :rtype: str
-        """
-        return self._custom_url
-
-    @custom_url.setter
-    def custom_url(self, custom_url):
-        """
-        Sets the custom_url of this HomepageItem.
-        Custom url entered by the user, if present
-
-        :param custom_url: The custom_url of this HomepageItem.
-        :type: str
-        """
-
-        self._custom_url = custom_url
-
-    @property
-    def use_custom_url(self):
-        """
-        Gets the use_custom_url of this HomepageItem.
-        Whether the custom url should be used instead of the content url, if the item is associated with content
-
-        :return: The use_custom_url of this HomepageItem.
-        :rtype: bool
-        """
-        return self._use_custom_url
-
-    @use_custom_url.setter
-    def use_custom_url(self, use_custom_url):
-        """
-        Sets the use_custom_url of this HomepageItem.
-        Whether the custom url should be used instead of the content url, if the item is associated with content
-
-        :param use_custom_url: The use_custom_url of this HomepageItem.
-        :type: bool
-        """
-
-        self._use_custom_url = use_custom_url
-
-    @property
-    def image_url(self):
-        """
-        Gets the image_url of this HomepageItem.
-        The actual image_url for display
-
-        :return: The image_url of this HomepageItem.
-        :rtype: str
-        """
-        return self._image_url
-
-    @image_url.setter
-    def image_url(self, image_url):
-        """
-        Sets the image_url of this HomepageItem.
-        The actual image_url for display
-
-        :param image_url: The image_url of this HomepageItem.
-        :type: str
-        """
-
-        self._image_url = image_url
-
-    @property
-    def custom_image_url(self):
-        """
-        Gets the custom_image_url of this HomepageItem.
-        Custom image_url entered by the user, if present
-
-        :return: The custom_image_url of this HomepageItem.
-        :rtype: str
-        """
-        return self._custom_image_url
-
-    @custom_image_url.setter
-    def custom_image_url(self, custom_image_url):
-        """
-        Sets the custom_image_url of this HomepageItem.
-        Custom image_url entered by the user, if present
-
-        :param custom_image_url: The custom_image_url of this HomepageItem.
-        :type: str
-        """
-
-        self._custom_image_url = custom_image_url
-
-    @property
-    def custom_image_data_base64(self):
-        """
-        Gets the custom_image_data_base64 of this HomepageItem.
-        (Write-Only) base64 encoded image data
-
-        :return: The custom_image_data_base64 of this HomepageItem.
-        :rtype: str
-        """
-        return self._custom_image_data_base64
-
-    @custom_image_data_base64.setter
-    def custom_image_data_base64(self, custom_image_data_base64):
-        """
-        Sets the custom_image_data_base64 of this HomepageItem.
-        (Write-Only) base64 encoded image data
-
-        :param custom_image_data_base64: The custom_image_data_base64 of this HomepageItem.
-        :type: str
-        """
-
         self._custom_image_data_base64 = custom_image_data_base64
-
-    @property
-    def use_custom_image(self):
-        """
-        Gets the use_custom_image of this HomepageItem.
-        Whether the custom image should be used instead of the content image, if the item is associated with content
-
-        :return: The use_custom_image of this HomepageItem.
-        :rtype: bool
-        """
-        return self._use_custom_image
-
-    @use_custom_image.setter
-    def use_custom_image(self, use_custom_image):
-        """
-        Sets the use_custom_image of this HomepageItem.
-        Whether the custom image should be used instead of the content image, if the item is associated with content
-
-        :param use_custom_image: The use_custom_image of this HomepageItem.
-        :type: bool
-        """
-
-        self._use_custom_image = use_custom_image
-
-    @property
-    def look_id(self):
-        """
-        Gets the look_id of this HomepageItem.
-        Look to base this item on
-
-        :return: The look_id of this HomepageItem.
-        :rtype: int
-        """
-        return self._look_id
-
-    @look_id.setter
-    def look_id(self, look_id):
-        """
-        Sets the look_id of this HomepageItem.
-        Look to base this item on
-
-        :param look_id: The look_id of this HomepageItem.
-        :type: int
-        """
-
-        self._look_id = look_id
-
-    @property
-    def dashboard_id(self):
-        """
-        Gets the dashboard_id of this HomepageItem.
-        Dashboard to base this item on
-
-        :return: The dashboard_id of this HomepageItem.
-        :rtype: int
-        """
-        return self._dashboard_id
-
-    @dashboard_id.setter
-    def dashboard_id(self, dashboard_id):
-        """
-        Sets the dashboard_id of this HomepageItem.
-        Dashboard to base this item on
-
-        :param dashboard_id: The dashboard_id of this HomepageItem.
-        :type: int
-        """
-
+        self._custom_image_url = custom_image_url
+        self._custom_title = custom_title
+        self._custom_url = custom_url
         self._dashboard_id = dashboard_id
-
-    @property
-    def lookml_dashboard_id(self):
-        """
-        Gets the lookml_dashboard_id of this HomepageItem.
-        LookML Dashboard to base this item on
-
-        :return: The lookml_dashboard_id of this HomepageItem.
-        :rtype: str
-        """
-        return self._lookml_dashboard_id
-
-    @lookml_dashboard_id.setter
-    def lookml_dashboard_id(self, lookml_dashboard_id):
-        """
-        Sets the lookml_dashboard_id of this HomepageItem.
-        LookML Dashboard to base this item on
-
-        :param lookml_dashboard_id: The lookml_dashboard_id of this HomepageItem.
-        :type: str
-        """
-
-        self._lookml_dashboard_id = lookml_dashboard_id
-
-    @property
-    def view_count(self):
-        """
-        Gets the view_count of this HomepageItem.
-        Number of times content has been viewed, if present
-
-        :return: The view_count of this HomepageItem.
-        :rtype: int
-        """
-        return self._view_count
-
-    @view_count.setter
-    def view_count(self, view_count):
-        """
-        Sets the view_count of this HomepageItem.
-        Number of times content has been viewed, if present
-
-        :param view_count: The view_count of this HomepageItem.
-        :type: int
-        """
-
-        self._view_count = view_count
-
-    @property
-    def favorite_count(self):
-        """
-        Gets the favorite_count of this HomepageItem.
-        Number of times content has been favorited, if present
-
-        :return: The favorite_count of this HomepageItem.
-        :rtype: int
-        """
-        return self._favorite_count
-
-    @favorite_count.setter
-    def favorite_count(self, favorite_count):
-        """
-        Sets the favorite_count of this HomepageItem.
-        Number of times content has been favorited, if present
-
-        :param favorite_count: The favorite_count of this HomepageItem.
-        :type: int
-        """
-
+        self._description = description
         self._favorite_count = favorite_count
+        self._homepage_section_id = homepage_section_id
+        self._id = id
+        self._image_url = image_url
+        self._location = location
+        self._look_id = look_id
+        self._lookml_dashboard_id = lookml_dashboard_id
+        self._order = order
+        self._section_fetch_time = section_fetch_time
+        self._title = title
+        self._url = url
+        self._use_custom_description = use_custom_description
+        self._use_custom_image = use_custom_image
+        self._use_custom_title = use_custom_title
+        self._use_custom_url = use_custom_url
+        self._view_count = view_count
+        self._can = can
 
     @property
     def content_created_by(self):
@@ -623,29 +143,6 @@ class HomepageItem(object):
         """
 
         self._content_created_by = content_created_by
-
-    @property
-    def content_updated_at(self):
-        """
-        Gets the content_updated_at of this HomepageItem.
-        Last time the content that this item is based on was updated
-
-        :return: The content_updated_at of this HomepageItem.
-        :rtype: str
-        """
-        return self._content_updated_at
-
-    @content_updated_at.setter
-    def content_updated_at(self, content_updated_at):
-        """
-        Sets the content_updated_at of this HomepageItem.
-        Last time the content that this item is based on was updated
-
-        :param content_updated_at: The content_updated_at of this HomepageItem.
-        :type: str
-        """
-
-        self._content_updated_at = content_updated_at
 
     @property
     def content_favorite_id(self):
@@ -694,6 +191,374 @@ class HomepageItem(object):
         self._content_metadata_id = content_metadata_id
 
     @property
+    def content_updated_at(self):
+        """
+        Gets the content_updated_at of this HomepageItem.
+        Last time the content that this item is based on was updated
+
+        :return: The content_updated_at of this HomepageItem.
+        :rtype: str
+        """
+        return self._content_updated_at
+
+    @content_updated_at.setter
+    def content_updated_at(self, content_updated_at):
+        """
+        Sets the content_updated_at of this HomepageItem.
+        Last time the content that this item is based on was updated
+
+        :param content_updated_at: The content_updated_at of this HomepageItem.
+        :type: str
+        """
+
+        self._content_updated_at = content_updated_at
+
+    @property
+    def custom_description(self):
+        """
+        Gets the custom_description of this HomepageItem.
+        Custom description entered by the user, if present
+
+        :return: The custom_description of this HomepageItem.
+        :rtype: str
+        """
+        return self._custom_description
+
+    @custom_description.setter
+    def custom_description(self, custom_description):
+        """
+        Sets the custom_description of this HomepageItem.
+        Custom description entered by the user, if present
+
+        :param custom_description: The custom_description of this HomepageItem.
+        :type: str
+        """
+
+        self._custom_description = custom_description
+
+    @property
+    def custom_image_data_base64(self):
+        """
+        Gets the custom_image_data_base64 of this HomepageItem.
+        (Write-Only) base64 encoded image data
+
+        :return: The custom_image_data_base64 of this HomepageItem.
+        :rtype: str
+        """
+        return self._custom_image_data_base64
+
+    @custom_image_data_base64.setter
+    def custom_image_data_base64(self, custom_image_data_base64):
+        """
+        Sets the custom_image_data_base64 of this HomepageItem.
+        (Write-Only) base64 encoded image data
+
+        :param custom_image_data_base64: The custom_image_data_base64 of this HomepageItem.
+        :type: str
+        """
+
+        self._custom_image_data_base64 = custom_image_data_base64
+
+    @property
+    def custom_image_url(self):
+        """
+        Gets the custom_image_url of this HomepageItem.
+        Custom image_url entered by the user, if present
+
+        :return: The custom_image_url of this HomepageItem.
+        :rtype: str
+        """
+        return self._custom_image_url
+
+    @custom_image_url.setter
+    def custom_image_url(self, custom_image_url):
+        """
+        Sets the custom_image_url of this HomepageItem.
+        Custom image_url entered by the user, if present
+
+        :param custom_image_url: The custom_image_url of this HomepageItem.
+        :type: str
+        """
+
+        self._custom_image_url = custom_image_url
+
+    @property
+    def custom_title(self):
+        """
+        Gets the custom_title of this HomepageItem.
+        Custom title entered by the user, if present
+
+        :return: The custom_title of this HomepageItem.
+        :rtype: str
+        """
+        return self._custom_title
+
+    @custom_title.setter
+    def custom_title(self, custom_title):
+        """
+        Sets the custom_title of this HomepageItem.
+        Custom title entered by the user, if present
+
+        :param custom_title: The custom_title of this HomepageItem.
+        :type: str
+        """
+
+        self._custom_title = custom_title
+
+    @property
+    def custom_url(self):
+        """
+        Gets the custom_url of this HomepageItem.
+        Custom url entered by the user, if present
+
+        :return: The custom_url of this HomepageItem.
+        :rtype: str
+        """
+        return self._custom_url
+
+    @custom_url.setter
+    def custom_url(self, custom_url):
+        """
+        Sets the custom_url of this HomepageItem.
+        Custom url entered by the user, if present
+
+        :param custom_url: The custom_url of this HomepageItem.
+        :type: str
+        """
+
+        self._custom_url = custom_url
+
+    @property
+    def dashboard_id(self):
+        """
+        Gets the dashboard_id of this HomepageItem.
+        Dashboard to base this item on
+
+        :return: The dashboard_id of this HomepageItem.
+        :rtype: int
+        """
+        return self._dashboard_id
+
+    @dashboard_id.setter
+    def dashboard_id(self, dashboard_id):
+        """
+        Sets the dashboard_id of this HomepageItem.
+        Dashboard to base this item on
+
+        :param dashboard_id: The dashboard_id of this HomepageItem.
+        :type: int
+        """
+
+        self._dashboard_id = dashboard_id
+
+    @property
+    def description(self):
+        """
+        Gets the description of this HomepageItem.
+        The actual description for display
+
+        :return: The description of this HomepageItem.
+        :rtype: str
+        """
+        return self._description
+
+    @description.setter
+    def description(self, description):
+        """
+        Sets the description of this HomepageItem.
+        The actual description for display
+
+        :param description: The description of this HomepageItem.
+        :type: str
+        """
+
+        self._description = description
+
+    @property
+    def favorite_count(self):
+        """
+        Gets the favorite_count of this HomepageItem.
+        Number of times content has been favorited, if present
+
+        :return: The favorite_count of this HomepageItem.
+        :rtype: int
+        """
+        return self._favorite_count
+
+    @favorite_count.setter
+    def favorite_count(self, favorite_count):
+        """
+        Sets the favorite_count of this HomepageItem.
+        Number of times content has been favorited, if present
+
+        :param favorite_count: The favorite_count of this HomepageItem.
+        :type: int
+        """
+
+        self._favorite_count = favorite_count
+
+    @property
+    def homepage_section_id(self):
+        """
+        Gets the homepage_section_id of this HomepageItem.
+        Associated Homepage Section
+
+        :return: The homepage_section_id of this HomepageItem.
+        :rtype: str
+        """
+        return self._homepage_section_id
+
+    @homepage_section_id.setter
+    def homepage_section_id(self, homepage_section_id):
+        """
+        Sets the homepage_section_id of this HomepageItem.
+        Associated Homepage Section
+
+        :param homepage_section_id: The homepage_section_id of this HomepageItem.
+        :type: str
+        """
+
+        self._homepage_section_id = homepage_section_id
+
+    @property
+    def id(self):
+        """
+        Gets the id of this HomepageItem.
+        Unique Id
+
+        :return: The id of this HomepageItem.
+        :rtype: str
+        """
+        return self._id
+
+    @id.setter
+    def id(self, id):
+        """
+        Sets the id of this HomepageItem.
+        Unique Id
+
+        :param id: The id of this HomepageItem.
+        :type: str
+        """
+
+        self._id = id
+
+    @property
+    def image_url(self):
+        """
+        Gets the image_url of this HomepageItem.
+        The actual image_url for display
+
+        :return: The image_url of this HomepageItem.
+        :rtype: str
+        """
+        return self._image_url
+
+    @image_url.setter
+    def image_url(self, image_url):
+        """
+        Sets the image_url of this HomepageItem.
+        The actual image_url for display
+
+        :param image_url: The image_url of this HomepageItem.
+        :type: str
+        """
+
+        self._image_url = image_url
+
+    @property
+    def location(self):
+        """
+        Gets the location of this HomepageItem.
+        The container folder name of the content
+
+        :return: The location of this HomepageItem.
+        :rtype: str
+        """
+        return self._location
+
+    @location.setter
+    def location(self, location):
+        """
+        Sets the location of this HomepageItem.
+        The container folder name of the content
+
+        :param location: The location of this HomepageItem.
+        :type: str
+        """
+
+        self._location = location
+
+    @property
+    def look_id(self):
+        """
+        Gets the look_id of this HomepageItem.
+        Look to base this item on
+
+        :return: The look_id of this HomepageItem.
+        :rtype: int
+        """
+        return self._look_id
+
+    @look_id.setter
+    def look_id(self, look_id):
+        """
+        Sets the look_id of this HomepageItem.
+        Look to base this item on
+
+        :param look_id: The look_id of this HomepageItem.
+        :type: int
+        """
+
+        self._look_id = look_id
+
+    @property
+    def lookml_dashboard_id(self):
+        """
+        Gets the lookml_dashboard_id of this HomepageItem.
+        LookML Dashboard to base this item on
+
+        :return: The lookml_dashboard_id of this HomepageItem.
+        :rtype: str
+        """
+        return self._lookml_dashboard_id
+
+    @lookml_dashboard_id.setter
+    def lookml_dashboard_id(self, lookml_dashboard_id):
+        """
+        Sets the lookml_dashboard_id of this HomepageItem.
+        LookML Dashboard to base this item on
+
+        :param lookml_dashboard_id: The lookml_dashboard_id of this HomepageItem.
+        :type: str
+        """
+
+        self._lookml_dashboard_id = lookml_dashboard_id
+
+    @property
+    def order(self):
+        """
+        Gets the order of this HomepageItem.
+        An arbitrary integer representing the sort order within the section
+
+        :return: The order of this HomepageItem.
+        :rtype: int
+        """
+        return self._order
+
+    @order.setter
+    def order(self, order):
+        """
+        Sets the order of this HomepageItem.
+        An arbitrary integer representing the sort order within the section
+
+        :param order: The order of this HomepageItem.
+        :type: int
+        """
+
+        self._order = order
+
+    @property
     def section_fetch_time(self):
         """
         Gets the section_fetch_time of this HomepageItem.
@@ -715,6 +580,167 @@ class HomepageItem(object):
         """
 
         self._section_fetch_time = section_fetch_time
+
+    @property
+    def title(self):
+        """
+        Gets the title of this HomepageItem.
+        The actual title for display
+
+        :return: The title of this HomepageItem.
+        :rtype: str
+        """
+        return self._title
+
+    @title.setter
+    def title(self, title):
+        """
+        Sets the title of this HomepageItem.
+        The actual title for display
+
+        :param title: The title of this HomepageItem.
+        :type: str
+        """
+
+        self._title = title
+
+    @property
+    def url(self):
+        """
+        Gets the url of this HomepageItem.
+        The actual url for display
+
+        :return: The url of this HomepageItem.
+        :rtype: str
+        """
+        return self._url
+
+    @url.setter
+    def url(self, url):
+        """
+        Sets the url of this HomepageItem.
+        The actual url for display
+
+        :param url: The url of this HomepageItem.
+        :type: str
+        """
+
+        self._url = url
+
+    @property
+    def use_custom_description(self):
+        """
+        Gets the use_custom_description of this HomepageItem.
+        Whether the custom description should be used instead of the content description, if the item is associated with content
+
+        :return: The use_custom_description of this HomepageItem.
+        :rtype: bool
+        """
+        return self._use_custom_description
+
+    @use_custom_description.setter
+    def use_custom_description(self, use_custom_description):
+        """
+        Sets the use_custom_description of this HomepageItem.
+        Whether the custom description should be used instead of the content description, if the item is associated with content
+
+        :param use_custom_description: The use_custom_description of this HomepageItem.
+        :type: bool
+        """
+
+        self._use_custom_description = use_custom_description
+
+    @property
+    def use_custom_image(self):
+        """
+        Gets the use_custom_image of this HomepageItem.
+        Whether the custom image should be used instead of the content image, if the item is associated with content
+
+        :return: The use_custom_image of this HomepageItem.
+        :rtype: bool
+        """
+        return self._use_custom_image
+
+    @use_custom_image.setter
+    def use_custom_image(self, use_custom_image):
+        """
+        Sets the use_custom_image of this HomepageItem.
+        Whether the custom image should be used instead of the content image, if the item is associated with content
+
+        :param use_custom_image: The use_custom_image of this HomepageItem.
+        :type: bool
+        """
+
+        self._use_custom_image = use_custom_image
+
+    @property
+    def use_custom_title(self):
+        """
+        Gets the use_custom_title of this HomepageItem.
+        Whether the custom title should be used instead of the content title, if the item is associated with content
+
+        :return: The use_custom_title of this HomepageItem.
+        :rtype: bool
+        """
+        return self._use_custom_title
+
+    @use_custom_title.setter
+    def use_custom_title(self, use_custom_title):
+        """
+        Sets the use_custom_title of this HomepageItem.
+        Whether the custom title should be used instead of the content title, if the item is associated with content
+
+        :param use_custom_title: The use_custom_title of this HomepageItem.
+        :type: bool
+        """
+
+        self._use_custom_title = use_custom_title
+
+    @property
+    def use_custom_url(self):
+        """
+        Gets the use_custom_url of this HomepageItem.
+        Whether the custom url should be used instead of the content url, if the item is associated with content
+
+        :return: The use_custom_url of this HomepageItem.
+        :rtype: bool
+        """
+        return self._use_custom_url
+
+    @use_custom_url.setter
+    def use_custom_url(self, use_custom_url):
+        """
+        Sets the use_custom_url of this HomepageItem.
+        Whether the custom url should be used instead of the content url, if the item is associated with content
+
+        :param use_custom_url: The use_custom_url of this HomepageItem.
+        :type: bool
+        """
+
+        self._use_custom_url = use_custom_url
+
+    @property
+    def view_count(self):
+        """
+        Gets the view_count of this HomepageItem.
+        Number of times content has been viewed, if present
+
+        :return: The view_count of this HomepageItem.
+        :rtype: int
+        """
+        return self._view_count
+
+    @view_count.setter
+    def view_count(self, view_count):
+        """
+        Sets the view_count of this HomepageItem.
+        Number of times content has been viewed, if present
+
+        :param view_count: The view_count of this HomepageItem.
+        :type: int
+        """
+
+        self._view_count = view_count
 
     @property
     def can(self):

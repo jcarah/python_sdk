@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class LDAPUser(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, email=None, first_name=None, last_name=None, ldap_id=None, all_emails=None, ldap_dn=None, roles=None, groups=None, attributes=None, url=None, can=None):
+    def __init__(self, all_emails=None, attributes=None, email=None, first_name=None, groups=None, last_name=None, ldap_dn=None, ldap_id=None, roles=None, url=None, can=None):
         """
         LDAPUser - a model defined in Swagger
 
@@ -31,44 +31,90 @@ class LDAPUser(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
+            'all_emails': 'list[str]',
+            'attributes': 'dict(str, str)',
             'email': 'str',
             'first_name': 'str',
-            'last_name': 'str',
-            'ldap_id': 'str',
-            'all_emails': 'list[str]',
-            'ldap_dn': 'str',
-            'roles': 'list[str]',
             'groups': 'list[str]',
-            'attributes': 'dict(str, str)',
+            'last_name': 'str',
+            'ldap_dn': 'str',
+            'ldap_id': 'str',
+            'roles': 'list[str]',
             'url': 'str',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
+            'all_emails': 'all_emails',
+            'attributes': 'attributes',
             'email': 'email',
             'first_name': 'first_name',
-            'last_name': 'last_name',
-            'ldap_id': 'ldap_id',
-            'all_emails': 'all_emails',
-            'ldap_dn': 'ldap_dn',
-            'roles': 'roles',
             'groups': 'groups',
-            'attributes': 'attributes',
+            'last_name': 'last_name',
+            'ldap_dn': 'ldap_dn',
+            'ldap_id': 'ldap_id',
+            'roles': 'roles',
             'url': 'url',
             'can': 'can'
         }
 
+        self._all_emails = all_emails
+        self._attributes = attributes
         self._email = email
         self._first_name = first_name
-        self._last_name = last_name
-        self._ldap_id = ldap_id
-        self._all_emails = all_emails
-        self._ldap_dn = ldap_dn
-        self._roles = roles
         self._groups = groups
-        self._attributes = attributes
+        self._last_name = last_name
+        self._ldap_dn = ldap_dn
+        self._ldap_id = ldap_id
+        self._roles = roles
         self._url = url
         self._can = can
+
+    @property
+    def all_emails(self):
+        """
+        Gets the all_emails of this LDAPUser.
+        Array of user's email addresses and aliases for use in migration
+
+        :return: The all_emails of this LDAPUser.
+        :rtype: list[str]
+        """
+        return self._all_emails
+
+    @all_emails.setter
+    def all_emails(self, all_emails):
+        """
+        Sets the all_emails of this LDAPUser.
+        Array of user's email addresses and aliases for use in migration
+
+        :param all_emails: The all_emails of this LDAPUser.
+        :type: list[str]
+        """
+
+        self._all_emails = all_emails
+
+    @property
+    def attributes(self):
+        """
+        Gets the attributes of this LDAPUser.
+        Dictionary of user's attributes (name/value)
+
+        :return: The attributes of this LDAPUser.
+        :rtype: dict(str, str)
+        """
+        return self._attributes
+
+    @attributes.setter
+    def attributes(self, attributes):
+        """
+        Sets the attributes of this LDAPUser.
+        Dictionary of user's attributes (name/value)
+
+        :param attributes: The attributes of this LDAPUser.
+        :type: dict(str, str)
+        """
+
+        self._attributes = attributes
 
     @property
     def email(self):
@@ -117,6 +163,29 @@ class LDAPUser(object):
         self._first_name = first_name
 
     @property
+    def groups(self):
+        """
+        Gets the groups of this LDAPUser.
+        Array of user's groups (group names only)
+
+        :return: The groups of this LDAPUser.
+        :rtype: list[str]
+        """
+        return self._groups
+
+    @groups.setter
+    def groups(self, groups):
+        """
+        Sets the groups of this LDAPUser.
+        Array of user's groups (group names only)
+
+        :param groups: The groups of this LDAPUser.
+        :type: list[str]
+        """
+
+        self._groups = groups
+
+    @property
     def last_name(self):
         """
         Gets the last_name of this LDAPUser.
@@ -138,52 +207,6 @@ class LDAPUser(object):
         """
 
         self._last_name = last_name
-
-    @property
-    def ldap_id(self):
-        """
-        Gets the ldap_id of this LDAPUser.
-        LDAP's Unique ID for the user
-
-        :return: The ldap_id of this LDAPUser.
-        :rtype: str
-        """
-        return self._ldap_id
-
-    @ldap_id.setter
-    def ldap_id(self, ldap_id):
-        """
-        Sets the ldap_id of this LDAPUser.
-        LDAP's Unique ID for the user
-
-        :param ldap_id: The ldap_id of this LDAPUser.
-        :type: str
-        """
-
-        self._ldap_id = ldap_id
-
-    @property
-    def all_emails(self):
-        """
-        Gets the all_emails of this LDAPUser.
-        Array of user's email addresses and aliases for use in migration
-
-        :return: The all_emails of this LDAPUser.
-        :rtype: list[str]
-        """
-        return self._all_emails
-
-    @all_emails.setter
-    def all_emails(self, all_emails):
-        """
-        Sets the all_emails of this LDAPUser.
-        Array of user's email addresses and aliases for use in migration
-
-        :param all_emails: The all_emails of this LDAPUser.
-        :type: list[str]
-        """
-
-        self._all_emails = all_emails
 
     @property
     def ldap_dn(self):
@@ -209,6 +232,29 @@ class LDAPUser(object):
         self._ldap_dn = ldap_dn
 
     @property
+    def ldap_id(self):
+        """
+        Gets the ldap_id of this LDAPUser.
+        LDAP's Unique ID for the user
+
+        :return: The ldap_id of this LDAPUser.
+        :rtype: str
+        """
+        return self._ldap_id
+
+    @ldap_id.setter
+    def ldap_id(self, ldap_id):
+        """
+        Sets the ldap_id of this LDAPUser.
+        LDAP's Unique ID for the user
+
+        :param ldap_id: The ldap_id of this LDAPUser.
+        :type: str
+        """
+
+        self._ldap_id = ldap_id
+
+    @property
     def roles(self):
         """
         Gets the roles of this LDAPUser.
@@ -230,52 +276,6 @@ class LDAPUser(object):
         """
 
         self._roles = roles
-
-    @property
-    def groups(self):
-        """
-        Gets the groups of this LDAPUser.
-        Array of user's groups (group names only)
-
-        :return: The groups of this LDAPUser.
-        :rtype: list[str]
-        """
-        return self._groups
-
-    @groups.setter
-    def groups(self, groups):
-        """
-        Sets the groups of this LDAPUser.
-        Array of user's groups (group names only)
-
-        :param groups: The groups of this LDAPUser.
-        :type: list[str]
-        """
-
-        self._groups = groups
-
-    @property
-    def attributes(self):
-        """
-        Gets the attributes of this LDAPUser.
-        Dictionary of user's attrributes (name/value)
-
-        :return: The attributes of this LDAPUser.
-        :rtype: dict(str, str)
-        """
-        return self._attributes
-
-    @attributes.setter
-    def attributes(self, attributes):
-        """
-        Sets the attributes of this LDAPUser.
-        Dictionary of user's attrributes (name/value)
-
-        :param attributes: The attributes of this LDAPUser.
-        :type: dict(str, str)
-        """
-
-        self._attributes = attributes
 
     @property
     def url(self):

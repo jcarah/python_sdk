@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class Project(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, id=None, name=None, uses_git=None, git_remote_url=None, git_username=None, git_password=None, git_username_user_attribute=None, git_password_user_attribute=None, git_service_name=None, pull_request_mode=None, validation_required=None, is_example=None, can=None):
+    def __init__(self, id=None, name=None, uses_git=None, git_remote_url=None, git_username=None, git_password=None, git_username_user_attribute=None, git_password_user_attribute=None, git_service_name=None, deploy_secret=None, unset_deploy_secret=None, pull_request_mode=None, validation_required=None, folders_enabled=None, allow_warnings=None, is_example=None, can=None):
         """
         Project - a model defined in Swagger
 
@@ -40,8 +40,12 @@ class Project(object):
             'git_username_user_attribute': 'str',
             'git_password_user_attribute': 'str',
             'git_service_name': 'str',
+            'deploy_secret': 'str',
+            'unset_deploy_secret': 'bool',
             'pull_request_mode': 'str',
             'validation_required': 'bool',
+            'folders_enabled': 'bool',
+            'allow_warnings': 'bool',
             'is_example': 'bool',
             'can': 'dict(str, bool)'
         }
@@ -56,8 +60,12 @@ class Project(object):
             'git_username_user_attribute': 'git_username_user_attribute',
             'git_password_user_attribute': 'git_password_user_attribute',
             'git_service_name': 'git_service_name',
+            'deploy_secret': 'deploy_secret',
+            'unset_deploy_secret': 'unset_deploy_secret',
             'pull_request_mode': 'pull_request_mode',
             'validation_required': 'validation_required',
+            'folders_enabled': 'folders_enabled',
+            'allow_warnings': 'allow_warnings',
             'is_example': 'is_example',
             'can': 'can'
         }
@@ -71,8 +79,12 @@ class Project(object):
         self._git_username_user_attribute = git_username_user_attribute
         self._git_password_user_attribute = git_password_user_attribute
         self._git_service_name = git_service_name
+        self._deploy_secret = deploy_secret
+        self._unset_deploy_secret = unset_deploy_secret
         self._pull_request_mode = pull_request_mode
         self._validation_required = validation_required
+        self._folders_enabled = folders_enabled
+        self._allow_warnings = allow_warnings
         self._is_example = is_example
         self._can = can
 
@@ -284,6 +296,52 @@ class Project(object):
         self._git_service_name = git_service_name
 
     @property
+    def deploy_secret(self):
+        """
+        Gets the deploy_secret of this Project.
+        (Write-Only) Optional secret token with which to authenticate requests to the webhook deploy endpoint. If not set, endpoint is unauthenticated.
+
+        :return: The deploy_secret of this Project.
+        :rtype: str
+        """
+        return self._deploy_secret
+
+    @deploy_secret.setter
+    def deploy_secret(self, deploy_secret):
+        """
+        Sets the deploy_secret of this Project.
+        (Write-Only) Optional secret token with which to authenticate requests to the webhook deploy endpoint. If not set, endpoint is unauthenticated.
+
+        :param deploy_secret: The deploy_secret of this Project.
+        :type: str
+        """
+
+        self._deploy_secret = deploy_secret
+
+    @property
+    def unset_deploy_secret(self):
+        """
+        Gets the unset_deploy_secret of this Project.
+        (Write-Only) When true, unsets the deploy secret to allow unauthenticated access to the webhook deploy endpoint.
+
+        :return: The unset_deploy_secret of this Project.
+        :rtype: bool
+        """
+        return self._unset_deploy_secret
+
+    @unset_deploy_secret.setter
+    def unset_deploy_secret(self, unset_deploy_secret):
+        """
+        Sets the unset_deploy_secret of this Project.
+        (Write-Only) When true, unsets the deploy secret to allow unauthenticated access to the webhook deploy endpoint.
+
+        :param unset_deploy_secret: The unset_deploy_secret of this Project.
+        :type: bool
+        """
+
+        self._unset_deploy_secret = unset_deploy_secret
+
+    @property
     def pull_request_mode(self):
         """
         Gets the pull_request_mode of this Project.
@@ -310,7 +368,7 @@ class Project(object):
     def validation_required(self):
         """
         Gets the validation_required of this Project.
-        Validation policy: If true, the project must pass all validation checks before project changes can be committed to the git repository
+        Validation policy: If true, the project must pass validation checks before project changes can be committed to the git repository
 
         :return: The validation_required of this Project.
         :rtype: bool
@@ -321,13 +379,59 @@ class Project(object):
     def validation_required(self, validation_required):
         """
         Sets the validation_required of this Project.
-        Validation policy: If true, the project must pass all validation checks before project changes can be committed to the git repository
+        Validation policy: If true, the project must pass validation checks before project changes can be committed to the git repository
 
         :param validation_required: The validation_required of this Project.
         :type: bool
         """
 
         self._validation_required = validation_required
+
+    @property
+    def folders_enabled(self):
+        """
+        Gets the folders_enabled of this Project.
+        If true, folders are enabled for this project
+
+        :return: The folders_enabled of this Project.
+        :rtype: bool
+        """
+        return self._folders_enabled
+
+    @folders_enabled.setter
+    def folders_enabled(self, folders_enabled):
+        """
+        Sets the folders_enabled of this Project.
+        If true, folders are enabled for this project
+
+        :param folders_enabled: The folders_enabled of this Project.
+        :type: bool
+        """
+
+        self._folders_enabled = folders_enabled
+
+    @property
+    def allow_warnings(self):
+        """
+        Gets the allow_warnings of this Project.
+        Validation policy: If true, the project can be committed with warnings when `validation_required` is true. (`allow_warnings` does nothing if `validation_required` is false).
+
+        :return: The allow_warnings of this Project.
+        :rtype: bool
+        """
+        return self._allow_warnings
+
+    @allow_warnings.setter
+    def allow_warnings(self, allow_warnings):
+        """
+        Sets the allow_warnings of this Project.
+        Validation policy: If true, the project can be committed with warnings when `validation_required` is true. (`allow_warnings` does nothing if `validation_required` is false).
+
+        :param allow_warnings: The allow_warnings of this Project.
+        :type: bool
+        """
+
+        self._allow_warnings = allow_warnings
 
     @property
     def is_example(self):

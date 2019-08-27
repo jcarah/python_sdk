@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class LDAPConfig(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, enabled=None, connection_host=None, connection_port=None, connection_tls=None, connection_tls_no_verify=None, auth_username=None, auth_password=None, has_auth_password=None, user_bind_base_dn=None, user_id_attribute_names=None, user_objectclass=None, user_custom_filter=None, user_attribute_map_email=None, user_attribute_map_first_name=None, user_attribute_map_last_name=None, user_attribute_map_ldap_id=None, merge_new_users_by_email=None, alternate_email_login_allowed=None, modified_at=None, modified_by=None, default_new_user_groups=None, default_new_user_roles=None, default_new_user_role_ids=None, default_new_user_group_ids=None, set_roles_from_groups=None, groups=None, groups_with_role_ids=None, auth_requires_role=None, groups_finder_type=None, groups_base_dn=None, groups_member_attribute=None, groups_user_attribute=None, groups_objectclasses=None, force_no_page=None, test_ldap_user=None, test_ldap_password=None, user_attributes=None, user_attributes_with_ids=None, url=None, can=None):
+    def __init__(self, alternate_email_login_allowed=None, auth_password=None, auth_requires_role=None, auth_username=None, connection_host=None, connection_port=None, connection_tls=None, connection_tls_no_verify=None, default_new_user_group_ids=None, default_new_user_groups=None, default_new_user_role_ids=None, default_new_user_roles=None, enabled=None, force_no_page=None, groups=None, groups_base_dn=None, groups_finder_type=None, groups_member_attribute=None, groups_objectclasses=None, groups_user_attribute=None, groups_with_role_ids=None, has_auth_password=None, merge_new_users_by_email=None, modified_at=None, modified_by=None, set_roles_from_groups=None, test_ldap_password=None, test_ldap_user=None, user_attribute_map_email=None, user_attribute_map_first_name=None, user_attribute_map_last_name=None, user_attribute_map_ldap_id=None, user_attributes=None, user_attributes_with_ids=None, user_bind_base_dn=None, user_custom_filter=None, user_id_attribute_names=None, user_objectclass=None, url=None, can=None):
         """
         LDAPConfig - a model defined in Swagger
 
@@ -31,154 +31,223 @@ class LDAPConfig(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'enabled': 'bool',
+            'alternate_email_login_allowed': 'bool',
+            'auth_password': 'str',
+            'auth_requires_role': 'bool',
+            'auth_username': 'str',
             'connection_host': 'str',
             'connection_port': 'str',
             'connection_tls': 'bool',
             'connection_tls_no_verify': 'bool',
-            'auth_username': 'str',
-            'auth_password': 'str',
+            'default_new_user_group_ids': 'list[int]',
+            'default_new_user_groups': 'list[Group]',
+            'default_new_user_role_ids': 'list[int]',
+            'default_new_user_roles': 'list[Role]',
+            'enabled': 'bool',
+            'force_no_page': 'bool',
+            'groups': 'list[LDAPGroupRead]',
+            'groups_base_dn': 'str',
+            'groups_finder_type': 'str',
+            'groups_member_attribute': 'str',
+            'groups_objectclasses': 'str',
+            'groups_user_attribute': 'str',
+            'groups_with_role_ids': 'list[LDAPGroupWrite]',
             'has_auth_password': 'bool',
-            'user_bind_base_dn': 'str',
-            'user_id_attribute_names': 'str',
-            'user_objectclass': 'str',
-            'user_custom_filter': 'str',
+            'merge_new_users_by_email': 'bool',
+            'modified_at': 'str',
+            'modified_by': 'str',
+            'set_roles_from_groups': 'bool',
+            'test_ldap_password': 'str',
+            'test_ldap_user': 'str',
             'user_attribute_map_email': 'str',
             'user_attribute_map_first_name': 'str',
             'user_attribute_map_last_name': 'str',
             'user_attribute_map_ldap_id': 'str',
-            'merge_new_users_by_email': 'bool',
-            'alternate_email_login_allowed': 'bool',
-            'modified_at': 'str',
-            'modified_by': 'str',
-            'default_new_user_groups': 'list[Group]',
-            'default_new_user_roles': 'list[Role]',
-            'default_new_user_role_ids': 'list[int]',
-            'default_new_user_group_ids': 'list[int]',
-            'set_roles_from_groups': 'bool',
-            'groups': 'list[LDAPGroupRead]',
-            'groups_with_role_ids': 'list[LDAPGroupWrite]',
-            'auth_requires_role': 'bool',
-            'groups_finder_type': 'str',
-            'groups_base_dn': 'str',
-            'groups_member_attribute': 'str',
-            'groups_user_attribute': 'str',
-            'groups_objectclasses': 'str',
-            'force_no_page': 'bool',
-            'test_ldap_user': 'str',
-            'test_ldap_password': 'str',
             'user_attributes': 'list[LDAPUserAttributeRead]',
             'user_attributes_with_ids': 'list[LDAPUserAttributeWrite]',
+            'user_bind_base_dn': 'str',
+            'user_custom_filter': 'str',
+            'user_id_attribute_names': 'str',
+            'user_objectclass': 'str',
             'url': 'str',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
-            'enabled': 'enabled',
+            'alternate_email_login_allowed': 'alternate_email_login_allowed',
+            'auth_password': 'auth_password',
+            'auth_requires_role': 'auth_requires_role',
+            'auth_username': 'auth_username',
             'connection_host': 'connection_host',
             'connection_port': 'connection_port',
             'connection_tls': 'connection_tls',
             'connection_tls_no_verify': 'connection_tls_no_verify',
-            'auth_username': 'auth_username',
-            'auth_password': 'auth_password',
+            'default_new_user_group_ids': 'default_new_user_group_ids',
+            'default_new_user_groups': 'default_new_user_groups',
+            'default_new_user_role_ids': 'default_new_user_role_ids',
+            'default_new_user_roles': 'default_new_user_roles',
+            'enabled': 'enabled',
+            'force_no_page': 'force_no_page',
+            'groups': 'groups',
+            'groups_base_dn': 'groups_base_dn',
+            'groups_finder_type': 'groups_finder_type',
+            'groups_member_attribute': 'groups_member_attribute',
+            'groups_objectclasses': 'groups_objectclasses',
+            'groups_user_attribute': 'groups_user_attribute',
+            'groups_with_role_ids': 'groups_with_role_ids',
             'has_auth_password': 'has_auth_password',
-            'user_bind_base_dn': 'user_bind_base_dn',
-            'user_id_attribute_names': 'user_id_attribute_names',
-            'user_objectclass': 'user_objectclass',
-            'user_custom_filter': 'user_custom_filter',
+            'merge_new_users_by_email': 'merge_new_users_by_email',
+            'modified_at': 'modified_at',
+            'modified_by': 'modified_by',
+            'set_roles_from_groups': 'set_roles_from_groups',
+            'test_ldap_password': 'test_ldap_password',
+            'test_ldap_user': 'test_ldap_user',
             'user_attribute_map_email': 'user_attribute_map_email',
             'user_attribute_map_first_name': 'user_attribute_map_first_name',
             'user_attribute_map_last_name': 'user_attribute_map_last_name',
             'user_attribute_map_ldap_id': 'user_attribute_map_ldap_id',
-            'merge_new_users_by_email': 'merge_new_users_by_email',
-            'alternate_email_login_allowed': 'alternate_email_login_allowed',
-            'modified_at': 'modified_at',
-            'modified_by': 'modified_by',
-            'default_new_user_groups': 'default_new_user_groups',
-            'default_new_user_roles': 'default_new_user_roles',
-            'default_new_user_role_ids': 'default_new_user_role_ids',
-            'default_new_user_group_ids': 'default_new_user_group_ids',
-            'set_roles_from_groups': 'set_roles_from_groups',
-            'groups': 'groups',
-            'groups_with_role_ids': 'groups_with_role_ids',
-            'auth_requires_role': 'auth_requires_role',
-            'groups_finder_type': 'groups_finder_type',
-            'groups_base_dn': 'groups_base_dn',
-            'groups_member_attribute': 'groups_member_attribute',
-            'groups_user_attribute': 'groups_user_attribute',
-            'groups_objectclasses': 'groups_objectclasses',
-            'force_no_page': 'force_no_page',
-            'test_ldap_user': 'test_ldap_user',
-            'test_ldap_password': 'test_ldap_password',
             'user_attributes': 'user_attributes',
             'user_attributes_with_ids': 'user_attributes_with_ids',
+            'user_bind_base_dn': 'user_bind_base_dn',
+            'user_custom_filter': 'user_custom_filter',
+            'user_id_attribute_names': 'user_id_attribute_names',
+            'user_objectclass': 'user_objectclass',
             'url': 'url',
             'can': 'can'
         }
 
-        self._enabled = enabled
+        self._alternate_email_login_allowed = alternate_email_login_allowed
+        self._auth_password = auth_password
+        self._auth_requires_role = auth_requires_role
+        self._auth_username = auth_username
         self._connection_host = connection_host
         self._connection_port = connection_port
         self._connection_tls = connection_tls
         self._connection_tls_no_verify = connection_tls_no_verify
-        self._auth_username = auth_username
-        self._auth_password = auth_password
+        self._default_new_user_group_ids = default_new_user_group_ids
+        self._default_new_user_groups = default_new_user_groups
+        self._default_new_user_role_ids = default_new_user_role_ids
+        self._default_new_user_roles = default_new_user_roles
+        self._enabled = enabled
+        self._force_no_page = force_no_page
+        self._groups = groups
+        self._groups_base_dn = groups_base_dn
+        self._groups_finder_type = groups_finder_type
+        self._groups_member_attribute = groups_member_attribute
+        self._groups_objectclasses = groups_objectclasses
+        self._groups_user_attribute = groups_user_attribute
+        self._groups_with_role_ids = groups_with_role_ids
         self._has_auth_password = has_auth_password
-        self._user_bind_base_dn = user_bind_base_dn
-        self._user_id_attribute_names = user_id_attribute_names
-        self._user_objectclass = user_objectclass
-        self._user_custom_filter = user_custom_filter
+        self._merge_new_users_by_email = merge_new_users_by_email
+        self._modified_at = modified_at
+        self._modified_by = modified_by
+        self._set_roles_from_groups = set_roles_from_groups
+        self._test_ldap_password = test_ldap_password
+        self._test_ldap_user = test_ldap_user
         self._user_attribute_map_email = user_attribute_map_email
         self._user_attribute_map_first_name = user_attribute_map_first_name
         self._user_attribute_map_last_name = user_attribute_map_last_name
         self._user_attribute_map_ldap_id = user_attribute_map_ldap_id
-        self._merge_new_users_by_email = merge_new_users_by_email
-        self._alternate_email_login_allowed = alternate_email_login_allowed
-        self._modified_at = modified_at
-        self._modified_by = modified_by
-        self._default_new_user_groups = default_new_user_groups
-        self._default_new_user_roles = default_new_user_roles
-        self._default_new_user_role_ids = default_new_user_role_ids
-        self._default_new_user_group_ids = default_new_user_group_ids
-        self._set_roles_from_groups = set_roles_from_groups
-        self._groups = groups
-        self._groups_with_role_ids = groups_with_role_ids
-        self._auth_requires_role = auth_requires_role
-        self._groups_finder_type = groups_finder_type
-        self._groups_base_dn = groups_base_dn
-        self._groups_member_attribute = groups_member_attribute
-        self._groups_user_attribute = groups_user_attribute
-        self._groups_objectclasses = groups_objectclasses
-        self._force_no_page = force_no_page
-        self._test_ldap_user = test_ldap_user
-        self._test_ldap_password = test_ldap_password
         self._user_attributes = user_attributes
         self._user_attributes_with_ids = user_attributes_with_ids
+        self._user_bind_base_dn = user_bind_base_dn
+        self._user_custom_filter = user_custom_filter
+        self._user_id_attribute_names = user_id_attribute_names
+        self._user_objectclass = user_objectclass
         self._url = url
         self._can = can
 
     @property
-    def enabled(self):
+    def alternate_email_login_allowed(self):
         """
-        Gets the enabled of this LDAPConfig.
-        Enable/Disable LDAP authentication for the server
+        Gets the alternate_email_login_allowed of this LDAPConfig.
+        Allow alternate email-based login via '/login/email' for admins and for specified users with the 'login_special_email' permission. This option is useful as a fallback during ldap setup, if ldap config problems occur later, or if you need to support some users who are not in your ldap directory. Looker email/password logins are always disabled for regular users when ldap is enabled.
 
-        :return: The enabled of this LDAPConfig.
+        :return: The alternate_email_login_allowed of this LDAPConfig.
         :rtype: bool
         """
-        return self._enabled
+        return self._alternate_email_login_allowed
 
-    @enabled.setter
-    def enabled(self, enabled):
+    @alternate_email_login_allowed.setter
+    def alternate_email_login_allowed(self, alternate_email_login_allowed):
         """
-        Sets the enabled of this LDAPConfig.
-        Enable/Disable LDAP authentication for the server
+        Sets the alternate_email_login_allowed of this LDAPConfig.
+        Allow alternate email-based login via '/login/email' for admins and for specified users with the 'login_special_email' permission. This option is useful as a fallback during ldap setup, if ldap config problems occur later, or if you need to support some users who are not in your ldap directory. Looker email/password logins are always disabled for regular users when ldap is enabled.
 
-        :param enabled: The enabled of this LDAPConfig.
+        :param alternate_email_login_allowed: The alternate_email_login_allowed of this LDAPConfig.
         :type: bool
         """
 
-        self._enabled = enabled
+        self._alternate_email_login_allowed = alternate_email_login_allowed
+
+    @property
+    def auth_password(self):
+        """
+        Gets the auth_password of this LDAPConfig.
+        (Write-Only)  Password for the LDAP account used to access the LDAP server
+
+        :return: The auth_password of this LDAPConfig.
+        :rtype: str
+        """
+        return self._auth_password
+
+    @auth_password.setter
+    def auth_password(self, auth_password):
+        """
+        Sets the auth_password of this LDAPConfig.
+        (Write-Only)  Password for the LDAP account used to access the LDAP server
+
+        :param auth_password: The auth_password of this LDAPConfig.
+        :type: str
+        """
+
+        self._auth_password = auth_password
+
+    @property
+    def auth_requires_role(self):
+        """
+        Gets the auth_requires_role of this LDAPConfig.
+        Users will not be allowed to login at all unless a role for them is found in LDAP if set to true
+
+        :return: The auth_requires_role of this LDAPConfig.
+        :rtype: bool
+        """
+        return self._auth_requires_role
+
+    @auth_requires_role.setter
+    def auth_requires_role(self, auth_requires_role):
+        """
+        Sets the auth_requires_role of this LDAPConfig.
+        Users will not be allowed to login at all unless a role for them is found in LDAP if set to true
+
+        :param auth_requires_role: The auth_requires_role of this LDAPConfig.
+        :type: bool
+        """
+
+        self._auth_requires_role = auth_requires_role
+
+    @property
+    def auth_username(self):
+        """
+        Gets the auth_username of this LDAPConfig.
+        Distinguished name of LDAP account used to access the LDAP server
+
+        :return: The auth_username of this LDAPConfig.
+        :rtype: str
+        """
+        return self._auth_username
+
+    @auth_username.setter
+    def auth_username(self, auth_username):
+        """
+        Sets the auth_username of this LDAPConfig.
+        Distinguished name of LDAP account used to access the LDAP server
+
+        :param auth_username: The auth_username of this LDAPConfig.
+        :type: str
+        """
+
+        self._auth_username = auth_username
 
     @property
     def connection_host(self):
@@ -273,50 +342,303 @@ class LDAPConfig(object):
         self._connection_tls_no_verify = connection_tls_no_verify
 
     @property
-    def auth_username(self):
+    def default_new_user_group_ids(self):
         """
-        Gets the auth_username of this LDAPConfig.
-        Distinguished name of LDAP account used to access the LDAP server
+        Gets the default_new_user_group_ids of this LDAPConfig.
+        (Write-Only)  Array of ids of groups that will be applied to new users the first time they login via LDAP
 
-        :return: The auth_username of this LDAPConfig.
-        :rtype: str
+        :return: The default_new_user_group_ids of this LDAPConfig.
+        :rtype: list[int]
         """
-        return self._auth_username
+        return self._default_new_user_group_ids
 
-    @auth_username.setter
-    def auth_username(self, auth_username):
+    @default_new_user_group_ids.setter
+    def default_new_user_group_ids(self, default_new_user_group_ids):
         """
-        Sets the auth_username of this LDAPConfig.
-        Distinguished name of LDAP account used to access the LDAP server
+        Sets the default_new_user_group_ids of this LDAPConfig.
+        (Write-Only)  Array of ids of groups that will be applied to new users the first time they login via LDAP
 
-        :param auth_username: The auth_username of this LDAPConfig.
-        :type: str
+        :param default_new_user_group_ids: The default_new_user_group_ids of this LDAPConfig.
+        :type: list[int]
         """
 
-        self._auth_username = auth_username
+        self._default_new_user_group_ids = default_new_user_group_ids
 
     @property
-    def auth_password(self):
+    def default_new_user_groups(self):
         """
-        Gets the auth_password of this LDAPConfig.
-        (Write-Only)  Password for the LDAP account used to access the LDAP server
+        Gets the default_new_user_groups of this LDAPConfig.
+        (Read-only) Groups that will be applied to new users the first time they login via LDAP
 
-        :return: The auth_password of this LDAPConfig.
+        :return: The default_new_user_groups of this LDAPConfig.
+        :rtype: list[Group]
+        """
+        return self._default_new_user_groups
+
+    @default_new_user_groups.setter
+    def default_new_user_groups(self, default_new_user_groups):
+        """
+        Sets the default_new_user_groups of this LDAPConfig.
+        (Read-only) Groups that will be applied to new users the first time they login via LDAP
+
+        :param default_new_user_groups: The default_new_user_groups of this LDAPConfig.
+        :type: list[Group]
+        """
+
+        self._default_new_user_groups = default_new_user_groups
+
+    @property
+    def default_new_user_role_ids(self):
+        """
+        Gets the default_new_user_role_ids of this LDAPConfig.
+        (Write-Only)  Array of ids of roles that will be applied to new users the first time they login via LDAP
+
+        :return: The default_new_user_role_ids of this LDAPConfig.
+        :rtype: list[int]
+        """
+        return self._default_new_user_role_ids
+
+    @default_new_user_role_ids.setter
+    def default_new_user_role_ids(self, default_new_user_role_ids):
+        """
+        Sets the default_new_user_role_ids of this LDAPConfig.
+        (Write-Only)  Array of ids of roles that will be applied to new users the first time they login via LDAP
+
+        :param default_new_user_role_ids: The default_new_user_role_ids of this LDAPConfig.
+        :type: list[int]
+        """
+
+        self._default_new_user_role_ids = default_new_user_role_ids
+
+    @property
+    def default_new_user_roles(self):
+        """
+        Gets the default_new_user_roles of this LDAPConfig.
+        (Read-only) Roles that will be applied to new users the first time they login via LDAP
+
+        :return: The default_new_user_roles of this LDAPConfig.
+        :rtype: list[Role]
+        """
+        return self._default_new_user_roles
+
+    @default_new_user_roles.setter
+    def default_new_user_roles(self, default_new_user_roles):
+        """
+        Sets the default_new_user_roles of this LDAPConfig.
+        (Read-only) Roles that will be applied to new users the first time they login via LDAP
+
+        :param default_new_user_roles: The default_new_user_roles of this LDAPConfig.
+        :type: list[Role]
+        """
+
+        self._default_new_user_roles = default_new_user_roles
+
+    @property
+    def enabled(self):
+        """
+        Gets the enabled of this LDAPConfig.
+        Enable/Disable LDAP authentication for the server
+
+        :return: The enabled of this LDAPConfig.
+        :rtype: bool
+        """
+        return self._enabled
+
+    @enabled.setter
+    def enabled(self, enabled):
+        """
+        Sets the enabled of this LDAPConfig.
+        Enable/Disable LDAP authentication for the server
+
+        :param enabled: The enabled of this LDAPConfig.
+        :type: bool
+        """
+
+        self._enabled = enabled
+
+    @property
+    def force_no_page(self):
+        """
+        Gets the force_no_page of this LDAPConfig.
+        Don't attempt to do LDAP search result paging (RFC 2696) even if the LDAP server claims to support it.
+
+        :return: The force_no_page of this LDAPConfig.
+        :rtype: bool
+        """
+        return self._force_no_page
+
+    @force_no_page.setter
+    def force_no_page(self, force_no_page):
+        """
+        Sets the force_no_page of this LDAPConfig.
+        Don't attempt to do LDAP search result paging (RFC 2696) even if the LDAP server claims to support it.
+
+        :param force_no_page: The force_no_page of this LDAPConfig.
+        :type: bool
+        """
+
+        self._force_no_page = force_no_page
+
+    @property
+    def groups(self):
+        """
+        Gets the groups of this LDAPConfig.
+        (Read-only) Array of mappings between LDAP Groups and Looker Roles
+
+        :return: The groups of this LDAPConfig.
+        :rtype: list[LDAPGroupRead]
+        """
+        return self._groups
+
+    @groups.setter
+    def groups(self, groups):
+        """
+        Sets the groups of this LDAPConfig.
+        (Read-only) Array of mappings between LDAP Groups and Looker Roles
+
+        :param groups: The groups of this LDAPConfig.
+        :type: list[LDAPGroupRead]
+        """
+
+        self._groups = groups
+
+    @property
+    def groups_base_dn(self):
+        """
+        Gets the groups_base_dn of this LDAPConfig.
+        Base dn for finding groups in LDAP searches
+
+        :return: The groups_base_dn of this LDAPConfig.
         :rtype: str
         """
-        return self._auth_password
+        return self._groups_base_dn
 
-    @auth_password.setter
-    def auth_password(self, auth_password):
+    @groups_base_dn.setter
+    def groups_base_dn(self, groups_base_dn):
         """
-        Sets the auth_password of this LDAPConfig.
-        (Write-Only)  Password for the LDAP account used to access the LDAP server
+        Sets the groups_base_dn of this LDAPConfig.
+        Base dn for finding groups in LDAP searches
 
-        :param auth_password: The auth_password of this LDAPConfig.
+        :param groups_base_dn: The groups_base_dn of this LDAPConfig.
         :type: str
         """
 
-        self._auth_password = auth_password
+        self._groups_base_dn = groups_base_dn
+
+    @property
+    def groups_finder_type(self):
+        """
+        Gets the groups_finder_type of this LDAPConfig.
+        Identifier for a strategy for how Looker will search for groups in the LDAP server
+
+        :return: The groups_finder_type of this LDAPConfig.
+        :rtype: str
+        """
+        return self._groups_finder_type
+
+    @groups_finder_type.setter
+    def groups_finder_type(self, groups_finder_type):
+        """
+        Sets the groups_finder_type of this LDAPConfig.
+        Identifier for a strategy for how Looker will search for groups in the LDAP server
+
+        :param groups_finder_type: The groups_finder_type of this LDAPConfig.
+        :type: str
+        """
+
+        self._groups_finder_type = groups_finder_type
+
+    @property
+    def groups_member_attribute(self):
+        """
+        Gets the groups_member_attribute of this LDAPConfig.
+        LDAP Group attribute that signifies the members of the groups. Most commonly 'member'
+
+        :return: The groups_member_attribute of this LDAPConfig.
+        :rtype: str
+        """
+        return self._groups_member_attribute
+
+    @groups_member_attribute.setter
+    def groups_member_attribute(self, groups_member_attribute):
+        """
+        Sets the groups_member_attribute of this LDAPConfig.
+        LDAP Group attribute that signifies the members of the groups. Most commonly 'member'
+
+        :param groups_member_attribute: The groups_member_attribute of this LDAPConfig.
+        :type: str
+        """
+
+        self._groups_member_attribute = groups_member_attribute
+
+    @property
+    def groups_objectclasses(self):
+        """
+        Gets the groups_objectclasses of this LDAPConfig.
+        Optional comma-separated list of supported LDAP objectclass for groups when doing groups searches
+
+        :return: The groups_objectclasses of this LDAPConfig.
+        :rtype: str
+        """
+        return self._groups_objectclasses
+
+    @groups_objectclasses.setter
+    def groups_objectclasses(self, groups_objectclasses):
+        """
+        Sets the groups_objectclasses of this LDAPConfig.
+        Optional comma-separated list of supported LDAP objectclass for groups when doing groups searches
+
+        :param groups_objectclasses: The groups_objectclasses of this LDAPConfig.
+        :type: str
+        """
+
+        self._groups_objectclasses = groups_objectclasses
+
+    @property
+    def groups_user_attribute(self):
+        """
+        Gets the groups_user_attribute of this LDAPConfig.
+        LDAP Group attribute that signifies the user in a group. Most commonly 'dn'
+
+        :return: The groups_user_attribute of this LDAPConfig.
+        :rtype: str
+        """
+        return self._groups_user_attribute
+
+    @groups_user_attribute.setter
+    def groups_user_attribute(self, groups_user_attribute):
+        """
+        Sets the groups_user_attribute of this LDAPConfig.
+        LDAP Group attribute that signifies the user in a group. Most commonly 'dn'
+
+        :param groups_user_attribute: The groups_user_attribute of this LDAPConfig.
+        :type: str
+        """
+
+        self._groups_user_attribute = groups_user_attribute
+
+    @property
+    def groups_with_role_ids(self):
+        """
+        Gets the groups_with_role_ids of this LDAPConfig.
+        (Read/Write) Array of mappings between LDAP Groups and arrays of Looker Role ids
+
+        :return: The groups_with_role_ids of this LDAPConfig.
+        :rtype: list[LDAPGroupWrite]
+        """
+        return self._groups_with_role_ids
+
+    @groups_with_role_ids.setter
+    def groups_with_role_ids(self, groups_with_role_ids):
+        """
+        Sets the groups_with_role_ids of this LDAPConfig.
+        (Read/Write) Array of mappings between LDAP Groups and arrays of Looker Role ids
+
+        :param groups_with_role_ids: The groups_with_role_ids of this LDAPConfig.
+        :type: list[LDAPGroupWrite]
+        """
+
+        self._groups_with_role_ids = groups_with_role_ids
 
     @property
     def has_auth_password(self):
@@ -342,96 +664,142 @@ class LDAPConfig(object):
         self._has_auth_password = has_auth_password
 
     @property
-    def user_bind_base_dn(self):
+    def merge_new_users_by_email(self):
         """
-        Gets the user_bind_base_dn of this LDAPConfig.
-        Distinguished name of LDAP node used as the base for user searches
+        Gets the merge_new_users_by_email of this LDAPConfig.
+        Merge first-time ldap login to existing user account by email addresses. When a user logs in for the first time via ldap this option will connect this user into their existing account by finding the account with a matching email address. Otherwise a new user account will be created for the user.
 
-        :return: The user_bind_base_dn of this LDAPConfig.
-        :rtype: str
+        :return: The merge_new_users_by_email of this LDAPConfig.
+        :rtype: bool
         """
-        return self._user_bind_base_dn
+        return self._merge_new_users_by_email
 
-    @user_bind_base_dn.setter
-    def user_bind_base_dn(self, user_bind_base_dn):
+    @merge_new_users_by_email.setter
+    def merge_new_users_by_email(self, merge_new_users_by_email):
         """
-        Sets the user_bind_base_dn of this LDAPConfig.
-        Distinguished name of LDAP node used as the base for user searches
+        Sets the merge_new_users_by_email of this LDAPConfig.
+        Merge first-time ldap login to existing user account by email addresses. When a user logs in for the first time via ldap this option will connect this user into their existing account by finding the account with a matching email address. Otherwise a new user account will be created for the user.
 
-        :param user_bind_base_dn: The user_bind_base_dn of this LDAPConfig.
-        :type: str
+        :param merge_new_users_by_email: The merge_new_users_by_email of this LDAPConfig.
+        :type: bool
         """
 
-        self._user_bind_base_dn = user_bind_base_dn
+        self._merge_new_users_by_email = merge_new_users_by_email
 
     @property
-    def user_id_attribute_names(self):
+    def modified_at(self):
         """
-        Gets the user_id_attribute_names of this LDAPConfig.
-        Name(s) of user record attributes used for matching user login id (comma separated list)
+        Gets the modified_at of this LDAPConfig.
+        When this config was last modified
 
-        :return: The user_id_attribute_names of this LDAPConfig.
+        :return: The modified_at of this LDAPConfig.
         :rtype: str
         """
-        return self._user_id_attribute_names
+        return self._modified_at
 
-    @user_id_attribute_names.setter
-    def user_id_attribute_names(self, user_id_attribute_names):
+    @modified_at.setter
+    def modified_at(self, modified_at):
         """
-        Sets the user_id_attribute_names of this LDAPConfig.
-        Name(s) of user record attributes used for matching user login id (comma separated list)
+        Sets the modified_at of this LDAPConfig.
+        When this config was last modified
 
-        :param user_id_attribute_names: The user_id_attribute_names of this LDAPConfig.
+        :param modified_at: The modified_at of this LDAPConfig.
         :type: str
         """
 
-        self._user_id_attribute_names = user_id_attribute_names
+        self._modified_at = modified_at
 
     @property
-    def user_objectclass(self):
+    def modified_by(self):
         """
-        Gets the user_objectclass of this LDAPConfig.
-        (Optional) Name of user record objectclass used for finding user during login id
+        Gets the modified_by of this LDAPConfig.
+        User id of user who last modified this config
 
-        :return: The user_objectclass of this LDAPConfig.
+        :return: The modified_by of this LDAPConfig.
         :rtype: str
         """
-        return self._user_objectclass
+        return self._modified_by
 
-    @user_objectclass.setter
-    def user_objectclass(self, user_objectclass):
+    @modified_by.setter
+    def modified_by(self, modified_by):
         """
-        Sets the user_objectclass of this LDAPConfig.
-        (Optional) Name of user record objectclass used for finding user during login id
+        Sets the modified_by of this LDAPConfig.
+        User id of user who last modified this config
 
-        :param user_objectclass: The user_objectclass of this LDAPConfig.
+        :param modified_by: The modified_by of this LDAPConfig.
         :type: str
         """
 
-        self._user_objectclass = user_objectclass
+        self._modified_by = modified_by
 
     @property
-    def user_custom_filter(self):
+    def set_roles_from_groups(self):
         """
-        Gets the user_custom_filter of this LDAPConfig.
-        (Optional) Custom RFC-2254 filter clause for use in finding user during login. Combined via 'and' with the other generated filter clauses.
+        Gets the set_roles_from_groups of this LDAPConfig.
+        Set user roles in Looker based on groups from LDAP
 
-        :return: The user_custom_filter of this LDAPConfig.
+        :return: The set_roles_from_groups of this LDAPConfig.
+        :rtype: bool
+        """
+        return self._set_roles_from_groups
+
+    @set_roles_from_groups.setter
+    def set_roles_from_groups(self, set_roles_from_groups):
+        """
+        Sets the set_roles_from_groups of this LDAPConfig.
+        Set user roles in Looker based on groups from LDAP
+
+        :param set_roles_from_groups: The set_roles_from_groups of this LDAPConfig.
+        :type: bool
+        """
+
+        self._set_roles_from_groups = set_roles_from_groups
+
+    @property
+    def test_ldap_password(self):
+        """
+        Gets the test_ldap_password of this LDAPConfig.
+        (Write-Only)  Test LDAP user password. For ldap tests only.
+
+        :return: The test_ldap_password of this LDAPConfig.
         :rtype: str
         """
-        return self._user_custom_filter
+        return self._test_ldap_password
 
-    @user_custom_filter.setter
-    def user_custom_filter(self, user_custom_filter):
+    @test_ldap_password.setter
+    def test_ldap_password(self, test_ldap_password):
         """
-        Sets the user_custom_filter of this LDAPConfig.
-        (Optional) Custom RFC-2254 filter clause for use in finding user during login. Combined via 'and' with the other generated filter clauses.
+        Sets the test_ldap_password of this LDAPConfig.
+        (Write-Only)  Test LDAP user password. For ldap tests only.
 
-        :param user_custom_filter: The user_custom_filter of this LDAPConfig.
+        :param test_ldap_password: The test_ldap_password of this LDAPConfig.
         :type: str
         """
 
-        self._user_custom_filter = user_custom_filter
+        self._test_ldap_password = test_ldap_password
+
+    @property
+    def test_ldap_user(self):
+        """
+        Gets the test_ldap_user of this LDAPConfig.
+        (Write-Only)  Test LDAP user login id. For ldap tests only.
+
+        :return: The test_ldap_user of this LDAPConfig.
+        :rtype: str
+        """
+        return self._test_ldap_user
+
+    @test_ldap_user.setter
+    def test_ldap_user(self, test_ldap_user):
+        """
+        Sets the test_ldap_user of this LDAPConfig.
+        (Write-Only)  Test LDAP user login id. For ldap tests only.
+
+        :param test_ldap_user: The test_ldap_user of this LDAPConfig.
+        :type: str
+        """
+
+        self._test_ldap_user = test_ldap_user
 
     @property
     def user_attribute_map_email(self):
@@ -526,466 +894,6 @@ class LDAPConfig(object):
         self._user_attribute_map_ldap_id = user_attribute_map_ldap_id
 
     @property
-    def merge_new_users_by_email(self):
-        """
-        Gets the merge_new_users_by_email of this LDAPConfig.
-        Merge first-time ldap login to existing user account by email addresses. When a user logs in for the first time via ldap this option will connect this user into their existing account by finding the account with a matching email address. Otherwise a new user account will be created for the user.
-
-        :return: The merge_new_users_by_email of this LDAPConfig.
-        :rtype: bool
-        """
-        return self._merge_new_users_by_email
-
-    @merge_new_users_by_email.setter
-    def merge_new_users_by_email(self, merge_new_users_by_email):
-        """
-        Sets the merge_new_users_by_email of this LDAPConfig.
-        Merge first-time ldap login to existing user account by email addresses. When a user logs in for the first time via ldap this option will connect this user into their existing account by finding the account with a matching email address. Otherwise a new user account will be created for the user.
-
-        :param merge_new_users_by_email: The merge_new_users_by_email of this LDAPConfig.
-        :type: bool
-        """
-
-        self._merge_new_users_by_email = merge_new_users_by_email
-
-    @property
-    def alternate_email_login_allowed(self):
-        """
-        Gets the alternate_email_login_allowed of this LDAPConfig.
-        Allow alternate email-based login via '/login/email' for admins and for specified users with the 'login_special_email' permission. This option is useful as a fallback during ldap setup, if ldap config problems occur later, or if you need to support some users who are not in your ldap directory. Looker email/password logins are always disabled for regular users when ldap is enabled.
-
-        :return: The alternate_email_login_allowed of this LDAPConfig.
-        :rtype: bool
-        """
-        return self._alternate_email_login_allowed
-
-    @alternate_email_login_allowed.setter
-    def alternate_email_login_allowed(self, alternate_email_login_allowed):
-        """
-        Sets the alternate_email_login_allowed of this LDAPConfig.
-        Allow alternate email-based login via '/login/email' for admins and for specified users with the 'login_special_email' permission. This option is useful as a fallback during ldap setup, if ldap config problems occur later, or if you need to support some users who are not in your ldap directory. Looker email/password logins are always disabled for regular users when ldap is enabled.
-
-        :param alternate_email_login_allowed: The alternate_email_login_allowed of this LDAPConfig.
-        :type: bool
-        """
-
-        self._alternate_email_login_allowed = alternate_email_login_allowed
-
-    @property
-    def modified_at(self):
-        """
-        Gets the modified_at of this LDAPConfig.
-        When this config was last modified
-
-        :return: The modified_at of this LDAPConfig.
-        :rtype: str
-        """
-        return self._modified_at
-
-    @modified_at.setter
-    def modified_at(self, modified_at):
-        """
-        Sets the modified_at of this LDAPConfig.
-        When this config was last modified
-
-        :param modified_at: The modified_at of this LDAPConfig.
-        :type: str
-        """
-
-        self._modified_at = modified_at
-
-    @property
-    def modified_by(self):
-        """
-        Gets the modified_by of this LDAPConfig.
-        User id of user who last modified this config
-
-        :return: The modified_by of this LDAPConfig.
-        :rtype: str
-        """
-        return self._modified_by
-
-    @modified_by.setter
-    def modified_by(self, modified_by):
-        """
-        Sets the modified_by of this LDAPConfig.
-        User id of user who last modified this config
-
-        :param modified_by: The modified_by of this LDAPConfig.
-        :type: str
-        """
-
-        self._modified_by = modified_by
-
-    @property
-    def default_new_user_groups(self):
-        """
-        Gets the default_new_user_groups of this LDAPConfig.
-        (Read-only) Groups that will be applied to new users the first time they login via LDAP
-
-        :return: The default_new_user_groups of this LDAPConfig.
-        :rtype: list[Group]
-        """
-        return self._default_new_user_groups
-
-    @default_new_user_groups.setter
-    def default_new_user_groups(self, default_new_user_groups):
-        """
-        Sets the default_new_user_groups of this LDAPConfig.
-        (Read-only) Groups that will be applied to new users the first time they login via LDAP
-
-        :param default_new_user_groups: The default_new_user_groups of this LDAPConfig.
-        :type: list[Group]
-        """
-
-        self._default_new_user_groups = default_new_user_groups
-
-    @property
-    def default_new_user_roles(self):
-        """
-        Gets the default_new_user_roles of this LDAPConfig.
-        (Read-only) Roles that will be applied to new users the first time they login via LDAP
-
-        :return: The default_new_user_roles of this LDAPConfig.
-        :rtype: list[Role]
-        """
-        return self._default_new_user_roles
-
-    @default_new_user_roles.setter
-    def default_new_user_roles(self, default_new_user_roles):
-        """
-        Sets the default_new_user_roles of this LDAPConfig.
-        (Read-only) Roles that will be applied to new users the first time they login via LDAP
-
-        :param default_new_user_roles: The default_new_user_roles of this LDAPConfig.
-        :type: list[Role]
-        """
-
-        self._default_new_user_roles = default_new_user_roles
-
-    @property
-    def default_new_user_role_ids(self):
-        """
-        Gets the default_new_user_role_ids of this LDAPConfig.
-        (Write-Only)  Array of ids of roles that will be applied to new users the first time they login via LDAP
-
-        :return: The default_new_user_role_ids of this LDAPConfig.
-        :rtype: list[int]
-        """
-        return self._default_new_user_role_ids
-
-    @default_new_user_role_ids.setter
-    def default_new_user_role_ids(self, default_new_user_role_ids):
-        """
-        Sets the default_new_user_role_ids of this LDAPConfig.
-        (Write-Only)  Array of ids of roles that will be applied to new users the first time they login via LDAP
-
-        :param default_new_user_role_ids: The default_new_user_role_ids of this LDAPConfig.
-        :type: list[int]
-        """
-
-        self._default_new_user_role_ids = default_new_user_role_ids
-
-    @property
-    def default_new_user_group_ids(self):
-        """
-        Gets the default_new_user_group_ids of this LDAPConfig.
-        (Write-Only)  Array of ids of groups that will be applied to new users the first time they login via LDAP
-
-        :return: The default_new_user_group_ids of this LDAPConfig.
-        :rtype: list[int]
-        """
-        return self._default_new_user_group_ids
-
-    @default_new_user_group_ids.setter
-    def default_new_user_group_ids(self, default_new_user_group_ids):
-        """
-        Sets the default_new_user_group_ids of this LDAPConfig.
-        (Write-Only)  Array of ids of groups that will be applied to new users the first time they login via LDAP
-
-        :param default_new_user_group_ids: The default_new_user_group_ids of this LDAPConfig.
-        :type: list[int]
-        """
-
-        self._default_new_user_group_ids = default_new_user_group_ids
-
-    @property
-    def set_roles_from_groups(self):
-        """
-        Gets the set_roles_from_groups of this LDAPConfig.
-        Set user roles in Looker based on groups from LDAP
-
-        :return: The set_roles_from_groups of this LDAPConfig.
-        :rtype: bool
-        """
-        return self._set_roles_from_groups
-
-    @set_roles_from_groups.setter
-    def set_roles_from_groups(self, set_roles_from_groups):
-        """
-        Sets the set_roles_from_groups of this LDAPConfig.
-        Set user roles in Looker based on groups from LDAP
-
-        :param set_roles_from_groups: The set_roles_from_groups of this LDAPConfig.
-        :type: bool
-        """
-
-        self._set_roles_from_groups = set_roles_from_groups
-
-    @property
-    def groups(self):
-        """
-        Gets the groups of this LDAPConfig.
-        (Read-only) Array of mappings between LDAP Groups and Looker Roles
-
-        :return: The groups of this LDAPConfig.
-        :rtype: list[LDAPGroupRead]
-        """
-        return self._groups
-
-    @groups.setter
-    def groups(self, groups):
-        """
-        Sets the groups of this LDAPConfig.
-        (Read-only) Array of mappings between LDAP Groups and Looker Roles
-
-        :param groups: The groups of this LDAPConfig.
-        :type: list[LDAPGroupRead]
-        """
-
-        self._groups = groups
-
-    @property
-    def groups_with_role_ids(self):
-        """
-        Gets the groups_with_role_ids of this LDAPConfig.
-        (Read/Write) Array of mappings between LDAP Groups and arrays of Looker Role ids
-
-        :return: The groups_with_role_ids of this LDAPConfig.
-        :rtype: list[LDAPGroupWrite]
-        """
-        return self._groups_with_role_ids
-
-    @groups_with_role_ids.setter
-    def groups_with_role_ids(self, groups_with_role_ids):
-        """
-        Sets the groups_with_role_ids of this LDAPConfig.
-        (Read/Write) Array of mappings between LDAP Groups and arrays of Looker Role ids
-
-        :param groups_with_role_ids: The groups_with_role_ids of this LDAPConfig.
-        :type: list[LDAPGroupWrite]
-        """
-
-        self._groups_with_role_ids = groups_with_role_ids
-
-    @property
-    def auth_requires_role(self):
-        """
-        Gets the auth_requires_role of this LDAPConfig.
-        Users will not be allowed to login at all unless a role for them is found in LDAP if set to true
-
-        :return: The auth_requires_role of this LDAPConfig.
-        :rtype: bool
-        """
-        return self._auth_requires_role
-
-    @auth_requires_role.setter
-    def auth_requires_role(self, auth_requires_role):
-        """
-        Sets the auth_requires_role of this LDAPConfig.
-        Users will not be allowed to login at all unless a role for them is found in LDAP if set to true
-
-        :param auth_requires_role: The auth_requires_role of this LDAPConfig.
-        :type: bool
-        """
-
-        self._auth_requires_role = auth_requires_role
-
-    @property
-    def groups_finder_type(self):
-        """
-        Gets the groups_finder_type of this LDAPConfig.
-        Identifier for a strategy for how Looker will search for groups in the LDAP server
-
-        :return: The groups_finder_type of this LDAPConfig.
-        :rtype: str
-        """
-        return self._groups_finder_type
-
-    @groups_finder_type.setter
-    def groups_finder_type(self, groups_finder_type):
-        """
-        Sets the groups_finder_type of this LDAPConfig.
-        Identifier for a strategy for how Looker will search for groups in the LDAP server
-
-        :param groups_finder_type: The groups_finder_type of this LDAPConfig.
-        :type: str
-        """
-
-        self._groups_finder_type = groups_finder_type
-
-    @property
-    def groups_base_dn(self):
-        """
-        Gets the groups_base_dn of this LDAPConfig.
-        Base dn for finding groups in LDAP searches
-
-        :return: The groups_base_dn of this LDAPConfig.
-        :rtype: str
-        """
-        return self._groups_base_dn
-
-    @groups_base_dn.setter
-    def groups_base_dn(self, groups_base_dn):
-        """
-        Sets the groups_base_dn of this LDAPConfig.
-        Base dn for finding groups in LDAP searches
-
-        :param groups_base_dn: The groups_base_dn of this LDAPConfig.
-        :type: str
-        """
-
-        self._groups_base_dn = groups_base_dn
-
-    @property
-    def groups_member_attribute(self):
-        """
-        Gets the groups_member_attribute of this LDAPConfig.
-        LDAP Group attribute that signifies the members of the groups. Most commonly 'member'
-
-        :return: The groups_member_attribute of this LDAPConfig.
-        :rtype: str
-        """
-        return self._groups_member_attribute
-
-    @groups_member_attribute.setter
-    def groups_member_attribute(self, groups_member_attribute):
-        """
-        Sets the groups_member_attribute of this LDAPConfig.
-        LDAP Group attribute that signifies the members of the groups. Most commonly 'member'
-
-        :param groups_member_attribute: The groups_member_attribute of this LDAPConfig.
-        :type: str
-        """
-
-        self._groups_member_attribute = groups_member_attribute
-
-    @property
-    def groups_user_attribute(self):
-        """
-        Gets the groups_user_attribute of this LDAPConfig.
-        LDAP Group attribute that signifies the user in a group. Most commonly 'dn'
-
-        :return: The groups_user_attribute of this LDAPConfig.
-        :rtype: str
-        """
-        return self._groups_user_attribute
-
-    @groups_user_attribute.setter
-    def groups_user_attribute(self, groups_user_attribute):
-        """
-        Sets the groups_user_attribute of this LDAPConfig.
-        LDAP Group attribute that signifies the user in a group. Most commonly 'dn'
-
-        :param groups_user_attribute: The groups_user_attribute of this LDAPConfig.
-        :type: str
-        """
-
-        self._groups_user_attribute = groups_user_attribute
-
-    @property
-    def groups_objectclasses(self):
-        """
-        Gets the groups_objectclasses of this LDAPConfig.
-        Optional comma-separated list of supported LDAP objectclass for groups when doing groups searches
-
-        :return: The groups_objectclasses of this LDAPConfig.
-        :rtype: str
-        """
-        return self._groups_objectclasses
-
-    @groups_objectclasses.setter
-    def groups_objectclasses(self, groups_objectclasses):
-        """
-        Sets the groups_objectclasses of this LDAPConfig.
-        Optional comma-separated list of supported LDAP objectclass for groups when doing groups searches
-
-        :param groups_objectclasses: The groups_objectclasses of this LDAPConfig.
-        :type: str
-        """
-
-        self._groups_objectclasses = groups_objectclasses
-
-    @property
-    def force_no_page(self):
-        """
-        Gets the force_no_page of this LDAPConfig.
-        Don't attempt to do LDAP search result paging (RFC 2696) even if the LDAP server claims to support it.
-
-        :return: The force_no_page of this LDAPConfig.
-        :rtype: bool
-        """
-        return self._force_no_page
-
-    @force_no_page.setter
-    def force_no_page(self, force_no_page):
-        """
-        Sets the force_no_page of this LDAPConfig.
-        Don't attempt to do LDAP search result paging (RFC 2696) even if the LDAP server claims to support it.
-
-        :param force_no_page: The force_no_page of this LDAPConfig.
-        :type: bool
-        """
-
-        self._force_no_page = force_no_page
-
-    @property
-    def test_ldap_user(self):
-        """
-        Gets the test_ldap_user of this LDAPConfig.
-        (Write-Only)  Test LDAP user login id. For ldap tests only.
-
-        :return: The test_ldap_user of this LDAPConfig.
-        :rtype: str
-        """
-        return self._test_ldap_user
-
-    @test_ldap_user.setter
-    def test_ldap_user(self, test_ldap_user):
-        """
-        Sets the test_ldap_user of this LDAPConfig.
-        (Write-Only)  Test LDAP user login id. For ldap tests only.
-
-        :param test_ldap_user: The test_ldap_user of this LDAPConfig.
-        :type: str
-        """
-
-        self._test_ldap_user = test_ldap_user
-
-    @property
-    def test_ldap_password(self):
-        """
-        Gets the test_ldap_password of this LDAPConfig.
-        (Write-Only)  Test LDAP user password. For ldap tests only.
-
-        :return: The test_ldap_password of this LDAPConfig.
-        :rtype: str
-        """
-        return self._test_ldap_password
-
-    @test_ldap_password.setter
-    def test_ldap_password(self, test_ldap_password):
-        """
-        Sets the test_ldap_password of this LDAPConfig.
-        (Write-Only)  Test LDAP user password. For ldap tests only.
-
-        :param test_ldap_password: The test_ldap_password of this LDAPConfig.
-        :type: str
-        """
-
-        self._test_ldap_password = test_ldap_password
-
-    @property
     def user_attributes(self):
         """
         Gets the user_attributes of this LDAPConfig.
@@ -1030,6 +938,98 @@ class LDAPConfig(object):
         """
 
         self._user_attributes_with_ids = user_attributes_with_ids
+
+    @property
+    def user_bind_base_dn(self):
+        """
+        Gets the user_bind_base_dn of this LDAPConfig.
+        Distinguished name of LDAP node used as the base for user searches
+
+        :return: The user_bind_base_dn of this LDAPConfig.
+        :rtype: str
+        """
+        return self._user_bind_base_dn
+
+    @user_bind_base_dn.setter
+    def user_bind_base_dn(self, user_bind_base_dn):
+        """
+        Sets the user_bind_base_dn of this LDAPConfig.
+        Distinguished name of LDAP node used as the base for user searches
+
+        :param user_bind_base_dn: The user_bind_base_dn of this LDAPConfig.
+        :type: str
+        """
+
+        self._user_bind_base_dn = user_bind_base_dn
+
+    @property
+    def user_custom_filter(self):
+        """
+        Gets the user_custom_filter of this LDAPConfig.
+        (Optional) Custom RFC-2254 filter clause for use in finding user during login. Combined via 'and' with the other generated filter clauses.
+
+        :return: The user_custom_filter of this LDAPConfig.
+        :rtype: str
+        """
+        return self._user_custom_filter
+
+    @user_custom_filter.setter
+    def user_custom_filter(self, user_custom_filter):
+        """
+        Sets the user_custom_filter of this LDAPConfig.
+        (Optional) Custom RFC-2254 filter clause for use in finding user during login. Combined via 'and' with the other generated filter clauses.
+
+        :param user_custom_filter: The user_custom_filter of this LDAPConfig.
+        :type: str
+        """
+
+        self._user_custom_filter = user_custom_filter
+
+    @property
+    def user_id_attribute_names(self):
+        """
+        Gets the user_id_attribute_names of this LDAPConfig.
+        Name(s) of user record attributes used for matching user login id (comma separated list)
+
+        :return: The user_id_attribute_names of this LDAPConfig.
+        :rtype: str
+        """
+        return self._user_id_attribute_names
+
+    @user_id_attribute_names.setter
+    def user_id_attribute_names(self, user_id_attribute_names):
+        """
+        Sets the user_id_attribute_names of this LDAPConfig.
+        Name(s) of user record attributes used for matching user login id (comma separated list)
+
+        :param user_id_attribute_names: The user_id_attribute_names of this LDAPConfig.
+        :type: str
+        """
+
+        self._user_id_attribute_names = user_id_attribute_names
+
+    @property
+    def user_objectclass(self):
+        """
+        Gets the user_objectclass of this LDAPConfig.
+        (Optional) Name of user record objectclass used for finding user during login id
+
+        :return: The user_objectclass of this LDAPConfig.
+        :rtype: str
+        """
+        return self._user_objectclass
+
+    @user_objectclass.setter
+    def user_objectclass(self, user_objectclass):
+        """
+        Sets the user_objectclass of this LDAPConfig.
+        (Optional) Name of user record objectclass used for finding user during login id
+
+        :param user_objectclass: The user_objectclass of this LDAPConfig.
+        :type: str
+        """
+
+        self._user_objectclass = user_objectclass
 
     @property
     def url(self):

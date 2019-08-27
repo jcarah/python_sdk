@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class LookWithQuery(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, id=None, content_metadata_id=None, view_count=None, favorite_count=None, content_favorite_id=None, title=None, user=None, query_id=None, description=None, short_url=None, space=None, public=None, public_slug=None, user_id=None, space_id=None, model=None, public_url=None, embed_url=None, google_spreadsheet_formula=None, excel_file_url=None, url=None, query=None, created_at=None, updated_at=None, deleted_at=None, last_updater_id=None, last_viewed_at=None, last_accessed_at=None, deleter_id=None, deleted=None, is_run_on_load=None, can=None):
+    def __init__(self, content_metadata_id=None, id=None, title=None, content_favorite_id=None, created_at=None, deleted=None, deleted_at=None, deleter_id=None, description=None, embed_url=None, excel_file_url=None, favorite_count=None, google_spreadsheet_formula=None, image_embed_url=None, is_run_on_load=None, last_accessed_at=None, last_updater_id=None, last_viewed_at=None, model=None, public=None, public_slug=None, public_url=None, query_id=None, short_url=None, space=None, space_id=None, updated_at=None, user=None, user_id=None, view_count=None, query=None, url=None, can=None):
         """
         LookWithQuery - a model defined in Swagger
 
@@ -31,130 +31,110 @@ class LookWithQuery(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'id': 'str',
             'content_metadata_id': 'int',
-            'view_count': 'int',
-            'favorite_count': 'int',
-            'content_favorite_id': 'int',
+            'id': 'int',
             'title': 'str',
-            'user': 'UserIdOnly',
-            'query_id': 'int',
-            'description': 'str',
-            'short_url': 'str',
-            'space': 'SpaceBase',
-            'public': 'bool',
-            'public_slug': 'str',
-            'user_id': 'int',
-            'space_id': 'str',
-            'model': 'LookModel',
-            'public_url': 'str',
-            'embed_url': 'str',
-            'google_spreadsheet_formula': 'str',
-            'excel_file_url': 'str',
-            'url': 'str',
-            'query': 'Query',
+            'content_favorite_id': 'int',
             'created_at': 'datetime',
-            'updated_at': 'datetime',
+            'deleted': 'bool',
             'deleted_at': 'datetime',
+            'deleter_id': 'int',
+            'description': 'str',
+            'embed_url': 'str',
+            'excel_file_url': 'str',
+            'favorite_count': 'int',
+            'google_spreadsheet_formula': 'str',
+            'image_embed_url': 'str',
+            'is_run_on_load': 'bool',
+            'last_accessed_at': 'datetime',
             'last_updater_id': 'int',
             'last_viewed_at': 'datetime',
-            'last_accessed_at': 'datetime',
-            'deleter_id': 'int',
-            'deleted': 'bool',
-            'is_run_on_load': 'bool',
+            'model': 'LookModel',
+            'public': 'bool',
+            'public_slug': 'str',
+            'public_url': 'str',
+            'query_id': 'int',
+            'short_url': 'str',
+            'space': 'SpaceBase',
+            'space_id': 'str',
+            'updated_at': 'datetime',
+            'user': 'UserIdOnly',
+            'user_id': 'int',
+            'view_count': 'int',
+            'query': 'Query',
+            'url': 'str',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
-            'id': 'id',
             'content_metadata_id': 'content_metadata_id',
-            'view_count': 'view_count',
-            'favorite_count': 'favorite_count',
-            'content_favorite_id': 'content_favorite_id',
+            'id': 'id',
             'title': 'title',
-            'user': 'user',
-            'query_id': 'query_id',
-            'description': 'description',
-            'short_url': 'short_url',
-            'space': 'space',
-            'public': 'public',
-            'public_slug': 'public_slug',
-            'user_id': 'user_id',
-            'space_id': 'space_id',
-            'model': 'model',
-            'public_url': 'public_url',
-            'embed_url': 'embed_url',
-            'google_spreadsheet_formula': 'google_spreadsheet_formula',
-            'excel_file_url': 'excel_file_url',
-            'url': 'url',
-            'query': 'query',
+            'content_favorite_id': 'content_favorite_id',
             'created_at': 'created_at',
-            'updated_at': 'updated_at',
+            'deleted': 'deleted',
             'deleted_at': 'deleted_at',
+            'deleter_id': 'deleter_id',
+            'description': 'description',
+            'embed_url': 'embed_url',
+            'excel_file_url': 'excel_file_url',
+            'favorite_count': 'favorite_count',
+            'google_spreadsheet_formula': 'google_spreadsheet_formula',
+            'image_embed_url': 'image_embed_url',
+            'is_run_on_load': 'is_run_on_load',
+            'last_accessed_at': 'last_accessed_at',
             'last_updater_id': 'last_updater_id',
             'last_viewed_at': 'last_viewed_at',
-            'last_accessed_at': 'last_accessed_at',
-            'deleter_id': 'deleter_id',
-            'deleted': 'deleted',
-            'is_run_on_load': 'is_run_on_load',
+            'model': 'model',
+            'public': 'public',
+            'public_slug': 'public_slug',
+            'public_url': 'public_url',
+            'query_id': 'query_id',
+            'short_url': 'short_url',
+            'space': 'space',
+            'space_id': 'space_id',
+            'updated_at': 'updated_at',
+            'user': 'user',
+            'user_id': 'user_id',
+            'view_count': 'view_count',
+            'query': 'query',
+            'url': 'url',
             'can': 'can'
         }
 
-        self._id = id
         self._content_metadata_id = content_metadata_id
-        self._view_count = view_count
-        self._favorite_count = favorite_count
-        self._content_favorite_id = content_favorite_id
+        self._id = id
         self._title = title
-        self._user = user
-        self._query_id = query_id
-        self._description = description
-        self._short_url = short_url
-        self._space = space
-        self._public = public
-        self._public_slug = public_slug
-        self._user_id = user_id
-        self._space_id = space_id
-        self._model = model
-        self._public_url = public_url
-        self._embed_url = embed_url
-        self._google_spreadsheet_formula = google_spreadsheet_formula
-        self._excel_file_url = excel_file_url
-        self._url = url
-        self._query = query
+        self._content_favorite_id = content_favorite_id
         self._created_at = created_at
-        self._updated_at = updated_at
+        self._deleted = deleted
         self._deleted_at = deleted_at
+        self._deleter_id = deleter_id
+        self._description = description
+        self._embed_url = embed_url
+        self._excel_file_url = excel_file_url
+        self._favorite_count = favorite_count
+        self._google_spreadsheet_formula = google_spreadsheet_formula
+        self._image_embed_url = image_embed_url
+        self._is_run_on_load = is_run_on_load
+        self._last_accessed_at = last_accessed_at
         self._last_updater_id = last_updater_id
         self._last_viewed_at = last_viewed_at
-        self._last_accessed_at = last_accessed_at
-        self._deleter_id = deleter_id
-        self._deleted = deleted
-        self._is_run_on_load = is_run_on_load
+        self._model = model
+        self._public = public
+        self._public_slug = public_slug
+        self._public_url = public_url
+        self._query_id = query_id
+        self._short_url = short_url
+        self._space = space
+        self._space_id = space_id
+        self._updated_at = updated_at
+        self._user = user
+        self._user_id = user_id
+        self._view_count = view_count
+        self._query = query
+        self._url = url
         self._can = can
-
-    @property
-    def id(self):
-        """
-        Gets the id of this LookWithQuery.
-        Unique Id
-
-        :return: The id of this LookWithQuery.
-        :rtype: str
-        """
-        return self._id
-
-    @id.setter
-    def id(self, id):
-        """
-        Sets the id of this LookWithQuery.
-        Unique Id
-
-        :param id: The id of this LookWithQuery.
-        :type: str
-        """
-
-        self._id = id
 
     @property
     def content_metadata_id(self):
@@ -180,73 +160,27 @@ class LookWithQuery(object):
         self._content_metadata_id = content_metadata_id
 
     @property
-    def view_count(self):
+    def id(self):
         """
-        Gets the view_count of this LookWithQuery.
-        Number of times viewed in the Looker web UI
+        Gets the id of this LookWithQuery.
+        Unique Id
 
-        :return: The view_count of this LookWithQuery.
+        :return: The id of this LookWithQuery.
         :rtype: int
         """
-        return self._view_count
+        return self._id
 
-    @view_count.setter
-    def view_count(self, view_count):
+    @id.setter
+    def id(self, id):
         """
-        Sets the view_count of this LookWithQuery.
-        Number of times viewed in the Looker web UI
+        Sets the id of this LookWithQuery.
+        Unique Id
 
-        :param view_count: The view_count of this LookWithQuery.
+        :param id: The id of this LookWithQuery.
         :type: int
         """
 
-        self._view_count = view_count
-
-    @property
-    def favorite_count(self):
-        """
-        Gets the favorite_count of this LookWithQuery.
-        Number of times favorited
-
-        :return: The favorite_count of this LookWithQuery.
-        :rtype: int
-        """
-        return self._favorite_count
-
-    @favorite_count.setter
-    def favorite_count(self, favorite_count):
-        """
-        Sets the favorite_count of this LookWithQuery.
-        Number of times favorited
-
-        :param favorite_count: The favorite_count of this LookWithQuery.
-        :type: int
-        """
-
-        self._favorite_count = favorite_count
-
-    @property
-    def content_favorite_id(self):
-        """
-        Gets the content_favorite_id of this LookWithQuery.
-        Content Favorite Id
-
-        :return: The content_favorite_id of this LookWithQuery.
-        :rtype: int
-        """
-        return self._content_favorite_id
-
-    @content_favorite_id.setter
-    def content_favorite_id(self, content_favorite_id):
-        """
-        Sets the content_favorite_id of this LookWithQuery.
-        Content Favorite Id
-
-        :param content_favorite_id: The content_favorite_id of this LookWithQuery.
-        :type: int
-        """
-
-        self._content_favorite_id = content_favorite_id
+        self._id = id
 
     @property
     def title(self):
@@ -272,372 +206,27 @@ class LookWithQuery(object):
         self._title = title
 
     @property
-    def user(self):
+    def content_favorite_id(self):
         """
-        Gets the user of this LookWithQuery.
-        User
+        Gets the content_favorite_id of this LookWithQuery.
+        Content Favorite Id
 
-        :return: The user of this LookWithQuery.
-        :rtype: UserIdOnly
-        """
-        return self._user
-
-    @user.setter
-    def user(self, user):
-        """
-        Sets the user of this LookWithQuery.
-        User
-
-        :param user: The user of this LookWithQuery.
-        :type: UserIdOnly
-        """
-
-        self._user = user
-
-    @property
-    def query_id(self):
-        """
-        Gets the query_id of this LookWithQuery.
-        Query Id
-
-        :return: The query_id of this LookWithQuery.
+        :return: The content_favorite_id of this LookWithQuery.
         :rtype: int
         """
-        return self._query_id
+        return self._content_favorite_id
 
-    @query_id.setter
-    def query_id(self, query_id):
+    @content_favorite_id.setter
+    def content_favorite_id(self, content_favorite_id):
         """
-        Sets the query_id of this LookWithQuery.
-        Query Id
+        Sets the content_favorite_id of this LookWithQuery.
+        Content Favorite Id
 
-        :param query_id: The query_id of this LookWithQuery.
+        :param content_favorite_id: The content_favorite_id of this LookWithQuery.
         :type: int
         """
 
-        self._query_id = query_id
-
-    @property
-    def description(self):
-        """
-        Gets the description of this LookWithQuery.
-        Description
-
-        :return: The description of this LookWithQuery.
-        :rtype: str
-        """
-        return self._description
-
-    @description.setter
-    def description(self, description):
-        """
-        Sets the description of this LookWithQuery.
-        Description
-
-        :param description: The description of this LookWithQuery.
-        :type: str
-        """
-
-        self._description = description
-
-    @property
-    def short_url(self):
-        """
-        Gets the short_url of this LookWithQuery.
-        Short Url
-
-        :return: The short_url of this LookWithQuery.
-        :rtype: str
-        """
-        return self._short_url
-
-    @short_url.setter
-    def short_url(self, short_url):
-        """
-        Sets the short_url of this LookWithQuery.
-        Short Url
-
-        :param short_url: The short_url of this LookWithQuery.
-        :type: str
-        """
-
-        self._short_url = short_url
-
-    @property
-    def space(self):
-        """
-        Gets the space of this LookWithQuery.
-        Space of this Look
-
-        :return: The space of this LookWithQuery.
-        :rtype: SpaceBase
-        """
-        return self._space
-
-    @space.setter
-    def space(self, space):
-        """
-        Sets the space of this LookWithQuery.
-        Space of this Look
-
-        :param space: The space of this LookWithQuery.
-        :type: SpaceBase
-        """
-
-        self._space = space
-
-    @property
-    def public(self):
-        """
-        Gets the public of this LookWithQuery.
-        Is Public
-
-        :return: The public of this LookWithQuery.
-        :rtype: bool
-        """
-        return self._public
-
-    @public.setter
-    def public(self, public):
-        """
-        Sets the public of this LookWithQuery.
-        Is Public
-
-        :param public: The public of this LookWithQuery.
-        :type: bool
-        """
-
-        self._public = public
-
-    @property
-    def public_slug(self):
-        """
-        Gets the public_slug of this LookWithQuery.
-        Public Slug
-
-        :return: The public_slug of this LookWithQuery.
-        :rtype: str
-        """
-        return self._public_slug
-
-    @public_slug.setter
-    def public_slug(self, public_slug):
-        """
-        Sets the public_slug of this LookWithQuery.
-        Public Slug
-
-        :param public_slug: The public_slug of this LookWithQuery.
-        :type: str
-        """
-
-        self._public_slug = public_slug
-
-    @property
-    def user_id(self):
-        """
-        Gets the user_id of this LookWithQuery.
-        (Write-Only) User Id
-
-        :return: The user_id of this LookWithQuery.
-        :rtype: int
-        """
-        return self._user_id
-
-    @user_id.setter
-    def user_id(self, user_id):
-        """
-        Sets the user_id of this LookWithQuery.
-        (Write-Only) User Id
-
-        :param user_id: The user_id of this LookWithQuery.
-        :type: int
-        """
-
-        self._user_id = user_id
-
-    @property
-    def space_id(self):
-        """
-        Gets the space_id of this LookWithQuery.
-        (Write-Only) Space Id
-
-        :return: The space_id of this LookWithQuery.
-        :rtype: str
-        """
-        return self._space_id
-
-    @space_id.setter
-    def space_id(self, space_id):
-        """
-        Sets the space_id of this LookWithQuery.
-        (Write-Only) Space Id
-
-        :param space_id: The space_id of this LookWithQuery.
-        :type: str
-        """
-
-        self._space_id = space_id
-
-    @property
-    def model(self):
-        """
-        Gets the model of this LookWithQuery.
-        Model
-
-        :return: The model of this LookWithQuery.
-        :rtype: LookModel
-        """
-        return self._model
-
-    @model.setter
-    def model(self, model):
-        """
-        Sets the model of this LookWithQuery.
-        Model
-
-        :param model: The model of this LookWithQuery.
-        :type: LookModel
-        """
-
-        self._model = model
-
-    @property
-    def public_url(self):
-        """
-        Gets the public_url of this LookWithQuery.
-        Public Url
-
-        :return: The public_url of this LookWithQuery.
-        :rtype: str
-        """
-        return self._public_url
-
-    @public_url.setter
-    def public_url(self, public_url):
-        """
-        Sets the public_url of this LookWithQuery.
-        Public Url
-
-        :param public_url: The public_url of this LookWithQuery.
-        :type: str
-        """
-
-        self._public_url = public_url
-
-    @property
-    def embed_url(self):
-        """
-        Gets the embed_url of this LookWithQuery.
-        Embed Url
-
-        :return: The embed_url of this LookWithQuery.
-        :rtype: str
-        """
-        return self._embed_url
-
-    @embed_url.setter
-    def embed_url(self, embed_url):
-        """
-        Sets the embed_url of this LookWithQuery.
-        Embed Url
-
-        :param embed_url: The embed_url of this LookWithQuery.
-        :type: str
-        """
-
-        self._embed_url = embed_url
-
-    @property
-    def google_spreadsheet_formula(self):
-        """
-        Gets the google_spreadsheet_formula of this LookWithQuery.
-        Google Spreadsheet Formula
-
-        :return: The google_spreadsheet_formula of this LookWithQuery.
-        :rtype: str
-        """
-        return self._google_spreadsheet_formula
-
-    @google_spreadsheet_formula.setter
-    def google_spreadsheet_formula(self, google_spreadsheet_formula):
-        """
-        Sets the google_spreadsheet_formula of this LookWithQuery.
-        Google Spreadsheet Formula
-
-        :param google_spreadsheet_formula: The google_spreadsheet_formula of this LookWithQuery.
-        :type: str
-        """
-
-        self._google_spreadsheet_formula = google_spreadsheet_formula
-
-    @property
-    def excel_file_url(self):
-        """
-        Gets the excel_file_url of this LookWithQuery.
-        Excel File Url
-
-        :return: The excel_file_url of this LookWithQuery.
-        :rtype: str
-        """
-        return self._excel_file_url
-
-    @excel_file_url.setter
-    def excel_file_url(self, excel_file_url):
-        """
-        Sets the excel_file_url of this LookWithQuery.
-        Excel File Url
-
-        :param excel_file_url: The excel_file_url of this LookWithQuery.
-        :type: str
-        """
-
-        self._excel_file_url = excel_file_url
-
-    @property
-    def url(self):
-        """
-        Gets the url of this LookWithQuery.
-        Url
-
-        :return: The url of this LookWithQuery.
-        :rtype: str
-        """
-        return self._url
-
-    @url.setter
-    def url(self, url):
-        """
-        Sets the url of this LookWithQuery.
-        Url
-
-        :param url: The url of this LookWithQuery.
-        :type: str
-        """
-
-        self._url = url
-
-    @property
-    def query(self):
-        """
-        Gets the query of this LookWithQuery.
-        Query
-
-        :return: The query of this LookWithQuery.
-        :rtype: Query
-        """
-        return self._query
-
-    @query.setter
-    def query(self, query):
-        """
-        Sets the query of this LookWithQuery.
-        Query
-
-        :param query: The query of this LookWithQuery.
-        :type: Query
-        """
-
-        self._query = query
+        self._content_favorite_id = content_favorite_id
 
     @property
     def created_at(self):
@@ -663,27 +252,27 @@ class LookWithQuery(object):
         self._created_at = created_at
 
     @property
-    def updated_at(self):
+    def deleted(self):
         """
-        Gets the updated_at of this LookWithQuery.
-        Time that the Look was updated.
+        Gets the deleted of this LookWithQuery.
+        Whether or not a look is 'soft' deleted.
 
-        :return: The updated_at of this LookWithQuery.
-        :rtype: datetime
+        :return: The deleted of this LookWithQuery.
+        :rtype: bool
         """
-        return self._updated_at
+        return self._deleted
 
-    @updated_at.setter
-    def updated_at(self, updated_at):
+    @deleted.setter
+    def deleted(self, deleted):
         """
-        Sets the updated_at of this LookWithQuery.
-        Time that the Look was updated.
+        Sets the deleted of this LookWithQuery.
+        Whether or not a look is 'soft' deleted.
 
-        :param updated_at: The updated_at of this LookWithQuery.
-        :type: datetime
+        :param deleted: The deleted of this LookWithQuery.
+        :type: bool
         """
 
-        self._updated_at = updated_at
+        self._deleted = deleted
 
     @property
     def deleted_at(self):
@@ -707,6 +296,213 @@ class LookWithQuery(object):
         """
 
         self._deleted_at = deleted_at
+
+    @property
+    def deleter_id(self):
+        """
+        Gets the deleter_id of this LookWithQuery.
+        Id of User that deleted the look.
+
+        :return: The deleter_id of this LookWithQuery.
+        :rtype: int
+        """
+        return self._deleter_id
+
+    @deleter_id.setter
+    def deleter_id(self, deleter_id):
+        """
+        Sets the deleter_id of this LookWithQuery.
+        Id of User that deleted the look.
+
+        :param deleter_id: The deleter_id of this LookWithQuery.
+        :type: int
+        """
+
+        self._deleter_id = deleter_id
+
+    @property
+    def description(self):
+        """
+        Gets the description of this LookWithQuery.
+        Description
+
+        :return: The description of this LookWithQuery.
+        :rtype: str
+        """
+        return self._description
+
+    @description.setter
+    def description(self, description):
+        """
+        Sets the description of this LookWithQuery.
+        Description
+
+        :param description: The description of this LookWithQuery.
+        :type: str
+        """
+
+        self._description = description
+
+    @property
+    def embed_url(self):
+        """
+        Gets the embed_url of this LookWithQuery.
+        Embed Url
+
+        :return: The embed_url of this LookWithQuery.
+        :rtype: str
+        """
+        return self._embed_url
+
+    @embed_url.setter
+    def embed_url(self, embed_url):
+        """
+        Sets the embed_url of this LookWithQuery.
+        Embed Url
+
+        :param embed_url: The embed_url of this LookWithQuery.
+        :type: str
+        """
+
+        self._embed_url = embed_url
+
+    @property
+    def excel_file_url(self):
+        """
+        Gets the excel_file_url of this LookWithQuery.
+        Excel File Url
+
+        :return: The excel_file_url of this LookWithQuery.
+        :rtype: str
+        """
+        return self._excel_file_url
+
+    @excel_file_url.setter
+    def excel_file_url(self, excel_file_url):
+        """
+        Sets the excel_file_url of this LookWithQuery.
+        Excel File Url
+
+        :param excel_file_url: The excel_file_url of this LookWithQuery.
+        :type: str
+        """
+
+        self._excel_file_url = excel_file_url
+
+    @property
+    def favorite_count(self):
+        """
+        Gets the favorite_count of this LookWithQuery.
+        Number of times favorited
+
+        :return: The favorite_count of this LookWithQuery.
+        :rtype: int
+        """
+        return self._favorite_count
+
+    @favorite_count.setter
+    def favorite_count(self, favorite_count):
+        """
+        Sets the favorite_count of this LookWithQuery.
+        Number of times favorited
+
+        :param favorite_count: The favorite_count of this LookWithQuery.
+        :type: int
+        """
+
+        self._favorite_count = favorite_count
+
+    @property
+    def google_spreadsheet_formula(self):
+        """
+        Gets the google_spreadsheet_formula of this LookWithQuery.
+        Google Spreadsheet Formula
+
+        :return: The google_spreadsheet_formula of this LookWithQuery.
+        :rtype: str
+        """
+        return self._google_spreadsheet_formula
+
+    @google_spreadsheet_formula.setter
+    def google_spreadsheet_formula(self, google_spreadsheet_formula):
+        """
+        Sets the google_spreadsheet_formula of this LookWithQuery.
+        Google Spreadsheet Formula
+
+        :param google_spreadsheet_formula: The google_spreadsheet_formula of this LookWithQuery.
+        :type: str
+        """
+
+        self._google_spreadsheet_formula = google_spreadsheet_formula
+
+    @property
+    def image_embed_url(self):
+        """
+        Gets the image_embed_url of this LookWithQuery.
+        Image Embed Url
+
+        :return: The image_embed_url of this LookWithQuery.
+        :rtype: str
+        """
+        return self._image_embed_url
+
+    @image_embed_url.setter
+    def image_embed_url(self, image_embed_url):
+        """
+        Sets the image_embed_url of this LookWithQuery.
+        Image Embed Url
+
+        :param image_embed_url: The image_embed_url of this LookWithQuery.
+        :type: str
+        """
+
+        self._image_embed_url = image_embed_url
+
+    @property
+    def is_run_on_load(self):
+        """
+        Gets the is_run_on_load of this LookWithQuery.
+        auto-run query when Look viewed
+
+        :return: The is_run_on_load of this LookWithQuery.
+        :rtype: bool
+        """
+        return self._is_run_on_load
+
+    @is_run_on_load.setter
+    def is_run_on_load(self, is_run_on_load):
+        """
+        Sets the is_run_on_load of this LookWithQuery.
+        auto-run query when Look viewed
+
+        :param is_run_on_load: The is_run_on_load of this LookWithQuery.
+        :type: bool
+        """
+
+        self._is_run_on_load = is_run_on_load
+
+    @property
+    def last_accessed_at(self):
+        """
+        Gets the last_accessed_at of this LookWithQuery.
+        Time that the Look was last accessed by any user
+
+        :return: The last_accessed_at of this LookWithQuery.
+        :rtype: datetime
+        """
+        return self._last_accessed_at
+
+    @last_accessed_at.setter
+    def last_accessed_at(self, last_accessed_at):
+        """
+        Sets the last_accessed_at of this LookWithQuery.
+        Time that the Look was last accessed by any user
+
+        :param last_accessed_at: The last_accessed_at of this LookWithQuery.
+        :type: datetime
+        """
+
+        self._last_accessed_at = last_accessed_at
 
     @property
     def last_updater_id(self):
@@ -755,96 +551,326 @@ class LookWithQuery(object):
         self._last_viewed_at = last_viewed_at
 
     @property
-    def last_accessed_at(self):
+    def model(self):
         """
-        Gets the last_accessed_at of this LookWithQuery.
-        Time that the Look was last accessed by any user
+        Gets the model of this LookWithQuery.
+        Model
 
-        :return: The last_accessed_at of this LookWithQuery.
-        :rtype: datetime
+        :return: The model of this LookWithQuery.
+        :rtype: LookModel
         """
-        return self._last_accessed_at
+        return self._model
 
-    @last_accessed_at.setter
-    def last_accessed_at(self, last_accessed_at):
+    @model.setter
+    def model(self, model):
         """
-        Sets the last_accessed_at of this LookWithQuery.
-        Time that the Look was last accessed by any user
+        Sets the model of this LookWithQuery.
+        Model
 
-        :param last_accessed_at: The last_accessed_at of this LookWithQuery.
-        :type: datetime
+        :param model: The model of this LookWithQuery.
+        :type: LookModel
         """
 
-        self._last_accessed_at = last_accessed_at
+        self._model = model
 
     @property
-    def deleter_id(self):
+    def public(self):
         """
-        Gets the deleter_id of this LookWithQuery.
-        Id of User that deleted the look.
+        Gets the public of this LookWithQuery.
+        Is Public
 
-        :return: The deleter_id of this LookWithQuery.
+        :return: The public of this LookWithQuery.
+        :rtype: bool
+        """
+        return self._public
+
+    @public.setter
+    def public(self, public):
+        """
+        Sets the public of this LookWithQuery.
+        Is Public
+
+        :param public: The public of this LookWithQuery.
+        :type: bool
+        """
+
+        self._public = public
+
+    @property
+    def public_slug(self):
+        """
+        Gets the public_slug of this LookWithQuery.
+        Public Slug
+
+        :return: The public_slug of this LookWithQuery.
+        :rtype: str
+        """
+        return self._public_slug
+
+    @public_slug.setter
+    def public_slug(self, public_slug):
+        """
+        Sets the public_slug of this LookWithQuery.
+        Public Slug
+
+        :param public_slug: The public_slug of this LookWithQuery.
+        :type: str
+        """
+
+        self._public_slug = public_slug
+
+    @property
+    def public_url(self):
+        """
+        Gets the public_url of this LookWithQuery.
+        Public Url
+
+        :return: The public_url of this LookWithQuery.
+        :rtype: str
+        """
+        return self._public_url
+
+    @public_url.setter
+    def public_url(self, public_url):
+        """
+        Sets the public_url of this LookWithQuery.
+        Public Url
+
+        :param public_url: The public_url of this LookWithQuery.
+        :type: str
+        """
+
+        self._public_url = public_url
+
+    @property
+    def query_id(self):
+        """
+        Gets the query_id of this LookWithQuery.
+        Query Id
+
+        :return: The query_id of this LookWithQuery.
         :rtype: int
         """
-        return self._deleter_id
+        return self._query_id
 
-    @deleter_id.setter
-    def deleter_id(self, deleter_id):
+    @query_id.setter
+    def query_id(self, query_id):
         """
-        Sets the deleter_id of this LookWithQuery.
-        Id of User that deleted the look.
+        Sets the query_id of this LookWithQuery.
+        Query Id
 
-        :param deleter_id: The deleter_id of this LookWithQuery.
+        :param query_id: The query_id of this LookWithQuery.
         :type: int
         """
 
-        self._deleter_id = deleter_id
+        self._query_id = query_id
 
     @property
-    def deleted(self):
+    def short_url(self):
         """
-        Gets the deleted of this LookWithQuery.
-        Whether or not the look is deleted
+        Gets the short_url of this LookWithQuery.
+        Short Url
 
-        :return: The deleted of this LookWithQuery.
-        :rtype: bool
+        :return: The short_url of this LookWithQuery.
+        :rtype: str
         """
-        return self._deleted
+        return self._short_url
 
-    @deleted.setter
-    def deleted(self, deleted):
+    @short_url.setter
+    def short_url(self, short_url):
         """
-        Sets the deleted of this LookWithQuery.
-        Whether or not the look is deleted
+        Sets the short_url of this LookWithQuery.
+        Short Url
 
-        :param deleted: The deleted of this LookWithQuery.
-        :type: bool
+        :param short_url: The short_url of this LookWithQuery.
+        :type: str
         """
 
-        self._deleted = deleted
+        self._short_url = short_url
 
     @property
-    def is_run_on_load(self):
+    def space(self):
         """
-        Gets the is_run_on_load of this LookWithQuery.
-        auto-run query when Look viewed
+        Gets the space of this LookWithQuery.
+        Space of this Look
 
-        :return: The is_run_on_load of this LookWithQuery.
-        :rtype: bool
+        :return: The space of this LookWithQuery.
+        :rtype: SpaceBase
         """
-        return self._is_run_on_load
+        return self._space
 
-    @is_run_on_load.setter
-    def is_run_on_load(self, is_run_on_load):
+    @space.setter
+    def space(self, space):
         """
-        Sets the is_run_on_load of this LookWithQuery.
-        auto-run query when Look viewed
+        Sets the space of this LookWithQuery.
+        Space of this Look
 
-        :param is_run_on_load: The is_run_on_load of this LookWithQuery.
-        :type: bool
+        :param space: The space of this LookWithQuery.
+        :type: SpaceBase
         """
 
-        self._is_run_on_load = is_run_on_load
+        self._space = space
+
+    @property
+    def space_id(self):
+        """
+        Gets the space_id of this LookWithQuery.
+        Space Id
+
+        :return: The space_id of this LookWithQuery.
+        :rtype: str
+        """
+        return self._space_id
+
+    @space_id.setter
+    def space_id(self, space_id):
+        """
+        Sets the space_id of this LookWithQuery.
+        Space Id
+
+        :param space_id: The space_id of this LookWithQuery.
+        :type: str
+        """
+
+        self._space_id = space_id
+
+    @property
+    def updated_at(self):
+        """
+        Gets the updated_at of this LookWithQuery.
+        Time that the Look was updated.
+
+        :return: The updated_at of this LookWithQuery.
+        :rtype: datetime
+        """
+        return self._updated_at
+
+    @updated_at.setter
+    def updated_at(self, updated_at):
+        """
+        Sets the updated_at of this LookWithQuery.
+        Time that the Look was updated.
+
+        :param updated_at: The updated_at of this LookWithQuery.
+        :type: datetime
+        """
+
+        self._updated_at = updated_at
+
+    @property
+    def user(self):
+        """
+        Gets the user of this LookWithQuery.
+        User
+
+        :return: The user of this LookWithQuery.
+        :rtype: UserIdOnly
+        """
+        return self._user
+
+    @user.setter
+    def user(self, user):
+        """
+        Sets the user of this LookWithQuery.
+        User
+
+        :param user: The user of this LookWithQuery.
+        :type: UserIdOnly
+        """
+
+        self._user = user
+
+    @property
+    def user_id(self):
+        """
+        Gets the user_id of this LookWithQuery.
+        User Id
+
+        :return: The user_id of this LookWithQuery.
+        :rtype: int
+        """
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, user_id):
+        """
+        Sets the user_id of this LookWithQuery.
+        User Id
+
+        :param user_id: The user_id of this LookWithQuery.
+        :type: int
+        """
+
+        self._user_id = user_id
+
+    @property
+    def view_count(self):
+        """
+        Gets the view_count of this LookWithQuery.
+        Number of times viewed in the Looker web UI
+
+        :return: The view_count of this LookWithQuery.
+        :rtype: int
+        """
+        return self._view_count
+
+    @view_count.setter
+    def view_count(self, view_count):
+        """
+        Sets the view_count of this LookWithQuery.
+        Number of times viewed in the Looker web UI
+
+        :param view_count: The view_count of this LookWithQuery.
+        :type: int
+        """
+
+        self._view_count = view_count
+
+    @property
+    def query(self):
+        """
+        Gets the query of this LookWithQuery.
+        Query
+
+        :return: The query of this LookWithQuery.
+        :rtype: Query
+        """
+        return self._query
+
+    @query.setter
+    def query(self, query):
+        """
+        Sets the query of this LookWithQuery.
+        Query
+
+        :param query: The query of this LookWithQuery.
+        :type: Query
+        """
+
+        self._query = query
+
+    @property
+    def url(self):
+        """
+        Gets the url of this LookWithQuery.
+        Url
+
+        :return: The url of this LookWithQuery.
+        :rtype: str
+        """
+        return self._url
+
+    @url.setter
+    def url(self, url):
+        """
+        Sets the url of this LookWithQuery.
+        Url
+
+        :param url: The url of this LookWithQuery.
+        :type: str
+        """
+
+        self._url = url
 
     @property
     def can(self):

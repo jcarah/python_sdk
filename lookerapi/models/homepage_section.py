@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class HomepageSection(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, id=None, title=None, is_dynamic=None, is_header=None, order=None, detail_url=None, can=None):
+    def __init__(self, created_at=None, deleted_at=None, detail_url=None, homepage_id=None, homepage_items=None, id=None, is_header=None, item_order=None, title=None, updated_at=None, can=None):
         """
         HomepageSection - a model defined in Swagger
 
@@ -31,32 +31,159 @@ class HomepageSection(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'id': 'str',
-            'title': 'str',
-            'is_dynamic': 'bool',
-            'is_header': 'bool',
-            'order': 'float',
+            'created_at': 'datetime',
+            'deleted_at': 'datetime',
             'detail_url': 'str',
+            'homepage_id': 'int',
+            'homepage_items': 'list[HomepageItem]',
+            'id': 'str',
+            'is_header': 'bool',
+            'item_order': 'list[int]',
+            'title': 'str',
+            'updated_at': 'datetime',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
-            'id': 'id',
-            'title': 'title',
-            'is_dynamic': 'is_dynamic',
-            'is_header': 'is_header',
-            'order': 'order',
+            'created_at': 'created_at',
+            'deleted_at': 'deleted_at',
             'detail_url': 'detail_url',
+            'homepage_id': 'homepage_id',
+            'homepage_items': 'homepage_items',
+            'id': 'id',
+            'is_header': 'is_header',
+            'item_order': 'item_order',
+            'title': 'title',
+            'updated_at': 'updated_at',
             'can': 'can'
         }
 
-        self._id = id
-        self._title = title
-        self._is_dynamic = is_dynamic
-        self._is_header = is_header
-        self._order = order
+        self._created_at = created_at
+        self._deleted_at = deleted_at
         self._detail_url = detail_url
+        self._homepage_id = homepage_id
+        self._homepage_items = homepage_items
+        self._id = id
+        self._is_header = is_header
+        self._item_order = item_order
+        self._title = title
+        self._updated_at = updated_at
         self._can = can
+
+    @property
+    def created_at(self):
+        """
+        Gets the created_at of this HomepageSection.
+        Time at which this section was created.
+
+        :return: The created_at of this HomepageSection.
+        :rtype: datetime
+        """
+        return self._created_at
+
+    @created_at.setter
+    def created_at(self, created_at):
+        """
+        Sets the created_at of this HomepageSection.
+        Time at which this section was created.
+
+        :param created_at: The created_at of this HomepageSection.
+        :type: datetime
+        """
+
+        self._created_at = created_at
+
+    @property
+    def deleted_at(self):
+        """
+        Gets the deleted_at of this HomepageSection.
+        Time at which this section was deleted.
+
+        :return: The deleted_at of this HomepageSection.
+        :rtype: datetime
+        """
+        return self._deleted_at
+
+    @deleted_at.setter
+    def deleted_at(self, deleted_at):
+        """
+        Sets the deleted_at of this HomepageSection.
+        Time at which this section was deleted.
+
+        :param deleted_at: The deleted_at of this HomepageSection.
+        :type: datetime
+        """
+
+        self._deleted_at = deleted_at
+
+    @property
+    def detail_url(self):
+        """
+        Gets the detail_url of this HomepageSection.
+        A URL pointing to a page showing further information about the content in the section.
+
+        :return: The detail_url of this HomepageSection.
+        :rtype: str
+        """
+        return self._detail_url
+
+    @detail_url.setter
+    def detail_url(self, detail_url):
+        """
+        Sets the detail_url of this HomepageSection.
+        A URL pointing to a page showing further information about the content in the section.
+
+        :param detail_url: The detail_url of this HomepageSection.
+        :type: str
+        """
+
+        self._detail_url = detail_url
+
+    @property
+    def homepage_id(self):
+        """
+        Gets the homepage_id of this HomepageSection.
+        Id reference to parent homepage
+
+        :return: The homepage_id of this HomepageSection.
+        :rtype: int
+        """
+        return self._homepage_id
+
+    @homepage_id.setter
+    def homepage_id(self, homepage_id):
+        """
+        Sets the homepage_id of this HomepageSection.
+        Id reference to parent homepage
+
+        :param homepage_id: The homepage_id of this HomepageSection.
+        :type: int
+        """
+
+        self._homepage_id = homepage_id
+
+    @property
+    def homepage_items(self):
+        """
+        Gets the homepage_items of this HomepageSection.
+        Items in the homepage section
+
+        :return: The homepage_items of this HomepageSection.
+        :rtype: list[HomepageItem]
+        """
+        return self._homepage_items
+
+    @homepage_items.setter
+    def homepage_items(self, homepage_items):
+        """
+        Sets the homepage_items of this HomepageSection.
+        Items in the homepage section
+
+        :param homepage_items: The homepage_items of this HomepageSection.
+        :type: list[HomepageItem]
+        """
+
+        self._homepage_items = homepage_items
 
     @property
     def id(self):
@@ -82,52 +209,6 @@ class HomepageSection(object):
         self._id = id
 
     @property
-    def title(self):
-        """
-        Gets the title of this HomepageSection.
-        Name of row
-
-        :return: The title of this HomepageSection.
-        :rtype: str
-        """
-        return self._title
-
-    @title.setter
-    def title(self, title):
-        """
-        Sets the title of this HomepageSection.
-        Name of row
-
-        :param title: The title of this HomepageSection.
-        :type: str
-        """
-
-        self._title = title
-
-    @property
-    def is_dynamic(self):
-        """
-        Gets the is_dynamic of this HomepageSection.
-        This section was automatically generated by Looker
-
-        :return: The is_dynamic of this HomepageSection.
-        :rtype: bool
-        """
-        return self._is_dynamic
-
-    @is_dynamic.setter
-    def is_dynamic(self, is_dynamic):
-        """
-        Sets the is_dynamic of this HomepageSection.
-        This section was automatically generated by Looker
-
-        :param is_dynamic: The is_dynamic of this HomepageSection.
-        :type: bool
-        """
-
-        self._is_dynamic = is_dynamic
-
-    @property
     def is_header(self):
         """
         Gets the is_header of this HomepageSection.
@@ -151,50 +232,73 @@ class HomepageSection(object):
         self._is_header = is_header
 
     @property
-    def order(self):
+    def item_order(self):
         """
-        Gets the order of this HomepageSection.
-        An arbitrary float representing the sort order of sections.
+        Gets the item_order of this HomepageSection.
+        ids of the homepage items in the order they should be displayed
 
-        :return: The order of this HomepageSection.
-        :rtype: float
+        :return: The item_order of this HomepageSection.
+        :rtype: list[int]
         """
-        return self._order
+        return self._item_order
 
-    @order.setter
-    def order(self, order):
+    @item_order.setter
+    def item_order(self, item_order):
         """
-        Sets the order of this HomepageSection.
-        An arbitrary float representing the sort order of sections.
+        Sets the item_order of this HomepageSection.
+        ids of the homepage items in the order they should be displayed
 
-        :param order: The order of this HomepageSection.
-        :type: float
+        :param item_order: The item_order of this HomepageSection.
+        :type: list[int]
         """
 
-        self._order = order
+        self._item_order = item_order
 
     @property
-    def detail_url(self):
+    def title(self):
         """
-        Gets the detail_url of this HomepageSection.
-        A URL pointing to a page showing further information about the content in the section.
+        Gets the title of this HomepageSection.
+        Name of row
 
-        :return: The detail_url of this HomepageSection.
+        :return: The title of this HomepageSection.
         :rtype: str
         """
-        return self._detail_url
+        return self._title
 
-    @detail_url.setter
-    def detail_url(self, detail_url):
+    @title.setter
+    def title(self, title):
         """
-        Sets the detail_url of this HomepageSection.
-        A URL pointing to a page showing further information about the content in the section.
+        Sets the title of this HomepageSection.
+        Name of row
 
-        :param detail_url: The detail_url of this HomepageSection.
+        :param title: The title of this HomepageSection.
         :type: str
         """
 
-        self._detail_url = detail_url
+        self._title = title
+
+    @property
+    def updated_at(self):
+        """
+        Gets the updated_at of this HomepageSection.
+        Time at which this section was last updated.
+
+        :return: The updated_at of this HomepageSection.
+        :rtype: datetime
+        """
+        return self._updated_at
+
+    @updated_at.setter
+    def updated_at(self, updated_at):
+        """
+        Sets the updated_at of this HomepageSection.
+        Time at which this section was last updated.
+
+        :param updated_at: The updated_at of this HomepageSection.
+        :type: datetime
+        """
+
+        self._updated_at = updated_at
 
     @property
     def can(self):

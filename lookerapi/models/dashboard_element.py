@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class DashboardElement(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, id=None, dashboard_id=None, look_id=None, query_id=None, type=None, refresh_interval=None, refresh_interval_to_i=None, note_text=None, note_text_as_html=None, note_display=None, note_state=None, title_hidden=None, title_text=None, title=None, subtitle_text=None, body_text=None, body_text_as_html=None, look=None, query=None, edit_uri=None, merge_result_id=None, result_maker_id=None, result_maker=None, can=None):
+    def __init__(self, body_text=None, body_text_as_html=None, dashboard_id=None, edit_uri=None, id=None, look=None, look_id=None, lookml_link_id=None, merge_result_id=None, note_display=None, note_state=None, note_text=None, note_text_as_html=None, query=None, query_id=None, refresh_interval=None, refresh_interval_to_i=None, result_maker=None, result_maker_id=None, subtitle_text=None, title=None, title_hidden=None, title_text=None, type=None, alert_count=None, can=None):
         """
         DashboardElement - a model defined in Swagger
 
@@ -31,428 +31,89 @@ class DashboardElement(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'id': 'str',
-            'dashboard_id': 'str',
-            'look_id': 'str',
-            'query_id': 'int',
-            'type': 'str',
-            'refresh_interval': 'str',
-            'refresh_interval_to_i': 'int',
-            'note_text': 'str',
-            'note_text_as_html': 'str',
-            'note_display': 'str',
-            'note_state': 'str',
-            'title_hidden': 'bool',
-            'title_text': 'str',
-            'title': 'str',
-            'subtitle_text': 'str',
             'body_text': 'str',
             'body_text_as_html': 'str',
-            'look': 'LookWithQuery',
-            'query': 'Query',
+            'dashboard_id': 'str',
             'edit_uri': 'str',
+            'id': 'str',
+            'look': 'LookWithQuery',
+            'look_id': 'str',
+            'lookml_link_id': 'str',
             'merge_result_id': 'str',
-            'result_maker_id': 'int',
+            'note_display': 'str',
+            'note_state': 'str',
+            'note_text': 'str',
+            'note_text_as_html': 'str',
+            'query': 'Query',
+            'query_id': 'int',
+            'refresh_interval': 'str',
+            'refresh_interval_to_i': 'int',
             'result_maker': 'ResultMakerWithIdVisConfigAndDynamicFields',
+            'result_maker_id': 'int',
+            'subtitle_text': 'str',
+            'title': 'str',
+            'title_hidden': 'bool',
+            'title_text': 'str',
+            'type': 'str',
+            'alert_count': 'int',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
-            'id': 'id',
-            'dashboard_id': 'dashboard_id',
-            'look_id': 'look_id',
-            'query_id': 'query_id',
-            'type': 'type',
-            'refresh_interval': 'refresh_interval',
-            'refresh_interval_to_i': 'refresh_interval_to_i',
-            'note_text': 'note_text',
-            'note_text_as_html': 'note_text_as_html',
-            'note_display': 'note_display',
-            'note_state': 'note_state',
-            'title_hidden': 'title_hidden',
-            'title_text': 'title_text',
-            'title': 'title',
-            'subtitle_text': 'subtitle_text',
             'body_text': 'body_text',
             'body_text_as_html': 'body_text_as_html',
-            'look': 'look',
-            'query': 'query',
+            'dashboard_id': 'dashboard_id',
             'edit_uri': 'edit_uri',
+            'id': 'id',
+            'look': 'look',
+            'look_id': 'look_id',
+            'lookml_link_id': 'lookml_link_id',
             'merge_result_id': 'merge_result_id',
-            'result_maker_id': 'result_maker_id',
+            'note_display': 'note_display',
+            'note_state': 'note_state',
+            'note_text': 'note_text',
+            'note_text_as_html': 'note_text_as_html',
+            'query': 'query',
+            'query_id': 'query_id',
+            'refresh_interval': 'refresh_interval',
+            'refresh_interval_to_i': 'refresh_interval_to_i',
             'result_maker': 'result_maker',
+            'result_maker_id': 'result_maker_id',
+            'subtitle_text': 'subtitle_text',
+            'title': 'title',
+            'title_hidden': 'title_hidden',
+            'title_text': 'title_text',
+            'type': 'type',
+            'alert_count': 'alert_count',
             'can': 'can'
         }
 
-        self._id = id
-        self._dashboard_id = dashboard_id
-        self._look_id = look_id
-        self._query_id = query_id
-        self._type = type
-        self._refresh_interval = refresh_interval
-        self._refresh_interval_to_i = refresh_interval_to_i
-        self._note_text = note_text
-        self._note_text_as_html = note_text_as_html
-        self._note_display = note_display
-        self._note_state = note_state
-        self._title_hidden = title_hidden
-        self._title_text = title_text
-        self._title = title
-        self._subtitle_text = subtitle_text
         self._body_text = body_text
         self._body_text_as_html = body_text_as_html
-        self._look = look
-        self._query = query
-        self._edit_uri = edit_uri
-        self._merge_result_id = merge_result_id
-        self._result_maker_id = result_maker_id
-        self._result_maker = result_maker
-        self._can = can
-
-    @property
-    def id(self):
-        """
-        Gets the id of this DashboardElement.
-        Unique Id
-
-        :return: The id of this DashboardElement.
-        :rtype: str
-        """
-        return self._id
-
-    @id.setter
-    def id(self, id):
-        """
-        Sets the id of this DashboardElement.
-        Unique Id
-
-        :param id: The id of this DashboardElement.
-        :type: str
-        """
-
-        self._id = id
-
-    @property
-    def dashboard_id(self):
-        """
-        Gets the dashboard_id of this DashboardElement.
-        Id of Dashboard
-
-        :return: The dashboard_id of this DashboardElement.
-        :rtype: str
-        """
-        return self._dashboard_id
-
-    @dashboard_id.setter
-    def dashboard_id(self, dashboard_id):
-        """
-        Sets the dashboard_id of this DashboardElement.
-        Id of Dashboard
-
-        :param dashboard_id: The dashboard_id of this DashboardElement.
-        :type: str
-        """
-
         self._dashboard_id = dashboard_id
-
-    @property
-    def look_id(self):
-        """
-        Gets the look_id of this DashboardElement.
-        Id Of Look
-
-        :return: The look_id of this DashboardElement.
-        :rtype: str
-        """
-        return self._look_id
-
-    @look_id.setter
-    def look_id(self, look_id):
-        """
-        Sets the look_id of this DashboardElement.
-        Id Of Look
-
-        :param look_id: The look_id of this DashboardElement.
-        :type: str
-        """
-
+        self._edit_uri = edit_uri
+        self._id = id
+        self._look = look
         self._look_id = look_id
-
-    @property
-    def query_id(self):
-        """
-        Gets the query_id of this DashboardElement.
-        Id Of Query
-
-        :return: The query_id of this DashboardElement.
-        :rtype: int
-        """
-        return self._query_id
-
-    @query_id.setter
-    def query_id(self, query_id):
-        """
-        Sets the query_id of this DashboardElement.
-        Id Of Query
-
-        :param query_id: The query_id of this DashboardElement.
-        :type: int
-        """
-
-        self._query_id = query_id
-
-    @property
-    def type(self):
-        """
-        Gets the type of this DashboardElement.
-        Type
-
-        :return: The type of this DashboardElement.
-        :rtype: str
-        """
-        return self._type
-
-    @type.setter
-    def type(self, type):
-        """
-        Sets the type of this DashboardElement.
-        Type
-
-        :param type: The type of this DashboardElement.
-        :type: str
-        """
-
-        self._type = type
-
-    @property
-    def refresh_interval(self):
-        """
-        Gets the refresh_interval of this DashboardElement.
-        Refresh Interval
-
-        :return: The refresh_interval of this DashboardElement.
-        :rtype: str
-        """
-        return self._refresh_interval
-
-    @refresh_interval.setter
-    def refresh_interval(self, refresh_interval):
-        """
-        Sets the refresh_interval of this DashboardElement.
-        Refresh Interval
-
-        :param refresh_interval: The refresh_interval of this DashboardElement.
-        :type: str
-        """
-
-        self._refresh_interval = refresh_interval
-
-    @property
-    def refresh_interval_to_i(self):
-        """
-        Gets the refresh_interval_to_i of this DashboardElement.
-        Refresh Interval as integer
-
-        :return: The refresh_interval_to_i of this DashboardElement.
-        :rtype: int
-        """
-        return self._refresh_interval_to_i
-
-    @refresh_interval_to_i.setter
-    def refresh_interval_to_i(self, refresh_interval_to_i):
-        """
-        Sets the refresh_interval_to_i of this DashboardElement.
-        Refresh Interval as integer
-
-        :param refresh_interval_to_i: The refresh_interval_to_i of this DashboardElement.
-        :type: int
-        """
-
-        self._refresh_interval_to_i = refresh_interval_to_i
-
-    @property
-    def note_text(self):
-        """
-        Gets the note_text of this DashboardElement.
-        Note Text
-
-        :return: The note_text of this DashboardElement.
-        :rtype: str
-        """
-        return self._note_text
-
-    @note_text.setter
-    def note_text(self, note_text):
-        """
-        Sets the note_text of this DashboardElement.
-        Note Text
-
-        :param note_text: The note_text of this DashboardElement.
-        :type: str
-        """
-
-        self._note_text = note_text
-
-    @property
-    def note_text_as_html(self):
-        """
-        Gets the note_text_as_html of this DashboardElement.
-        Note Text as Html
-
-        :return: The note_text_as_html of this DashboardElement.
-        :rtype: str
-        """
-        return self._note_text_as_html
-
-    @note_text_as_html.setter
-    def note_text_as_html(self, note_text_as_html):
-        """
-        Sets the note_text_as_html of this DashboardElement.
-        Note Text as Html
-
-        :param note_text_as_html: The note_text_as_html of this DashboardElement.
-        :type: str
-        """
-
-        self._note_text_as_html = note_text_as_html
-
-    @property
-    def note_display(self):
-        """
-        Gets the note_display of this DashboardElement.
-        Note Display
-
-        :return: The note_display of this DashboardElement.
-        :rtype: str
-        """
-        return self._note_display
-
-    @note_display.setter
-    def note_display(self, note_display):
-        """
-        Sets the note_display of this DashboardElement.
-        Note Display
-
-        :param note_display: The note_display of this DashboardElement.
-        :type: str
-        """
-
+        self._lookml_link_id = lookml_link_id
+        self._merge_result_id = merge_result_id
         self._note_display = note_display
-
-    @property
-    def note_state(self):
-        """
-        Gets the note_state of this DashboardElement.
-        Note State
-
-        :return: The note_state of this DashboardElement.
-        :rtype: str
-        """
-        return self._note_state
-
-    @note_state.setter
-    def note_state(self, note_state):
-        """
-        Sets the note_state of this DashboardElement.
-        Note State
-
-        :param note_state: The note_state of this DashboardElement.
-        :type: str
-        """
-
         self._note_state = note_state
-
-    @property
-    def title_hidden(self):
-        """
-        Gets the title_hidden of this DashboardElement.
-        Whether title is hidden
-
-        :return: The title_hidden of this DashboardElement.
-        :rtype: bool
-        """
-        return self._title_hidden
-
-    @title_hidden.setter
-    def title_hidden(self, title_hidden):
-        """
-        Sets the title_hidden of this DashboardElement.
-        Whether title is hidden
-
-        :param title_hidden: The title_hidden of this DashboardElement.
-        :type: bool
-        """
-
-        self._title_hidden = title_hidden
-
-    @property
-    def title_text(self):
-        """
-        Gets the title_text of this DashboardElement.
-        Text tile title
-
-        :return: The title_text of this DashboardElement.
-        :rtype: str
-        """
-        return self._title_text
-
-    @title_text.setter
-    def title_text(self, title_text):
-        """
-        Sets the title_text of this DashboardElement.
-        Text tile title
-
-        :param title_text: The title_text of this DashboardElement.
-        :type: str
-        """
-
-        self._title_text = title_text
-
-    @property
-    def title(self):
-        """
-        Gets the title of this DashboardElement.
-        Title of dashboard element
-
-        :return: The title of this DashboardElement.
-        :rtype: str
-        """
-        return self._title
-
-    @title.setter
-    def title(self, title):
-        """
-        Sets the title of this DashboardElement.
-        Title of dashboard element
-
-        :param title: The title of this DashboardElement.
-        :type: str
-        """
-
-        self._title = title
-
-    @property
-    def subtitle_text(self):
-        """
-        Gets the subtitle_text of this DashboardElement.
-        Text tile subtitle text
-
-        :return: The subtitle_text of this DashboardElement.
-        :rtype: str
-        """
-        return self._subtitle_text
-
-    @subtitle_text.setter
-    def subtitle_text(self, subtitle_text):
-        """
-        Sets the subtitle_text of this DashboardElement.
-        Text tile subtitle text
-
-        :param subtitle_text: The subtitle_text of this DashboardElement.
-        :type: str
-        """
-
+        self._note_text = note_text
+        self._note_text_as_html = note_text_as_html
+        self._query = query
+        self._query_id = query_id
+        self._refresh_interval = refresh_interval
+        self._refresh_interval_to_i = refresh_interval_to_i
+        self._result_maker = result_maker
+        self._result_maker_id = result_maker_id
         self._subtitle_text = subtitle_text
+        self._title = title
+        self._title_hidden = title_hidden
+        self._title_text = title_text
+        self._type = type
+        self._alert_count = alert_count
+        self._can = can
 
     @property
     def body_text(self):
@@ -501,50 +162,27 @@ class DashboardElement(object):
         self._body_text_as_html = body_text_as_html
 
     @property
-    def look(self):
+    def dashboard_id(self):
         """
-        Gets the look of this DashboardElement.
-        Look
+        Gets the dashboard_id of this DashboardElement.
+        Id of Dashboard
 
-        :return: The look of this DashboardElement.
-        :rtype: LookWithQuery
+        :return: The dashboard_id of this DashboardElement.
+        :rtype: str
         """
-        return self._look
+        return self._dashboard_id
 
-    @look.setter
-    def look(self, look):
+    @dashboard_id.setter
+    def dashboard_id(self, dashboard_id):
         """
-        Sets the look of this DashboardElement.
-        Look
+        Sets the dashboard_id of this DashboardElement.
+        Id of Dashboard
 
-        :param look: The look of this DashboardElement.
-        :type: LookWithQuery
-        """
-
-        self._look = look
-
-    @property
-    def query(self):
-        """
-        Gets the query of this DashboardElement.
-        Query
-
-        :return: The query of this DashboardElement.
-        :rtype: Query
-        """
-        return self._query
-
-    @query.setter
-    def query(self, query):
-        """
-        Sets the query of this DashboardElement.
-        Query
-
-        :param query: The query of this DashboardElement.
-        :type: Query
+        :param dashboard_id: The dashboard_id of this DashboardElement.
+        :type: str
         """
 
-        self._query = query
+        self._dashboard_id = dashboard_id
 
     @property
     def edit_uri(self):
@@ -570,6 +208,98 @@ class DashboardElement(object):
         self._edit_uri = edit_uri
 
     @property
+    def id(self):
+        """
+        Gets the id of this DashboardElement.
+        Unique Id
+
+        :return: The id of this DashboardElement.
+        :rtype: str
+        """
+        return self._id
+
+    @id.setter
+    def id(self, id):
+        """
+        Sets the id of this DashboardElement.
+        Unique Id
+
+        :param id: The id of this DashboardElement.
+        :type: str
+        """
+
+        self._id = id
+
+    @property
+    def look(self):
+        """
+        Gets the look of this DashboardElement.
+        Look
+
+        :return: The look of this DashboardElement.
+        :rtype: LookWithQuery
+        """
+        return self._look
+
+    @look.setter
+    def look(self, look):
+        """
+        Sets the look of this DashboardElement.
+        Look
+
+        :param look: The look of this DashboardElement.
+        :type: LookWithQuery
+        """
+
+        self._look = look
+
+    @property
+    def look_id(self):
+        """
+        Gets the look_id of this DashboardElement.
+        Id Of Look
+
+        :return: The look_id of this DashboardElement.
+        :rtype: str
+        """
+        return self._look_id
+
+    @look_id.setter
+    def look_id(self, look_id):
+        """
+        Sets the look_id of this DashboardElement.
+        Id Of Look
+
+        :param look_id: The look_id of this DashboardElement.
+        :type: str
+        """
+
+        self._look_id = look_id
+
+    @property
+    def lookml_link_id(self):
+        """
+        Gets the lookml_link_id of this DashboardElement.
+        LookML link ID
+
+        :return: The lookml_link_id of this DashboardElement.
+        :rtype: str
+        """
+        return self._lookml_link_id
+
+    @lookml_link_id.setter
+    def lookml_link_id(self, lookml_link_id):
+        """
+        Sets the lookml_link_id of this DashboardElement.
+        LookML link ID
+
+        :param lookml_link_id: The lookml_link_id of this DashboardElement.
+        :type: str
+        """
+
+        self._lookml_link_id = lookml_link_id
+
+    @property
     def merge_result_id(self):
         """
         Gets the merge_result_id of this DashboardElement.
@@ -591,6 +321,213 @@ class DashboardElement(object):
         """
 
         self._merge_result_id = merge_result_id
+
+    @property
+    def note_display(self):
+        """
+        Gets the note_display of this DashboardElement.
+        Note Display
+
+        :return: The note_display of this DashboardElement.
+        :rtype: str
+        """
+        return self._note_display
+
+    @note_display.setter
+    def note_display(self, note_display):
+        """
+        Sets the note_display of this DashboardElement.
+        Note Display
+
+        :param note_display: The note_display of this DashboardElement.
+        :type: str
+        """
+
+        self._note_display = note_display
+
+    @property
+    def note_state(self):
+        """
+        Gets the note_state of this DashboardElement.
+        Note State
+
+        :return: The note_state of this DashboardElement.
+        :rtype: str
+        """
+        return self._note_state
+
+    @note_state.setter
+    def note_state(self, note_state):
+        """
+        Sets the note_state of this DashboardElement.
+        Note State
+
+        :param note_state: The note_state of this DashboardElement.
+        :type: str
+        """
+
+        self._note_state = note_state
+
+    @property
+    def note_text(self):
+        """
+        Gets the note_text of this DashboardElement.
+        Note Text
+
+        :return: The note_text of this DashboardElement.
+        :rtype: str
+        """
+        return self._note_text
+
+    @note_text.setter
+    def note_text(self, note_text):
+        """
+        Sets the note_text of this DashboardElement.
+        Note Text
+
+        :param note_text: The note_text of this DashboardElement.
+        :type: str
+        """
+
+        self._note_text = note_text
+
+    @property
+    def note_text_as_html(self):
+        """
+        Gets the note_text_as_html of this DashboardElement.
+        Note Text as Html
+
+        :return: The note_text_as_html of this DashboardElement.
+        :rtype: str
+        """
+        return self._note_text_as_html
+
+    @note_text_as_html.setter
+    def note_text_as_html(self, note_text_as_html):
+        """
+        Sets the note_text_as_html of this DashboardElement.
+        Note Text as Html
+
+        :param note_text_as_html: The note_text_as_html of this DashboardElement.
+        :type: str
+        """
+
+        self._note_text_as_html = note_text_as_html
+
+    @property
+    def query(self):
+        """
+        Gets the query of this DashboardElement.
+        Query
+
+        :return: The query of this DashboardElement.
+        :rtype: Query
+        """
+        return self._query
+
+    @query.setter
+    def query(self, query):
+        """
+        Sets the query of this DashboardElement.
+        Query
+
+        :param query: The query of this DashboardElement.
+        :type: Query
+        """
+
+        self._query = query
+
+    @property
+    def query_id(self):
+        """
+        Gets the query_id of this DashboardElement.
+        Id Of Query
+
+        :return: The query_id of this DashboardElement.
+        :rtype: int
+        """
+        return self._query_id
+
+    @query_id.setter
+    def query_id(self, query_id):
+        """
+        Sets the query_id of this DashboardElement.
+        Id Of Query
+
+        :param query_id: The query_id of this DashboardElement.
+        :type: int
+        """
+
+        self._query_id = query_id
+
+    @property
+    def refresh_interval(self):
+        """
+        Gets the refresh_interval of this DashboardElement.
+        Refresh Interval
+
+        :return: The refresh_interval of this DashboardElement.
+        :rtype: str
+        """
+        return self._refresh_interval
+
+    @refresh_interval.setter
+    def refresh_interval(self, refresh_interval):
+        """
+        Sets the refresh_interval of this DashboardElement.
+        Refresh Interval
+
+        :param refresh_interval: The refresh_interval of this DashboardElement.
+        :type: str
+        """
+
+        self._refresh_interval = refresh_interval
+
+    @property
+    def refresh_interval_to_i(self):
+        """
+        Gets the refresh_interval_to_i of this DashboardElement.
+        Refresh Interval as integer
+
+        :return: The refresh_interval_to_i of this DashboardElement.
+        :rtype: int
+        """
+        return self._refresh_interval_to_i
+
+    @refresh_interval_to_i.setter
+    def refresh_interval_to_i(self, refresh_interval_to_i):
+        """
+        Sets the refresh_interval_to_i of this DashboardElement.
+        Refresh Interval as integer
+
+        :param refresh_interval_to_i: The refresh_interval_to_i of this DashboardElement.
+        :type: int
+        """
+
+        self._refresh_interval_to_i = refresh_interval_to_i
+
+    @property
+    def result_maker(self):
+        """
+        Gets the result_maker of this DashboardElement.
+        Data about the result maker.
+
+        :return: The result_maker of this DashboardElement.
+        :rtype: ResultMakerWithIdVisConfigAndDynamicFields
+        """
+        return self._result_maker
+
+    @result_maker.setter
+    def result_maker(self, result_maker):
+        """
+        Sets the result_maker of this DashboardElement.
+        Data about the result maker.
+
+        :param result_maker: The result_maker of this DashboardElement.
+        :type: ResultMakerWithIdVisConfigAndDynamicFields
+        """
+
+        self._result_maker = result_maker
 
     @property
     def result_maker_id(self):
@@ -616,27 +553,142 @@ class DashboardElement(object):
         self._result_maker_id = result_maker_id
 
     @property
-    def result_maker(self):
+    def subtitle_text(self):
         """
-        Gets the result_maker of this DashboardElement.
-        Data about the result maker.
+        Gets the subtitle_text of this DashboardElement.
+        Text tile subtitle text
 
-        :return: The result_maker of this DashboardElement.
-        :rtype: ResultMakerWithIdVisConfigAndDynamicFields
+        :return: The subtitle_text of this DashboardElement.
+        :rtype: str
         """
-        return self._result_maker
+        return self._subtitle_text
 
-    @result_maker.setter
-    def result_maker(self, result_maker):
+    @subtitle_text.setter
+    def subtitle_text(self, subtitle_text):
         """
-        Sets the result_maker of this DashboardElement.
-        Data about the result maker.
+        Sets the subtitle_text of this DashboardElement.
+        Text tile subtitle text
 
-        :param result_maker: The result_maker of this DashboardElement.
-        :type: ResultMakerWithIdVisConfigAndDynamicFields
+        :param subtitle_text: The subtitle_text of this DashboardElement.
+        :type: str
         """
 
-        self._result_maker = result_maker
+        self._subtitle_text = subtitle_text
+
+    @property
+    def title(self):
+        """
+        Gets the title of this DashboardElement.
+        Title of dashboard element
+
+        :return: The title of this DashboardElement.
+        :rtype: str
+        """
+        return self._title
+
+    @title.setter
+    def title(self, title):
+        """
+        Sets the title of this DashboardElement.
+        Title of dashboard element
+
+        :param title: The title of this DashboardElement.
+        :type: str
+        """
+
+        self._title = title
+
+    @property
+    def title_hidden(self):
+        """
+        Gets the title_hidden of this DashboardElement.
+        Whether title is hidden
+
+        :return: The title_hidden of this DashboardElement.
+        :rtype: bool
+        """
+        return self._title_hidden
+
+    @title_hidden.setter
+    def title_hidden(self, title_hidden):
+        """
+        Sets the title_hidden of this DashboardElement.
+        Whether title is hidden
+
+        :param title_hidden: The title_hidden of this DashboardElement.
+        :type: bool
+        """
+
+        self._title_hidden = title_hidden
+
+    @property
+    def title_text(self):
+        """
+        Gets the title_text of this DashboardElement.
+        Text tile title
+
+        :return: The title_text of this DashboardElement.
+        :rtype: str
+        """
+        return self._title_text
+
+    @title_text.setter
+    def title_text(self, title_text):
+        """
+        Sets the title_text of this DashboardElement.
+        Text tile title
+
+        :param title_text: The title_text of this DashboardElement.
+        :type: str
+        """
+
+        self._title_text = title_text
+
+    @property
+    def type(self):
+        """
+        Gets the type of this DashboardElement.
+        Type
+
+        :return: The type of this DashboardElement.
+        :rtype: str
+        """
+        return self._type
+
+    @type.setter
+    def type(self, type):
+        """
+        Sets the type of this DashboardElement.
+        Type
+
+        :param type: The type of this DashboardElement.
+        :type: str
+        """
+
+        self._type = type
+
+    @property
+    def alert_count(self):
+        """
+        Gets the alert_count of this DashboardElement.
+        Count of Alerts associated to a dashboard element
+
+        :return: The alert_count of this DashboardElement.
+        :rtype: int
+        """
+        return self._alert_count
+
+    @alert_count.setter
+    def alert_count(self, alert_count):
+        """
+        Sets the alert_count of this DashboardElement.
+        Count of Alerts associated to a dashboard element
+
+        :param alert_count: The alert_count of this DashboardElement.
+        :type: int
+        """
+
+        self._alert_count = alert_count
 
     @property
     def can(self):

@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class DialectInfoOptions(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, timezone=None, schema=None, ssl=None, auth=None, host=None, tmp_table=None, project_name=None, oauth_credentials=None, additional_params=None, username_required=None, can=None):
+    def __init__(self, additional_params=None, auth=None, host=None, oauth_credentials=None, project_name=None, schema=None, ssl=None, timezone=None, tmp_table=None, username_required=None, can=None):
         """
         DialectInfoOptions - a model defined in Swagger
 
@@ -31,113 +31,67 @@ class DialectInfoOptions(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'timezone': 'bool',
-            'schema': 'bool',
-            'ssl': 'bool',
+            'additional_params': 'bool',
             'auth': 'bool',
             'host': 'bool',
-            'tmp_table': 'bool',
-            'project_name': 'bool',
             'oauth_credentials': 'bool',
-            'additional_params': 'bool',
+            'project_name': 'bool',
+            'schema': 'bool',
+            'ssl': 'bool',
+            'timezone': 'bool',
+            'tmp_table': 'bool',
             'username_required': 'bool',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
-            'timezone': 'timezone',
-            'schema': 'schema',
-            'ssl': 'ssl',
+            'additional_params': 'additional_params',
             'auth': 'auth',
             'host': 'host',
-            'tmp_table': 'tmp_table',
-            'project_name': 'project_name',
             'oauth_credentials': 'oauth_credentials',
-            'additional_params': 'additional_params',
+            'project_name': 'project_name',
+            'schema': 'schema',
+            'ssl': 'ssl',
+            'timezone': 'timezone',
+            'tmp_table': 'tmp_table',
             'username_required': 'username_required',
             'can': 'can'
         }
 
-        self._timezone = timezone
-        self._schema = schema
-        self._ssl = ssl
+        self._additional_params = additional_params
         self._auth = auth
         self._host = host
-        self._tmp_table = tmp_table
-        self._project_name = project_name
         self._oauth_credentials = oauth_credentials
-        self._additional_params = additional_params
+        self._project_name = project_name
+        self._schema = schema
+        self._ssl = ssl
+        self._timezone = timezone
+        self._tmp_table = tmp_table
         self._username_required = username_required
         self._can = can
 
     @property
-    def timezone(self):
+    def additional_params(self):
         """
-        Gets the timezone of this DialectInfoOptions.
-        Has timezone support
+        Gets the additional_params of this DialectInfoOptions.
+        Has additional params support
 
-        :return: The timezone of this DialectInfoOptions.
+        :return: The additional_params of this DialectInfoOptions.
         :rtype: bool
         """
-        return self._timezone
+        return self._additional_params
 
-    @timezone.setter
-    def timezone(self, timezone):
+    @additional_params.setter
+    def additional_params(self, additional_params):
         """
-        Sets the timezone of this DialectInfoOptions.
-        Has timezone support
+        Sets the additional_params of this DialectInfoOptions.
+        Has additional params support
 
-        :param timezone: The timezone of this DialectInfoOptions.
+        :param additional_params: The additional_params of this DialectInfoOptions.
         :type: bool
         """
 
-        self._timezone = timezone
-
-    @property
-    def schema(self):
-        """
-        Gets the schema of this DialectInfoOptions.
-        Has schema support
-
-        :return: The schema of this DialectInfoOptions.
-        :rtype: bool
-        """
-        return self._schema
-
-    @schema.setter
-    def schema(self, schema):
-        """
-        Sets the schema of this DialectInfoOptions.
-        Has schema support
-
-        :param schema: The schema of this DialectInfoOptions.
-        :type: bool
-        """
-
-        self._schema = schema
-
-    @property
-    def ssl(self):
-        """
-        Gets the ssl of this DialectInfoOptions.
-        Has SSL support
-
-        :return: The ssl of this DialectInfoOptions.
-        :rtype: bool
-        """
-        return self._ssl
-
-    @ssl.setter
-    def ssl(self, ssl):
-        """
-        Sets the ssl of this DialectInfoOptions.
-        Has SSL support
-
-        :param ssl: The ssl of this DialectInfoOptions.
-        :type: bool
-        """
-
-        self._ssl = ssl
+        self._additional_params = additional_params
 
     @property
     def auth(self):
@@ -186,27 +140,27 @@ class DialectInfoOptions(object):
         self._host = host
 
     @property
-    def tmp_table(self):
+    def oauth_credentials(self):
         """
-        Gets the tmp_table of this DialectInfoOptions.
-        Has tmp table support
+        Gets the oauth_credentials of this DialectInfoOptions.
+        Has support for a service account
 
-        :return: The tmp_table of this DialectInfoOptions.
+        :return: The oauth_credentials of this DialectInfoOptions.
         :rtype: bool
         """
-        return self._tmp_table
+        return self._oauth_credentials
 
-    @tmp_table.setter
-    def tmp_table(self, tmp_table):
+    @oauth_credentials.setter
+    def oauth_credentials(self, oauth_credentials):
         """
-        Sets the tmp_table of this DialectInfoOptions.
-        Has tmp table support
+        Sets the oauth_credentials of this DialectInfoOptions.
+        Has support for a service account
 
-        :param tmp_table: The tmp_table of this DialectInfoOptions.
+        :param oauth_credentials: The oauth_credentials of this DialectInfoOptions.
         :type: bool
         """
 
-        self._tmp_table = tmp_table
+        self._oauth_credentials = oauth_credentials
 
     @property
     def project_name(self):
@@ -232,50 +186,96 @@ class DialectInfoOptions(object):
         self._project_name = project_name
 
     @property
-    def oauth_credentials(self):
+    def schema(self):
         """
-        Gets the oauth_credentials of this DialectInfoOptions.
-        Has OAuth support
+        Gets the schema of this DialectInfoOptions.
+        Has schema support
 
-        :return: The oauth_credentials of this DialectInfoOptions.
+        :return: The schema of this DialectInfoOptions.
         :rtype: bool
         """
-        return self._oauth_credentials
+        return self._schema
 
-    @oauth_credentials.setter
-    def oauth_credentials(self, oauth_credentials):
+    @schema.setter
+    def schema(self, schema):
         """
-        Sets the oauth_credentials of this DialectInfoOptions.
-        Has OAuth support
+        Sets the schema of this DialectInfoOptions.
+        Has schema support
 
-        :param oauth_credentials: The oauth_credentials of this DialectInfoOptions.
+        :param schema: The schema of this DialectInfoOptions.
         :type: bool
         """
 
-        self._oauth_credentials = oauth_credentials
+        self._schema = schema
 
     @property
-    def additional_params(self):
+    def ssl(self):
         """
-        Gets the additional_params of this DialectInfoOptions.
-        Has additional params support
+        Gets the ssl of this DialectInfoOptions.
+        Has SSL support
 
-        :return: The additional_params of this DialectInfoOptions.
+        :return: The ssl of this DialectInfoOptions.
         :rtype: bool
         """
-        return self._additional_params
+        return self._ssl
 
-    @additional_params.setter
-    def additional_params(self, additional_params):
+    @ssl.setter
+    def ssl(self, ssl):
         """
-        Sets the additional_params of this DialectInfoOptions.
-        Has additional params support
+        Sets the ssl of this DialectInfoOptions.
+        Has SSL support
 
-        :param additional_params: The additional_params of this DialectInfoOptions.
+        :param ssl: The ssl of this DialectInfoOptions.
         :type: bool
         """
 
-        self._additional_params = additional_params
+        self._ssl = ssl
+
+    @property
+    def timezone(self):
+        """
+        Gets the timezone of this DialectInfoOptions.
+        Has timezone support
+
+        :return: The timezone of this DialectInfoOptions.
+        :rtype: bool
+        """
+        return self._timezone
+
+    @timezone.setter
+    def timezone(self, timezone):
+        """
+        Sets the timezone of this DialectInfoOptions.
+        Has timezone support
+
+        :param timezone: The timezone of this DialectInfoOptions.
+        :type: bool
+        """
+
+        self._timezone = timezone
+
+    @property
+    def tmp_table(self):
+        """
+        Gets the tmp_table of this DialectInfoOptions.
+        Has tmp table support
+
+        :return: The tmp_table of this DialectInfoOptions.
+        :rtype: bool
+        """
+        return self._tmp_table
+
+    @tmp_table.setter
+    def tmp_table(self, tmp_table):
+        """
+        Sets the tmp_table of this DialectInfoOptions.
+        Has tmp table support
+
+        :param tmp_table: The tmp_table of this DialectInfoOptions.
+        :type: bool
+        """
+
+        self._tmp_table = tmp_table
 
     @property
     def username_required(self):

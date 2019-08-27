@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -43,7 +43,7 @@ class ScheduledPlanApi(object):
     def all_scheduled_plans(self, **kwargs):
         """
         Get All Scheduled Plans
-        ### Get All Scheduled Plans  Returns all scheduled plans owned by the caller or given user.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
+        ### List All Scheduled Plans  Returns all scheduled plans which belong to the caller or given user.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   To list all schedules for all users, pass `all_users=true`.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -54,8 +54,9 @@ class ScheduledPlanApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param int user_id: User Id (default is requesting user if not specified)
-        :param str fields: Requested fields.
+        :param int user_id: Return scheduled plans belonging to this user_id. If not provided, returns scheduled plans owned by the caller.
+        :param str fields: Comma delimited list of field names. If provided, only the fields specified will be included in the response
+        :param bool all_users: Return scheduled plans belonging to all users (caller needs see_schedules permission)
         :return: list[ScheduledPlan]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -70,7 +71,7 @@ class ScheduledPlanApi(object):
     def all_scheduled_plans_with_http_info(self, **kwargs):
         """
         Get All Scheduled Plans
-        ### Get All Scheduled Plans  Returns all scheduled plans owned by the caller or given user.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
+        ### List All Scheduled Plans  Returns all scheduled plans which belong to the caller or given user.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   To list all schedules for all users, pass `all_users=true`.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -81,14 +82,15 @@ class ScheduledPlanApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param int user_id: User Id (default is requesting user if not specified)
-        :param str fields: Requested fields.
+        :param int user_id: Return scheduled plans belonging to this user_id. If not provided, returns scheduled plans owned by the caller.
+        :param str fields: Comma delimited list of field names. If provided, only the fields specified will be included in the response
+        :param bool all_users: Return scheduled plans belonging to all users (caller needs see_schedules permission)
         :return: list[ScheduledPlan]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['user_id', 'fields']
+        all_params = ['user_id', 'fields', 'all_users']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -115,6 +117,8 @@ class ScheduledPlanApi(object):
             query_params['user_id'] = params['user_id']
         if 'fields' in params:
             query_params['fields'] = params['fields']
+        if 'all_users' in params:
+            query_params['all_users'] = params['all_users']
 
         header_params = {}
 
@@ -473,7 +477,7 @@ class ScheduledPlanApi(object):
     def scheduled_plan_run_once(self, **kwargs):
         """
         Run Scheduled Plan Once
-        ### Run a Scheduled Plan Immediately  Create a scheduled plan that runs only once, and immediately.  This can be useful for testing a Scheduled Plan before committing to a production schedule.  Admins can create scheduled plans on behalf of other users by specifying a user id.  Scheduled plan destinations must specify the data format to produce and send to the destination  Scheduled Plan Destination formats:  | format | Description | :-----------: | :--- | | json | A JSON object containing a `data` property which contains an array of JSON objects, one per row. No metadata. | json_detail | Row data plus metadata describing the fields, pivots, table calcs, and other aspects of the query | inline_json | Same as the JSON format, except that the `data` property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination. | csv | Comma separated values with a header | txt | Tab separated values with a header | html | Simple html | xlsx | MS Excel spreadsheet | wysiwyg_pdf | Dashboard rendered in a tiled layout to produce a PDF document | assembled_pdf | Dashboard rendered in a single column layout to produce a PDF document | wysiwyg_png | Dashboard rendered in a tiled layout to produce a PNG image ||  Valid formats vary by destination type and source object. `wysiwyg_pdf` is only valid for dashboards, for example.   
+        ### Run a Scheduled Plan Immediately  Create a scheduled plan that runs only once, and immediately.  This can be useful for testing a Scheduled Plan before committing to a production schedule.  Admins can create scheduled plans on behalf of other users by specifying a user id.  This API is rate limited to prevent it from being used for relay spam or DoS attacks  Scheduled plan destinations must specify the data format to produce and send to the destination  Scheduled Plan Destination formats:  | format | Description | :-----------: | :--- | | json | A JSON object containing a `data` property which contains an array of JSON objects, one per row. No metadata. | json_detail | Row data plus metadata describing the fields, pivots, table calcs, and other aspects of the query | inline_json | Same as the JSON format, except that the `data` property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination. | csv | Comma separated values with a header | txt | Tab separated values with a header | html | Simple html | xlsx | MS Excel spreadsheet | wysiwyg_pdf | Dashboard rendered in a tiled layout to produce a PDF document | assembled_pdf | Dashboard rendered in a single column layout to produce a PDF document | wysiwyg_png | Dashboard rendered in a tiled layout to produce a PNG image ||  Valid formats vary by destination type and source object. `wysiwyg_pdf` is only valid for dashboards, for example.   
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -499,7 +503,7 @@ class ScheduledPlanApi(object):
     def scheduled_plan_run_once_with_http_info(self, **kwargs):
         """
         Run Scheduled Plan Once
-        ### Run a Scheduled Plan Immediately  Create a scheduled plan that runs only once, and immediately.  This can be useful for testing a Scheduled Plan before committing to a production schedule.  Admins can create scheduled plans on behalf of other users by specifying a user id.  Scheduled plan destinations must specify the data format to produce and send to the destination  Scheduled Plan Destination formats:  | format | Description | :-----------: | :--- | | json | A JSON object containing a `data` property which contains an array of JSON objects, one per row. No metadata. | json_detail | Row data plus metadata describing the fields, pivots, table calcs, and other aspects of the query | inline_json | Same as the JSON format, except that the `data` property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination. | csv | Comma separated values with a header | txt | Tab separated values with a header | html | Simple html | xlsx | MS Excel spreadsheet | wysiwyg_pdf | Dashboard rendered in a tiled layout to produce a PDF document | assembled_pdf | Dashboard rendered in a single column layout to produce a PDF document | wysiwyg_png | Dashboard rendered in a tiled layout to produce a PNG image ||  Valid formats vary by destination type and source object. `wysiwyg_pdf` is only valid for dashboards, for example.   
+        ### Run a Scheduled Plan Immediately  Create a scheduled plan that runs only once, and immediately.  This can be useful for testing a Scheduled Plan before committing to a production schedule.  Admins can create scheduled plans on behalf of other users by specifying a user id.  This API is rate limited to prevent it from being used for relay spam or DoS attacks  Scheduled plan destinations must specify the data format to produce and send to the destination  Scheduled Plan Destination formats:  | format | Description | :-----------: | :--- | | json | A JSON object containing a `data` property which contains an array of JSON objects, one per row. No metadata. | json_detail | Row data plus metadata describing the fields, pivots, table calcs, and other aspects of the query | inline_json | Same as the JSON format, except that the `data` property is a string containing JSON-escaped row data. Additional properties describe the data operation. This format is primarily used to send data to web hooks so that the web hook doesn't have to re-encode the JSON row data in order to pass it on to its ultimate destination. | csv | Comma separated values with a header | txt | Tab separated values with a header | html | Simple html | xlsx | MS Excel spreadsheet | wysiwyg_pdf | Dashboard rendered in a tiled layout to produce a PDF document | assembled_pdf | Dashboard rendered in a single column layout to produce a PDF document | wysiwyg_png | Dashboard rendered in a tiled layout to produce a PNG image ||  Valid formats vary by destination type and source object. `wysiwyg_pdf` is only valid for dashboards, for example.   
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -577,7 +581,7 @@ class ScheduledPlanApi(object):
     def scheduled_plans_for_dashboard(self, dashboard_id, **kwargs):
         """
         Scheduled Plans for Dashboard
-        ### Get Scheduled Plans for a Dashboard  Returns all scheduled plans owned by the caller or given user, for a given dashboard.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
+        ### Get Scheduled Plans for a Dashboard  Returns all scheduled plans for a dashboard which belong to the caller or given user.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   To list all schedules for all users, pass `all_users=true`.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -590,6 +594,7 @@ class ScheduledPlanApi(object):
             for asynchronous request. (optional)
         :param int dashboard_id: Dashboard Id (required)
         :param int user_id: User Id (default is requesting user if not specified)
+        :param bool all_users: Return scheduled plans belonging to all users for the dashboard
         :param str fields: Requested fields.
         :return: list[ScheduledPlan]
                  If the method is called asynchronously,
@@ -605,7 +610,7 @@ class ScheduledPlanApi(object):
     def scheduled_plans_for_dashboard_with_http_info(self, dashboard_id, **kwargs):
         """
         Scheduled Plans for Dashboard
-        ### Get Scheduled Plans for a Dashboard  Returns all scheduled plans owned by the caller or given user, for a given dashboard.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
+        ### Get Scheduled Plans for a Dashboard  Returns all scheduled plans for a dashboard which belong to the caller or given user.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   To list all schedules for all users, pass `all_users=true`.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -618,13 +623,14 @@ class ScheduledPlanApi(object):
             for asynchronous request. (optional)
         :param int dashboard_id: Dashboard Id (required)
         :param int user_id: User Id (default is requesting user if not specified)
+        :param bool all_users: Return scheduled plans belonging to all users for the dashboard
         :param str fields: Requested fields.
         :return: list[ScheduledPlan]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['dashboard_id', 'user_id', 'fields']
+        all_params = ['dashboard_id', 'user_id', 'all_users', 'fields']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -654,6 +660,8 @@ class ScheduledPlanApi(object):
         query_params = {}
         if 'user_id' in params:
             query_params['user_id'] = params['user_id']
+        if 'all_users' in params:
+            query_params['all_users'] = params['all_users']
         if 'fields' in params:
             query_params['fields'] = params['fields']
 
@@ -692,7 +700,7 @@ class ScheduledPlanApi(object):
     def scheduled_plans_for_look(self, look_id, **kwargs):
         """
         Scheduled Plans for Look
-        ### Get Scheduled Plans for a Look  Returns all scheduled plans owned by the caller or given user, for a given look.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
+        ### Get Scheduled Plans for a Look  Returns all scheduled plans for a look which belong to the caller or given user.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   To list all schedules for all users, pass `all_users=true`.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -706,6 +714,7 @@ class ScheduledPlanApi(object):
         :param int look_id: Look Id (required)
         :param int user_id: User Id (default is requesting user if not specified)
         :param str fields: Requested fields.
+        :param bool all_users: Return scheduled plans belonging to all users for the look
         :return: list[ScheduledPlan]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -720,7 +729,7 @@ class ScheduledPlanApi(object):
     def scheduled_plans_for_look_with_http_info(self, look_id, **kwargs):
         """
         Scheduled Plans for Look
-        ### Get Scheduled Plans for a Look  Returns all scheduled plans owned by the caller or given user, for a given look.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
+        ### Get Scheduled Plans for a Look  Returns all scheduled plans for a look which belong to the caller or given user.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   To list all schedules for all users, pass `all_users=true`.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -734,12 +743,13 @@ class ScheduledPlanApi(object):
         :param int look_id: Look Id (required)
         :param int user_id: User Id (default is requesting user if not specified)
         :param str fields: Requested fields.
+        :param bool all_users: Return scheduled plans belonging to all users for the look
         :return: list[ScheduledPlan]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['look_id', 'user_id', 'fields']
+        all_params = ['look_id', 'user_id', 'fields', 'all_users']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -771,6 +781,8 @@ class ScheduledPlanApi(object):
             query_params['user_id'] = params['user_id']
         if 'fields' in params:
             query_params['fields'] = params['fields']
+        if 'all_users' in params:
+            query_params['all_users'] = params['all_users']
 
         header_params = {}
 
@@ -807,7 +819,7 @@ class ScheduledPlanApi(object):
     def scheduled_plans_for_lookml_dashboard(self, lookml_dashboard_id, **kwargs):
         """
         Scheduled Plans for LookML Dashboard
-        ### Get Scheduled Plans for a LookML Dashboard  Returns all scheduled plans owned by the caller or given user, for a given LookML dashboard.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
+        ### Get Scheduled Plans for a LookML Dashboard  Returns all scheduled plans for a LookML Dashboard which belong to the caller or given user.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   To list all schedules for all users, pass `all_users=true`.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -821,6 +833,7 @@ class ScheduledPlanApi(object):
         :param int lookml_dashboard_id: LookML Dashboard Id (required)
         :param int user_id: User Id (default is requesting user if not specified)
         :param str fields: Requested fields.
+        :param bool all_users: Return scheduled plans belonging to all users for the dashboard
         :return: list[ScheduledPlan]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -835,7 +848,7 @@ class ScheduledPlanApi(object):
     def scheduled_plans_for_lookml_dashboard_with_http_info(self, lookml_dashboard_id, **kwargs):
         """
         Scheduled Plans for LookML Dashboard
-        ### Get Scheduled Plans for a LookML Dashboard  Returns all scheduled plans owned by the caller or given user, for a given LookML dashboard.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
+        ### Get Scheduled Plans for a LookML Dashboard  Returns all scheduled plans for a LookML Dashboard which belong to the caller or given user.  If no user_id is provided, this function returns the scheduled plans owned by the caller.   To list all schedules for all users, pass `all_users=true`.   The caller must have `see_schedules` permission to see other users' scheduled plans.   
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -849,12 +862,13 @@ class ScheduledPlanApi(object):
         :param int lookml_dashboard_id: LookML Dashboard Id (required)
         :param int user_id: User Id (default is requesting user if not specified)
         :param str fields: Requested fields.
+        :param bool all_users: Return scheduled plans belonging to all users for the dashboard
         :return: list[ScheduledPlan]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['lookml_dashboard_id', 'user_id', 'fields']
+        all_params = ['lookml_dashboard_id', 'user_id', 'fields', 'all_users']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -886,6 +900,8 @@ class ScheduledPlanApi(object):
             query_params['user_id'] = params['user_id']
         if 'fields' in params:
             query_params['fields'] = params['fields']
+        if 'all_users' in params:
+            query_params['all_users'] = params['all_users']
 
         header_params = {}
 

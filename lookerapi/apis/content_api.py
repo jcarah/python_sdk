@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -40,9 +40,9 @@ class ContentApi(object):
                 config.api_client = ApiClient()
             self.api_client = config.api_client
 
-    def all_content_metadata_accesss(self, **kwargs):
+    def all_content_metadata_accesses(self, content_metadata_id, **kwargs):
         """
-        Get All Content Metadata Accesss
+        Get All Content Metadata Accesses
         ### All content metadata access records for a content metadata item. 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -50,11 +50,11 @@ class ContentApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.all_content_metadata_accesss(callback=callback_function)
+        >>> thread = api.all_content_metadata_accesses(content_metadata_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param int content_metadata_id: Id of content metadata
+        :param int content_metadata_id: Id of content metadata (required)
         :param str fields: Requested fields.
         :return: list[ContentMetaGroupUser]
                  If the method is called asynchronously,
@@ -62,14 +62,14 @@ class ContentApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('callback'):
-            return self.all_content_metadata_accesss_with_http_info(**kwargs)
+            return self.all_content_metadata_accesses_with_http_info(content_metadata_id, **kwargs)
         else:
-            (data) = self.all_content_metadata_accesss_with_http_info(**kwargs)
+            (data) = self.all_content_metadata_accesses_with_http_info(content_metadata_id, **kwargs)
             return data
 
-    def all_content_metadata_accesss_with_http_info(self, **kwargs):
+    def all_content_metadata_accesses_with_http_info(self, content_metadata_id, **kwargs):
         """
-        Get All Content Metadata Accesss
+        Get All Content Metadata Accesses
         ### All content metadata access records for a content metadata item. 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
@@ -77,11 +77,11 @@ class ContentApi(object):
         >>> def callback_function(response):
         >>>     pprint(response)
         >>>
-        >>> thread = api.all_content_metadata_accesss_with_http_info(callback=callback_function)
+        >>> thread = api.all_content_metadata_accesses_with_http_info(content_metadata_id, callback=callback_function)
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param int content_metadata_id: Id of content metadata
+        :param int content_metadata_id: Id of content metadata (required)
         :param str fields: Requested fields.
         :return: list[ContentMetaGroupUser]
                  If the method is called asynchronously,
@@ -99,10 +99,13 @@ class ContentApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method all_content_metadata_accesss" % key
+                    " to method all_content_metadata_accesses" % key
                 )
             params[key] = val
         del params['kwargs']
+        # verify the required parameter 'content_metadata_id' is set
+        if ('content_metadata_id' not in params) or (params['content_metadata_id'] is None):
+            raise ValueError("Missing the required parameter `content_metadata_id` when calling `all_content_metadata_accesses`")
 
 
         collection_formats = {}
@@ -474,6 +477,110 @@ class ContentApi(object):
                                         post_params=form_params,
                                         files=local_var_files,
                                         response_type='ContentMeta',
+                                        auth_settings=auth_settings,
+                                        callback=params.get('callback'),
+                                        _return_http_data_only=params.get('_return_http_data_only'),
+                                        _preload_content=params.get('_preload_content', True),
+                                        _request_timeout=params.get('_request_timeout'),
+                                        collection_formats=collection_formats)
+
+    def content_validation(self, **kwargs):
+        """
+        Validate Content
+        ### Validate All Content Requires Content Validation Labs Feature be enabled  Performs validation of all looks and dashboards Returns a list of errors found as well as metadata about the content validation run. 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.content_validation(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str fields: Requested fields.
+        :return: ContentValidation
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('callback'):
+            return self.content_validation_with_http_info(**kwargs)
+        else:
+            (data) = self.content_validation_with_http_info(**kwargs)
+            return data
+
+    def content_validation_with_http_info(self, **kwargs):
+        """
+        Validate Content
+        ### Validate All Content Requires Content Validation Labs Feature be enabled  Performs validation of all looks and dashboards Returns a list of errors found as well as metadata about the content validation run. 
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please define a `callback` function
+        to be invoked when receiving the response.
+        >>> def callback_function(response):
+        >>>     pprint(response)
+        >>>
+        >>> thread = api.content_validation_with_http_info(callback=callback_function)
+
+        :param callback function: The callback function
+            for asynchronous request. (optional)
+        :param str fields: Requested fields.
+        :return: ContentValidation
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['fields']
+        all_params.append('callback')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method content_validation" % key
+                )
+            params[key] = val
+        del params['kwargs']
+
+
+        collection_formats = {}
+
+        resource_path = '/content_validation'.replace('{format}', 'json')
+        path_params = {}
+
+        query_params = {}
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.\
+            select_header_accept(['application/json'])
+
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.\
+            select_header_content_type(['application/json'])
+
+        # Authentication setting
+        auth_settings = []
+
+        return self.api_client.call_api(resource_path, 'GET',
+                                        path_params,
+                                        query_params,
+                                        header_params,
+                                        body=body_params,
+                                        post_params=form_params,
+                                        files=local_var_files,
+                                        response_type='ContentValidation',
                                         auth_settings=auth_settings,
                                         callback=params.get('callback'),
                                         _return_http_data_only=params.get('_return_http_data_only'),
@@ -906,7 +1013,7 @@ class ContentApi(object):
     def search_content_favorites(self, **kwargs):
         """
         Search Favorite Contents
-        ### Search Favorite Content 
+        ### Search Favorite Content  If multiple search params are given and `filter_or` is FALSE or not specified, search params are combined in a logical AND operation. Only rows that match *all* search param criteria will be returned.  If `filter_or` is TRUE, multiple search params are combined in a logical OR operation. Results will include rows that match **any** of the search criteria.  String search params use case-insensitive matching. String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions. example=\"dan%\" will match \"danger\" and \"Danzig\" but not \"David\" example=\"D_m%\" will match \"Damage\" and \"dump\"  Integer search params can accept a single value or a comma separated list of values. The multiple values will be combined under a logical OR operation - results will match at least one of the given values.  Most search params can accept \"IS NULL\" and \"NOT NULL\" as special expressions to match or exclude (respectively) rows where the column is null.  Boolean search params accept only \"true\" and \"false\" as values.  
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -917,11 +1024,16 @@ class ContentApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param int user_id: Match User Id
+        :param int id: Match content favorite id(s)
+        :param int user_id: Match user id(s)
+        :param int content_metadata_id: Match content metadata id(s)
+        :param int dashboard_id: Match dashboard id(s)
+        :param int look_id: Match look id(s)
         :param int limit: Number of results to return. (used with offset)
         :param int offset: Number of results to skip before returning any. (used with limit)
         :param str sorts: Fields to sort by.
         :param str fields: Requested fields.
+        :param bool filter_or: Combine given search criteria in a boolean OR expression
         :return: list[ContentFavorite]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -936,7 +1048,7 @@ class ContentApi(object):
     def search_content_favorites_with_http_info(self, **kwargs):
         """
         Search Favorite Contents
-        ### Search Favorite Content 
+        ### Search Favorite Content  If multiple search params are given and `filter_or` is FALSE or not specified, search params are combined in a logical AND operation. Only rows that match *all* search param criteria will be returned.  If `filter_or` is TRUE, multiple search params are combined in a logical OR operation. Results will include rows that match **any** of the search criteria.  String search params use case-insensitive matching. String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions. example=\"dan%\" will match \"danger\" and \"Danzig\" but not \"David\" example=\"D_m%\" will match \"Damage\" and \"dump\"  Integer search params can accept a single value or a comma separated list of values. The multiple values will be combined under a logical OR operation - results will match at least one of the given values.  Most search params can accept \"IS NULL\" and \"NOT NULL\" as special expressions to match or exclude (respectively) rows where the column is null.  Boolean search params accept only \"true\" and \"false\" as values.  
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -947,17 +1059,22 @@ class ContentApi(object):
 
         :param callback function: The callback function
             for asynchronous request. (optional)
-        :param int user_id: Match User Id
+        :param int id: Match content favorite id(s)
+        :param int user_id: Match user id(s)
+        :param int content_metadata_id: Match content metadata id(s)
+        :param int dashboard_id: Match dashboard id(s)
+        :param int look_id: Match look id(s)
         :param int limit: Number of results to return. (used with offset)
         :param int offset: Number of results to skip before returning any. (used with limit)
         :param str sorts: Fields to sort by.
         :param str fields: Requested fields.
+        :param bool filter_or: Combine given search criteria in a boolean OR expression
         :return: list[ContentFavorite]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['user_id', 'limit', 'offset', 'sorts', 'fields']
+        all_params = ['id', 'user_id', 'content_metadata_id', 'dashboard_id', 'look_id', 'limit', 'offset', 'sorts', 'fields', 'filter_or']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -980,8 +1097,16 @@ class ContentApi(object):
         path_params = {}
 
         query_params = {}
+        if 'id' in params:
+            query_params['id'] = params['id']
         if 'user_id' in params:
             query_params['user_id'] = params['user_id']
+        if 'content_metadata_id' in params:
+            query_params['content_metadata_id'] = params['content_metadata_id']
+        if 'dashboard_id' in params:
+            query_params['dashboard_id'] = params['dashboard_id']
+        if 'look_id' in params:
+            query_params['look_id'] = params['look_id']
         if 'limit' in params:
             query_params['limit'] = params['limit']
         if 'offset' in params:
@@ -990,6 +1115,8 @@ class ContentApi(object):
             query_params['sorts'] = params['sorts']
         if 'fields' in params:
             query_params['fields'] = params['fields']
+        if 'filter_or' in params:
+            query_params['filter_or'] = params['filter_or']
 
         header_params = {}
 
@@ -1026,7 +1153,7 @@ class ContentApi(object):
     def search_content_views(self, **kwargs):
         """
         Search Content Views
-        ### Search Content View 
+        ### Search Content Views  If multiple search params are given and `filter_or` is FALSE or not specified, search params are combined in a logical AND operation. Only rows that match *all* search param criteria will be returned.  If `filter_or` is TRUE, multiple search params are combined in a logical OR operation. Results will include rows that match **any** of the search criteria.  String search params use case-insensitive matching. String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions. example=\"dan%\" will match \"danger\" and \"Danzig\" but not \"David\" example=\"D_m%\" will match \"Damage\" and \"dump\"  Integer search params can accept a single value or a comma separated list of values. The multiple values will be combined under a logical OR operation - results will match at least one of the given values.  Most search params can accept \"IS NULL\" and \"NOT NULL\" as special expressions to match or exclude (respectively) rows where the column is null.  Boolean search params accept only \"true\" and \"false\" as values.  
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -1045,10 +1172,11 @@ class ContentApi(object):
         :param str start_of_week_date: Match start of week date
         :param bool all_time: True if only all time view records should be returned
         :param int user_id: Match user id
+        :param str fields: Requested fields
         :param int limit: Number of results to return. Use with `offset` to manage pagination of results
         :param int offset: Number of results to skip before returning data
         :param str sorts: Fields to sort by
-        :param str fields: Requested fields.
+        :param bool filter_or: Combine given search criteria in a boolean OR expression
         :return: list[ContentView]
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1063,7 +1191,7 @@ class ContentApi(object):
     def search_content_views_with_http_info(self, **kwargs):
         """
         Search Content Views
-        ### Search Content View 
+        ### Search Content Views  If multiple search params are given and `filter_or` is FALSE or not specified, search params are combined in a logical AND operation. Only rows that match *all* search param criteria will be returned.  If `filter_or` is TRUE, multiple search params are combined in a logical OR operation. Results will include rows that match **any** of the search criteria.  String search params use case-insensitive matching. String search params can contain `%` and '_' as SQL LIKE pattern match wildcard expressions. example=\"dan%\" will match \"danger\" and \"Danzig\" but not \"David\" example=\"D_m%\" will match \"Damage\" and \"dump\"  Integer search params can accept a single value or a comma separated list of values. The multiple values will be combined under a logical OR operation - results will match at least one of the given values.  Most search params can accept \"IS NULL\" and \"NOT NULL\" as special expressions to match or exclude (respectively) rows where the column is null.  Boolean search params accept only \"true\" and \"false\" as values.  
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -1082,16 +1210,17 @@ class ContentApi(object):
         :param str start_of_week_date: Match start of week date
         :param bool all_time: True if only all time view records should be returned
         :param int user_id: Match user id
+        :param str fields: Requested fields
         :param int limit: Number of results to return. Use with `offset` to manage pagination of results
         :param int offset: Number of results to skip before returning data
         :param str sorts: Fields to sort by
-        :param str fields: Requested fields.
+        :param bool filter_or: Combine given search criteria in a boolean OR expression
         :return: list[ContentView]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['view_count', 'group_id', 'look_id', 'dashboard_id', 'content_metadata_id', 'start_of_week_date', 'all_time', 'user_id', 'limit', 'offset', 'sorts', 'fields']
+        all_params = ['view_count', 'group_id', 'look_id', 'dashboard_id', 'content_metadata_id', 'start_of_week_date', 'all_time', 'user_id', 'fields', 'limit', 'offset', 'sorts', 'filter_or']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1130,14 +1259,16 @@ class ContentApi(object):
             query_params['all_time'] = params['all_time']
         if 'user_id' in params:
             query_params['user_id'] = params['user_id']
+        if 'fields' in params:
+            query_params['fields'] = params['fields']
         if 'limit' in params:
             query_params['limit'] = params['limit']
         if 'offset' in params:
             query_params['offset'] = params['offset']
         if 'sorts' in params:
             query_params['sorts'] = params['sorts']
-        if 'fields' in params:
-            query_params['fields'] = params['fields']
+        if 'filter_or' in params:
+            query_params['filter_or'] = params['filter_or']
 
         header_params = {}
 

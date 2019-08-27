@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class LookmlModelExploreField(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, align=None, can_filter=None, category=None, default_filter_value=None, description=None, enumerations=None, error=None, field_group_label=None, field_group_variant=None, fill_style=None, fiscal_month_offset=None, has_allowed_values=None, hidden=None, is_filter=None, is_fiscal=None, is_numeric=None, is_timeframe=None, can_time_filter=None, time_interval=None, label=None, label_from_parameter=None, label_short=None, lookml_link=None, map_layer=None, measure=None, name=None, parameter=None, permanent=None, primary_key=None, project_name=None, requires_refresh_on_sort=None, scope=None, sortable=None, source_file=None, source_file_path=None, sql=None, sql_case=None, suggest_dimension=None, suggest_explore=None, suggestable=None, suggestions=None, tags=None, type=None, user_attribute_filter_types=None, value_format=None, view=None, view_label=None, dynamic=None, week_start_day=None):
+    def __init__(self, align=None, can_filter=None, category=None, default_filter_value=None, description=None, enumerations=None, error=None, field_group_label=None, field_group_variant=None, fill_style=None, fiscal_month_offset=None, has_allowed_values=None, hidden=None, is_filter=None, is_fiscal=None, is_numeric=None, is_timeframe=None, can_time_filter=None, time_interval=None, label=None, label_from_parameter=None, label_short=None, lookml_link=None, map_layer=None, measure=None, name=None, strict_value_format=None, parameter=None, permanent=None, primary_key=None, project_name=None, requires_refresh_on_sort=None, scope=None, sortable=None, source_file=None, source_file_path=None, sql=None, sql_case=None, suggest_dimension=None, suggest_explore=None, suggestable=None, suggestions=None, tags=None, type=None, user_attribute_filter_types=None, value_format=None, view=None, view_label=None, dynamic=None, week_start_day=None):
         """
         LookmlModelExploreField - a model defined in Swagger
 
@@ -57,6 +57,7 @@ class LookmlModelExploreField(object):
             'map_layer': 'LookmlModelExploreFieldMapLayer',
             'measure': 'bool',
             'name': 'str',
+            'strict_value_format': 'bool',
             'parameter': 'bool',
             'permanent': 'bool',
             'primary_key': 'bool',
@@ -109,6 +110,7 @@ class LookmlModelExploreField(object):
             'map_layer': 'map_layer',
             'measure': 'measure',
             'name': 'name',
+            'strict_value_format': 'strict_value_format',
             'parameter': 'parameter',
             'permanent': 'permanent',
             'primary_key': 'primary_key',
@@ -160,6 +162,7 @@ class LookmlModelExploreField(object):
         self._map_layer = map_layer
         self._measure = measure
         self._name = name
+        self._strict_value_format = strict_value_format
         self._parameter = parameter
         self._permanent = permanent
         self._primary_key = primary_key
@@ -783,6 +786,29 @@ class LookmlModelExploreField(object):
         self._name = name
 
     @property
+    def strict_value_format(self):
+        """
+        Gets the strict_value_format of this LookmlModelExploreField.
+        If yes, the field will not be localized with the user attribute number_format. Defaults to no
+
+        :return: The strict_value_format of this LookmlModelExploreField.
+        :rtype: bool
+        """
+        return self._strict_value_format
+
+    @strict_value_format.setter
+    def strict_value_format(self, strict_value_format):
+        """
+        Sets the strict_value_format of this LookmlModelExploreField.
+        If yes, the field will not be localized with the user attribute number_format. Defaults to no
+
+        :param strict_value_format: The strict_value_format of this LookmlModelExploreField.
+        :type: bool
+        """
+
+        self._strict_value_format = strict_value_format
+
+    @property
     def parameter(self):
         """
         Gets the parameter of this LookmlModelExploreField.
@@ -993,7 +1019,7 @@ class LookmlModelExploreField(object):
     def sql(self):
         """
         Gets the sql of this LookmlModelExploreField.
-        SQL expression as defined in the LookML model. This will be null if the current user does not have the see_lookml permission for the field's model.
+        SQL expression as defined in the LookML model. The SQL syntax shown here is a representation intended for auditability, and is not neccessarily an exact match for what will ultimately be run in the database. It may contain special LookML syntax or annotations that are not valid SQL. This will be null if the current user does not have the see_lookml permission for the field's model.
 
         :return: The sql of this LookmlModelExploreField.
         :rtype: str
@@ -1004,7 +1030,7 @@ class LookmlModelExploreField(object):
     def sql(self, sql):
         """
         Sets the sql of this LookmlModelExploreField.
-        SQL expression as defined in the LookML model. This will be null if the current user does not have the see_lookml permission for the field's model.
+        SQL expression as defined in the LookML model. The SQL syntax shown here is a representation intended for auditability, and is not neccessarily an exact match for what will ultimately be run in the database. It may contain special LookML syntax or annotations that are not valid SQL. This will be null if the current user does not have the see_lookml permission for the field's model.
 
         :param sql: The sql of this LookmlModelExploreField.
         :type: str
@@ -1016,7 +1042,7 @@ class LookmlModelExploreField(object):
     def sql_case(self):
         """
         Gets the sql_case of this LookmlModelExploreField.
-        An array of conditions and values that make up a SQL Case expression, as defined in the LookML model. This will be null if the current user does not have the see_lookml permission for the field's model.
+        An array of conditions and values that make up a SQL Case expression, as defined in the LookML model. The SQL syntax shown here is a representation intended for auditability, and is not neccessarily an exact match for what will ultimately be run in the database. It may contain special LookML syntax or annotations that are not valid SQL. This will be null if the current user does not have the see_lookml permission for the field's model.
 
         :return: The sql_case of this LookmlModelExploreField.
         :rtype: list[LookmlModelExploreFieldSqlCase]
@@ -1027,7 +1053,7 @@ class LookmlModelExploreField(object):
     def sql_case(self, sql_case):
         """
         Sets the sql_case of this LookmlModelExploreField.
-        An array of conditions and values that make up a SQL Case expression, as defined in the LookML model. This will be null if the current user does not have the see_lookml permission for the field's model.
+        An array of conditions and values that make up a SQL Case expression, as defined in the LookML model. The SQL syntax shown here is a representation intended for auditability, and is not neccessarily an exact match for what will ultimately be run in the database. It may contain special LookML syntax or annotations that are not valid SQL. This will be null if the current user does not have the see_lookml permission for the field's model.
 
         :param sql_case: The sql_case of this LookmlModelExploreField.
         :type: list[LookmlModelExploreFieldSqlCase]

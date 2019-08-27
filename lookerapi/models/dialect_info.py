@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class DialectInfo(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, name=None, label=None, label_for_database_equivalent=None, default_port=None, default_max_connections=None, supported_options=None, installed=None, can=None):
+    def __init__(self, default_max_connections=None, default_port=None, installed=None, label=None, label_for_database_equivalent=None, name=None, supported_options=None, can=None):
         """
         DialectInfo - a model defined in Swagger
 
@@ -31,58 +31,104 @@ class DialectInfo(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
-            'name': 'str',
+            'default_max_connections': 'str',
+            'default_port': 'str',
+            'installed': 'bool',
             'label': 'str',
             'label_for_database_equivalent': 'str',
-            'default_port': 'str',
-            'default_max_connections': 'str',
+            'name': 'str',
             'supported_options': 'DialectInfoOptions',
-            'installed': 'bool',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
-            'name': 'name',
+            'default_max_connections': 'default_max_connections',
+            'default_port': 'default_port',
+            'installed': 'installed',
             'label': 'label',
             'label_for_database_equivalent': 'label_for_database_equivalent',
-            'default_port': 'default_port',
-            'default_max_connections': 'default_max_connections',
+            'name': 'name',
             'supported_options': 'supported_options',
-            'installed': 'installed',
             'can': 'can'
         }
 
-        self._name = name
+        self._default_max_connections = default_max_connections
+        self._default_port = default_port
+        self._installed = installed
         self._label = label
         self._label_for_database_equivalent = label_for_database_equivalent
-        self._default_port = default_port
-        self._default_max_connections = default_max_connections
+        self._name = name
         self._supported_options = supported_options
-        self._installed = installed
         self._can = can
 
     @property
-    def name(self):
+    def default_max_connections(self):
         """
-        Gets the name of this DialectInfo.
-        The name of the dialect
+        Gets the default_max_connections of this DialectInfo.
+        Default number max connections
 
-        :return: The name of this DialectInfo.
+        :return: The default_max_connections of this DialectInfo.
         :rtype: str
         """
-        return self._name
+        return self._default_max_connections
 
-    @name.setter
-    def name(self, name):
+    @default_max_connections.setter
+    def default_max_connections(self, default_max_connections):
         """
-        Sets the name of this DialectInfo.
-        The name of the dialect
+        Sets the default_max_connections of this DialectInfo.
+        Default number max connections
 
-        :param name: The name of this DialectInfo.
+        :param default_max_connections: The default_max_connections of this DialectInfo.
         :type: str
         """
 
-        self._name = name
+        self._default_max_connections = default_max_connections
+
+    @property
+    def default_port(self):
+        """
+        Gets the default_port of this DialectInfo.
+        Default port number
+
+        :return: The default_port of this DialectInfo.
+        :rtype: str
+        """
+        return self._default_port
+
+    @default_port.setter
+    def default_port(self, default_port):
+        """
+        Sets the default_port of this DialectInfo.
+        Default port number
+
+        :param default_port: The default_port of this DialectInfo.
+        :type: str
+        """
+
+        self._default_port = default_port
+
+    @property
+    def installed(self):
+        """
+        Gets the installed of this DialectInfo.
+        Is the supporting driver installed
+
+        :return: The installed of this DialectInfo.
+        :rtype: bool
+        """
+        return self._installed
+
+    @installed.setter
+    def installed(self, installed):
+        """
+        Sets the installed of this DialectInfo.
+        Is the supporting driver installed
+
+        :param installed: The installed of this DialectInfo.
+        :type: bool
+        """
+
+        self._installed = installed
 
     @property
     def label(self):
@@ -131,50 +177,27 @@ class DialectInfo(object):
         self._label_for_database_equivalent = label_for_database_equivalent
 
     @property
-    def default_port(self):
+    def name(self):
         """
-        Gets the default_port of this DialectInfo.
-        Default port number
+        Gets the name of this DialectInfo.
+        The name of the dialect
 
-        :return: The default_port of this DialectInfo.
+        :return: The name of this DialectInfo.
         :rtype: str
         """
-        return self._default_port
+        return self._name
 
-    @default_port.setter
-    def default_port(self, default_port):
+    @name.setter
+    def name(self, name):
         """
-        Sets the default_port of this DialectInfo.
-        Default port number
+        Sets the name of this DialectInfo.
+        The name of the dialect
 
-        :param default_port: The default_port of this DialectInfo.
+        :param name: The name of this DialectInfo.
         :type: str
         """
 
-        self._default_port = default_port
-
-    @property
-    def default_max_connections(self):
-        """
-        Gets the default_max_connections of this DialectInfo.
-        Default number max connections
-
-        :return: The default_max_connections of this DialectInfo.
-        :rtype: str
-        """
-        return self._default_max_connections
-
-    @default_max_connections.setter
-    def default_max_connections(self, default_max_connections):
-        """
-        Sets the default_max_connections of this DialectInfo.
-        Default number max connections
-
-        :param default_max_connections: The default_max_connections of this DialectInfo.
-        :type: str
-        """
-
-        self._default_max_connections = default_max_connections
+        self._name = name
 
     @property
     def supported_options(self):
@@ -198,29 +221,6 @@ class DialectInfo(object):
         """
 
         self._supported_options = supported_options
-
-    @property
-    def installed(self):
-        """
-        Gets the installed of this DialectInfo.
-        Is the supporting driver installed
-
-        :return: The installed of this DialectInfo.
-        :rtype: bool
-        """
-        return self._installed
-
-    @installed.setter
-    def installed(self, installed):
-        """
-        Sets the installed of this DialectInfo.
-        Is the supporting driver installed
-
-        :param installed: The installed of this DialectInfo.
-        :type: bool
-        """
-
-        self._installed = installed
 
     @property
     def can(self):

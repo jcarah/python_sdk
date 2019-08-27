@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -60,6 +60,8 @@ class RenderTaskApi(object):
         :param int width: Output width in pixels (required)
         :param int height: Output height in pixels (required)
         :param str fields: Requested fields.
+        :param str pdf_paper_size: Paper size for pdf
+        :param bool pdf_landscape: Whether to render pdf in landscape
         :return: RenderTask
                  If the method is called asynchronously,
                  returns the request thread.
@@ -91,12 +93,14 @@ class RenderTaskApi(object):
         :param int width: Output width in pixels (required)
         :param int height: Output height in pixels (required)
         :param str fields: Requested fields.
+        :param str pdf_paper_size: Paper size for pdf
+        :param bool pdf_landscape: Whether to render pdf in landscape
         :return: RenderTask
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['dashboard_id', 'result_format', 'body', 'width', 'height', 'fields']
+        all_params = ['dashboard_id', 'result_format', 'body', 'width', 'height', 'fields', 'pdf_paper_size', 'pdf_landscape']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -144,6 +148,10 @@ class RenderTaskApi(object):
             query_params['height'] = params['height']
         if 'fields' in params:
             query_params['fields'] = params['fields']
+        if 'pdf_paper_size' in params:
+            query_params['pdf_paper_size'] = params['pdf_paper_size']
+        if 'pdf_landscape' in params:
+            query_params['pdf_landscape'] = params['pdf_landscape']
 
         header_params = {}
 
@@ -331,6 +339,8 @@ class RenderTaskApi(object):
         :param int width: Output width in pixels (required)
         :param int height: Output height in pixels (required)
         :param str fields: Requested fields.
+        :param str pdf_paper_size: Paper size for pdf
+        :param bool pdf_landscape: Whether to render pdf in landscape
         :return: RenderTask
                  If the method is called asynchronously,
                  returns the request thread.
@@ -362,12 +372,14 @@ class RenderTaskApi(object):
         :param int width: Output width in pixels (required)
         :param int height: Output height in pixels (required)
         :param str fields: Requested fields.
+        :param str pdf_paper_size: Paper size for pdf
+        :param bool pdf_landscape: Whether to render pdf in landscape
         :return: RenderTask
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['dashboard_id', 'result_format', 'body', 'width', 'height', 'fields']
+        all_params = ['dashboard_id', 'result_format', 'body', 'width', 'height', 'fields', 'pdf_paper_size', 'pdf_landscape']
         all_params.append('callback')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -415,6 +427,10 @@ class RenderTaskApi(object):
             query_params['height'] = params['height']
         if 'fields' in params:
             query_params['fields'] = params['fields']
+        if 'pdf_paper_size' in params:
+            query_params['pdf_paper_size'] = params['pdf_paper_size']
+        if 'pdf_landscape' in params:
+            query_params['pdf_landscape'] = params['pdf_landscape']
 
         header_params = {}
 
@@ -696,7 +712,7 @@ class RenderTaskApi(object):
     def render_task_results(self, render_task_id, **kwargs):
         """
         Render Task Results
-        ### Get the document or image produced by a completed render task.  Returns `102 Processing` if the render task has not completed. 
+        ### Get the document or image produced by a completed render task.  Note that the PDF or image result will be a binary blob in the HTTP response, as indicated by the Content-Type in the response headers. This may require specialized (or at least different) handling than text responses such as JSON. You may need to tell your HTTP client that the response is binary so that it does not attempt to parse the binary data as text.  If the render task exists but has not finished rendering the results, the response HTTP status will be **202 Accepted**, the response body will be empty, and the response will have a Retry-After header indicating that the caller should repeat the request at a later time.  Returns 404 if the render task cannot be found, if the cached result has expired, or if the caller does not have permission to view the results.  For detailed information about the status of the render task, use [Render Task](#!/RenderTask/render_task). Polling loops waiting for completion of a render task would be better served by polling **render_task(id)** until the task status reaches completion (or error) instead of polling **render_task_results(id)** alone. 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.
@@ -722,7 +738,7 @@ class RenderTaskApi(object):
     def render_task_results_with_http_info(self, render_task_id, **kwargs):
         """
         Render Task Results
-        ### Get the document or image produced by a completed render task.  Returns `102 Processing` if the render task has not completed. 
+        ### Get the document or image produced by a completed render task.  Note that the PDF or image result will be a binary blob in the HTTP response, as indicated by the Content-Type in the response headers. This may require specialized (or at least different) handling than text responses such as JSON. You may need to tell your HTTP client that the response is binary so that it does not attempt to parse the binary data as text.  If the render task exists but has not finished rendering the results, the response HTTP status will be **202 Accepted**, the response body will be empty, and the response will have a Retry-After header indicating that the caller should repeat the request at a later time.  Returns 404 if the render task cannot be found, if the cached result has expired, or if the caller does not have permission to view the results.  For detailed information about the status of the render task, use [Render Task](#!/RenderTask/render_task). Polling loops waiting for completion of a render task would be better served by polling **render_task(id)** until the task status reaches completion (or error) instead of polling **render_task_results(id)** alone. 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please define a `callback` function
         to be invoked when receiving the response.

@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class Query(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, id=None, model=None, view=None, fields=None, pivots=None, fill_fields=None, filters=None, filter_expression=None, sorts=None, limit=None, column_limit=None, total=None, row_total=None, runtime=None, vis_config=None, filter_config=None, visible_ui_sections=None, slug=None, dynamic_fields=None, client_id=None, share_url=None, expanded_share_url=None, url=None, query_timezone=None, has_table_calculations=None, can=None):
+    def __init__(self, id=None, model=None, view=None, fields=None, pivots=None, fill_fields=None, filters=None, filter_expression=None, sorts=None, limit=None, column_limit=None, total=None, row_total=None, subtotals=None, runtime=None, vis_config=None, filter_config=None, visible_ui_sections=None, slug=None, dynamic_fields=None, client_id=None, share_url=None, expanded_share_url=None, url=None, query_timezone=None, has_table_calculations=None, can=None):
         """
         Query - a model defined in Swagger
 
@@ -44,12 +44,13 @@ class Query(object):
             'column_limit': 'str',
             'total': 'bool',
             'row_total': 'str',
+            'subtotals': 'list[str]',
             'runtime': 'float',
             'vis_config': 'dict(str, str)',
             'filter_config': 'dict(str, str)',
             'visible_ui_sections': 'str',
             'slug': 'str',
-            'dynamic_fields': 'list[str]',
+            'dynamic_fields': 'str',
             'client_id': 'str',
             'share_url': 'str',
             'expanded_share_url': 'str',
@@ -73,6 +74,7 @@ class Query(object):
             'column_limit': 'column_limit',
             'total': 'total',
             'row_total': 'row_total',
+            'subtotals': 'subtotals',
             'runtime': 'runtime',
             'vis_config': 'vis_config',
             'filter_config': 'filter_config',
@@ -101,6 +103,7 @@ class Query(object):
         self._column_limit = column_limit
         self._total = total
         self._row_total = row_total
+        self._subtotals = subtotals
         self._runtime = runtime
         self._vis_config = vis_config
         self._filter_config = filter_config
@@ -167,7 +170,7 @@ class Query(object):
     def view(self):
         """
         Gets the view of this Query.
-        View
+        Explore Name
 
         :return: The view of this Query.
         :rtype: str
@@ -178,7 +181,7 @@ class Query(object):
     def view(self, view):
         """
         Sets the view of this Query.
-        View
+        Explore Name
 
         :param view: The view of this Query.
         :type: str
@@ -307,7 +310,7 @@ class Query(object):
     def sorts(self):
         """
         Gets the sorts of this Query.
-        Sorting for the query results. Use the format [\"view.field\", ...] to sort on fields in ascending order. Use the format [\"view.field desc\", ...] to sort on fields in descending order. Use [\"__UNSORTED__\"] to disable sorting entirely. Empty sorts [] will trigger a default sort.
+        Sorting for the query results. Use the format `[\"view.field\", ...]` to sort on fields in ascending order. Use the format `[\"view.field desc\", ...]` to sort on fields in descending order. Use `[\"__UNSORTED__\"]` (2 underscores before and after) to disable sorting entirely. Empty sorts `[]` will trigger a default sort.
 
         :return: The sorts of this Query.
         :rtype: list[str]
@@ -318,7 +321,7 @@ class Query(object):
     def sorts(self, sorts):
         """
         Sets the sorts of this Query.
-        Sorting for the query results. Use the format [\"view.field\", ...] to sort on fields in ascending order. Use the format [\"view.field desc\", ...] to sort on fields in descending order. Use [\"__UNSORTED__\"] to disable sorting entirely. Empty sorts [] will trigger a default sort.
+        Sorting for the query results. Use the format `[\"view.field\", ...]` to sort on fields in ascending order. Use the format `[\"view.field desc\", ...]` to sort on fields in descending order. Use `[\"__UNSORTED__\"]` (2 underscores before and after) to disable sorting entirely. Empty sorts `[]` will trigger a default sort.
 
         :param sorts: The sorts of this Query.
         :type: list[str]
@@ -417,6 +420,29 @@ class Query(object):
         """
 
         self._row_total = row_total
+
+    @property
+    def subtotals(self):
+        """
+        Gets the subtotals of this Query.
+        Fields on which to run subtotals
+
+        :return: The subtotals of this Query.
+        :rtype: list[str]
+        """
+        return self._subtotals
+
+    @subtotals.setter
+    def subtotals(self, subtotals):
+        """
+        Sets the subtotals of this Query.
+        Fields on which to run subtotals
+
+        :param subtotals: The subtotals of this Query.
+        :type: list[str]
+        """
+
+        self._subtotals = subtotals
 
     @property
     def runtime(self):
@@ -540,7 +566,7 @@ class Query(object):
         Dynamic Fields
 
         :return: The dynamic_fields of this Query.
-        :rtype: list[str]
+        :rtype: str
         """
         return self._dynamic_fields
 
@@ -551,7 +577,7 @@ class Query(object):
         Dynamic Fields
 
         :param dynamic_fields: The dynamic_fields of this Query.
-        :type: list[str]
+        :type: str
         """
 
         self._dynamic_fields = dynamic_fields

@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class Group(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, id=None, name=None, user_count=None, contains_current_user=None, externally_managed=None, include_by_default=None, external_group_id=None, can_add_to_content_metadata=None, can=None):
+    def __init__(self, can_add_to_content_metadata=None, contains_current_user=None, external_group_id=None, externally_managed=None, id=None, include_by_default=None, name=None, user_count=None, can=None):
         """
         Group - a model defined in Swagger
 
@@ -31,38 +31,130 @@ class Group(object):
                                   and the value is json key in definition.
         """
         self.swagger_types = {
+            'can_add_to_content_metadata': 'bool',
+            'contains_current_user': 'bool',
+            'external_group_id': 'str',
+            'externally_managed': 'bool',
             'id': 'int',
+            'include_by_default': 'bool',
             'name': 'str',
             'user_count': 'int',
-            'contains_current_user': 'bool',
-            'externally_managed': 'bool',
-            'include_by_default': 'bool',
-            'external_group_id': 'str',
-            'can_add_to_content_metadata': 'bool',
             'can': 'dict(str, bool)'
         }
 
         self.attribute_map = {
+            'can_add_to_content_metadata': 'can_add_to_content_metadata',
+            'contains_current_user': 'contains_current_user',
+            'external_group_id': 'external_group_id',
+            'externally_managed': 'externally_managed',
             'id': 'id',
+            'include_by_default': 'include_by_default',
             'name': 'name',
             'user_count': 'user_count',
-            'contains_current_user': 'contains_current_user',
-            'externally_managed': 'externally_managed',
-            'include_by_default': 'include_by_default',
-            'external_group_id': 'external_group_id',
-            'can_add_to_content_metadata': 'can_add_to_content_metadata',
             'can': 'can'
         }
 
+        self._can_add_to_content_metadata = can_add_to_content_metadata
+        self._contains_current_user = contains_current_user
+        self._external_group_id = external_group_id
+        self._externally_managed = externally_managed
         self._id = id
+        self._include_by_default = include_by_default
         self._name = name
         self._user_count = user_count
-        self._contains_current_user = contains_current_user
-        self._externally_managed = externally_managed
-        self._include_by_default = include_by_default
-        self._external_group_id = external_group_id
-        self._can_add_to_content_metadata = can_add_to_content_metadata
         self._can = can
+
+    @property
+    def can_add_to_content_metadata(self):
+        """
+        Gets the can_add_to_content_metadata of this Group.
+        Group can be used in content access controls
+
+        :return: The can_add_to_content_metadata of this Group.
+        :rtype: bool
+        """
+        return self._can_add_to_content_metadata
+
+    @can_add_to_content_metadata.setter
+    def can_add_to_content_metadata(self, can_add_to_content_metadata):
+        """
+        Sets the can_add_to_content_metadata of this Group.
+        Group can be used in content access controls
+
+        :param can_add_to_content_metadata: The can_add_to_content_metadata of this Group.
+        :type: bool
+        """
+
+        self._can_add_to_content_metadata = can_add_to_content_metadata
+
+    @property
+    def contains_current_user(self):
+        """
+        Gets the contains_current_user of this Group.
+        Currently logged in user is group member
+
+        :return: The contains_current_user of this Group.
+        :rtype: bool
+        """
+        return self._contains_current_user
+
+    @contains_current_user.setter
+    def contains_current_user(self, contains_current_user):
+        """
+        Sets the contains_current_user of this Group.
+        Currently logged in user is group member
+
+        :param contains_current_user: The contains_current_user of this Group.
+        :type: bool
+        """
+
+        self._contains_current_user = contains_current_user
+
+    @property
+    def external_group_id(self):
+        """
+        Gets the external_group_id of this Group.
+        External Id group if embed group
+
+        :return: The external_group_id of this Group.
+        :rtype: str
+        """
+        return self._external_group_id
+
+    @external_group_id.setter
+    def external_group_id(self, external_group_id):
+        """
+        Sets the external_group_id of this Group.
+        External Id group if embed group
+
+        :param external_group_id: The external_group_id of this Group.
+        :type: str
+        """
+
+        self._external_group_id = external_group_id
+
+    @property
+    def externally_managed(self):
+        """
+        Gets the externally_managed of this Group.
+        Group membership controlled outside of Looker
+
+        :return: The externally_managed of this Group.
+        :rtype: bool
+        """
+        return self._externally_managed
+
+    @externally_managed.setter
+    def externally_managed(self, externally_managed):
+        """
+        Sets the externally_managed of this Group.
+        Group membership controlled outside of Looker
+
+        :param externally_managed: The externally_managed of this Group.
+        :type: bool
+        """
+
+        self._externally_managed = externally_managed
 
     @property
     def id(self):
@@ -86,6 +178,29 @@ class Group(object):
         """
 
         self._id = id
+
+    @property
+    def include_by_default(self):
+        """
+        Gets the include_by_default of this Group.
+        New users are added to this group by default
+
+        :return: The include_by_default of this Group.
+        :rtype: bool
+        """
+        return self._include_by_default
+
+    @include_by_default.setter
+    def include_by_default(self, include_by_default):
+        """
+        Sets the include_by_default of this Group.
+        New users are added to this group by default
+
+        :param include_by_default: The include_by_default of this Group.
+        :type: bool
+        """
+
+        self._include_by_default = include_by_default
 
     @property
     def name(self):
@@ -132,121 +247,6 @@ class Group(object):
         """
 
         self._user_count = user_count
-
-    @property
-    def contains_current_user(self):
-        """
-        Gets the contains_current_user of this Group.
-        Currently logged in user is group member
-
-        :return: The contains_current_user of this Group.
-        :rtype: bool
-        """
-        return self._contains_current_user
-
-    @contains_current_user.setter
-    def contains_current_user(self, contains_current_user):
-        """
-        Sets the contains_current_user of this Group.
-        Currently logged in user is group member
-
-        :param contains_current_user: The contains_current_user of this Group.
-        :type: bool
-        """
-
-        self._contains_current_user = contains_current_user
-
-    @property
-    def externally_managed(self):
-        """
-        Gets the externally_managed of this Group.
-        Group membership controlled outside of Looker
-
-        :return: The externally_managed of this Group.
-        :rtype: bool
-        """
-        return self._externally_managed
-
-    @externally_managed.setter
-    def externally_managed(self, externally_managed):
-        """
-        Sets the externally_managed of this Group.
-        Group membership controlled outside of Looker
-
-        :param externally_managed: The externally_managed of this Group.
-        :type: bool
-        """
-
-        self._externally_managed = externally_managed
-
-    @property
-    def include_by_default(self):
-        """
-        Gets the include_by_default of this Group.
-        New users are added to this group by default
-
-        :return: The include_by_default of this Group.
-        :rtype: bool
-        """
-        return self._include_by_default
-
-    @include_by_default.setter
-    def include_by_default(self, include_by_default):
-        """
-        Sets the include_by_default of this Group.
-        New users are added to this group by default
-
-        :param include_by_default: The include_by_default of this Group.
-        :type: bool
-        """
-
-        self._include_by_default = include_by_default
-
-    @property
-    def external_group_id(self):
-        """
-        Gets the external_group_id of this Group.
-        External Id group if embed group
-
-        :return: The external_group_id of this Group.
-        :rtype: str
-        """
-        return self._external_group_id
-
-    @external_group_id.setter
-    def external_group_id(self, external_group_id):
-        """
-        Sets the external_group_id of this Group.
-        External Id group if embed group
-
-        :param external_group_id: The external_group_id of this Group.
-        :type: str
-        """
-
-        self._external_group_id = external_group_id
-
-    @property
-    def can_add_to_content_metadata(self):
-        """
-        Gets the can_add_to_content_metadata of this Group.
-        Group can be used in content access controls
-
-        :return: The can_add_to_content_metadata of this Group.
-        :rtype: bool
-        """
-        return self._can_add_to_content_metadata
-
-    @can_add_to_content_metadata.setter
-    def can_add_to_content_metadata(self, can_add_to_content_metadata):
-        """
-        Sets the can_add_to_content_metadata of this Group.
-        Group can be used in content access controls
-
-        :param can_add_to_content_metadata: The can_add_to_content_metadata of this Group.
-        :type: bool
-        """
-
-        self._can_add_to_content_metadata = can_add_to_content_metadata
 
     @property
     def can(self):

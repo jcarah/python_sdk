@@ -1,12 +1,12 @@
 # coding: utf-8
 
 """
-    Looker API 3.0 Reference
+    Looker API 3.1 Reference
 
-    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning. Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning) 
+    ### Authorization  The Looker API uses Looker **API3** credentials for authorization and access control. Looker admins can create API3 credentials on Looker's **Admin/Users** page. Pass API3 credentials to the **/login** endpoint to obtain a temporary access_token. Include that access_token in the Authorization header of Looker API requests. For details, see [Looker API Authorization](https://looker.com/docs/r/api/authorization)  ### Client SDKs  The Looker API is a RESTful system that should be usable by any programming language capable of making HTTPS requests. Client SDKs for a variety of programming languages can be generated from the Looker API's Swagger JSON metadata to streamline use of the Looker API in your applications. A client SDK for Ruby is available as an example. For more information, see [Looker API Client SDKs](https://looker.com/docs/r/api/client_sdks)  ### Try It Out!  The 'api-docs' page served by the Looker instance includes 'Try It Out!' buttons for each API method. After logging in with API3 credentials, you can use the \"Try It Out!\" buttons to call the API directly from the documentation page to interactively explore API features and responses.  Note! With great power comes great responsibility: The \"Try It Out!\" button makes API calls to your live Looker instance. Be especially careful with destructive API operations such as `delete_user` or similar. There is no \"undo\" for API operations.  ### Versioning  Future releases of Looker will expand this API release-by-release to securely expose more and more of the core power of Looker to API client applications. API endpoints marked as \"beta\" may receive breaking changes without warning (but we will try to avoid doing that). Stable (non-beta) API endpoints should not receive breaking changes in future releases. For more information, see [Looker API Versioning](https://looker.com/docs/r/api/versioning)  This **API 3.1** is in active development. This is where support for new Looker features will appear as non-breaking additions - new functions, new optional parameters on existing functions, or new optional properties in existing types. Additive changes should not impact your existing application code that calls the Looker API. Your existing application code will not be aware of any new Looker API functionality until you choose to upgrade your app to use a newer Looker API client SDK release.  The following are a few examples of noteworthy items that have changed between API 3.0 and API 3.1. For more comprehensive coverage of API changes, please see the release notes for your Looker release.   ### Examples of new things added in API 3.1:  * Dashboard construction APIs * Themes and custom color collections APIs * Create and run SQL_runner queries * Create and run merged results queries * Create and modify dashboard filters * Create and modify password requirements   ### Deprecated in API 3.0  The following functions and properties have been deprecated in API 3.0.  They continue to exist and work in API 3.0 for the next several Looker releases but they have not been carried forward to API 3.1:  * Dashboard Prefetch functions * User access_filter functions * User API 1.0 credentials functions * Space.is_root and Space.is_user_root properties. Use Space.is_shared_root and Space.is_users_root instead.   ### Semantic changes in API 3.1:  * `all_looks` no longer includes soft-deleted looks, matching `all_dashboards` behavior. You can find soft-deleted looks using `search_looks` with the `deleted` param set to True. * `all_spaces` no longer includes duplicate items * `search_users` no longer accepts Y,y,1,0,N,n for Boolean params, only \"true\" and \"false\". * For greater client and network compatibility, `render_task_results` now returns HTTP status ***202 Accepted*** instead of HTTP status ***102 Processing*** * `all_running_queries` and `kill_query` functions have moved into the `Query` function group.   If you have application code which relies on the old behavior of the APIs above, you may continue using the API 3.0 functions in this Looker release. We strongly suggest you update your code to use API 3.1 analogs as soon as possible.  
 
-    OpenAPI spec version: 3.0.0
-    
+    OpenAPI spec version: 3.1.0
+    Contact: support@looker.com
     Generated by: https://github.com/swagger-api/swagger-codegen.git
 """
 
@@ -21,7 +21,7 @@ class ScheduledPlan(object):
     NOTE: This class is auto generated by the swagger code generator program.
     Do not edit the class manually.
     """
-    def __init__(self, id=None, name=None, created_at=None, updated_at=None, title=None, user_id=None, user=None, run_as_recipient=None, enabled=None, next_run_at=None, last_run_at=None, look_id=None, dashboard_id=None, lookml_dashboard_id=None, filters_string=None, dashboard_filters=None, require_results=None, require_no_results=None, require_change=None, send_all_results=None, crontab=None, datagroup=None, timezone=None, query_id=None, scheduled_plan_destination=None, run_once=None, include_links=None, can=None):
+    def __init__(self, id=None, name=None, created_at=None, updated_at=None, title=None, user_id=None, user=None, run_as_recipient=None, enabled=None, next_run_at=None, last_run_at=None, look_id=None, dashboard_id=None, lookml_dashboard_id=None, filters_string=None, dashboard_filters=None, require_results=None, require_no_results=None, require_change=None, send_all_results=None, crontab=None, datagroup=None, timezone=None, query_id=None, scheduled_plan_destination=None, run_once=None, include_links=None, pdf_paper_size=None, pdf_landscape=None, embed=None, color_theme=None, long_tables=None, can=None):
         """
         ScheduledPlan - a model defined in Swagger
 
@@ -58,6 +58,11 @@ class ScheduledPlan(object):
             'scheduled_plan_destination': 'list[ScheduledPlanDestination]',
             'run_once': 'bool',
             'include_links': 'bool',
+            'pdf_paper_size': 'str',
+            'pdf_landscape': 'bool',
+            'embed': 'bool',
+            'color_theme': 'str',
+            'long_tables': 'bool',
             'can': 'dict(str, bool)'
         }
 
@@ -89,6 +94,11 @@ class ScheduledPlan(object):
             'scheduled_plan_destination': 'scheduled_plan_destination',
             'run_once': 'run_once',
             'include_links': 'include_links',
+            'pdf_paper_size': 'pdf_paper_size',
+            'pdf_landscape': 'pdf_landscape',
+            'embed': 'embed',
+            'color_theme': 'color_theme',
+            'long_tables': 'long_tables',
             'can': 'can'
         }
 
@@ -119,6 +129,11 @@ class ScheduledPlan(object):
         self._scheduled_plan_destination = scheduled_plan_destination
         self._run_once = run_once
         self._include_links = include_links
+        self._pdf_paper_size = pdf_paper_size
+        self._pdf_landscape = pdf_landscape
+        self._embed = embed
+        self._color_theme = color_theme
+        self._long_tables = long_tables
         self._can = can
 
     @property
@@ -741,6 +756,121 @@ class ScheduledPlan(object):
         """
 
         self._include_links = include_links
+
+    @property
+    def pdf_paper_size(self):
+        """
+        Gets the pdf_paper_size of this ScheduledPlan.
+        The size of paper a PDF should be rendered for
+
+        :return: The pdf_paper_size of this ScheduledPlan.
+        :rtype: str
+        """
+        return self._pdf_paper_size
+
+    @pdf_paper_size.setter
+    def pdf_paper_size(self, pdf_paper_size):
+        """
+        Sets the pdf_paper_size of this ScheduledPlan.
+        The size of paper a PDF should be rendered for
+
+        :param pdf_paper_size: The pdf_paper_size of this ScheduledPlan.
+        :type: str
+        """
+
+        self._pdf_paper_size = pdf_paper_size
+
+    @property
+    def pdf_landscape(self):
+        """
+        Gets the pdf_landscape of this ScheduledPlan.
+        Whether the paper should be landscape
+
+        :return: The pdf_landscape of this ScheduledPlan.
+        :rtype: bool
+        """
+        return self._pdf_landscape
+
+    @pdf_landscape.setter
+    def pdf_landscape(self, pdf_landscape):
+        """
+        Sets the pdf_landscape of this ScheduledPlan.
+        Whether the paper should be landscape
+
+        :param pdf_landscape: The pdf_landscape of this ScheduledPlan.
+        :type: bool
+        """
+
+        self._pdf_landscape = pdf_landscape
+
+    @property
+    def embed(self):
+        """
+        Gets the embed of this ScheduledPlan.
+        Whether this schedule is in an embed context or not
+
+        :return: The embed of this ScheduledPlan.
+        :rtype: bool
+        """
+        return self._embed
+
+    @embed.setter
+    def embed(self, embed):
+        """
+        Sets the embed of this ScheduledPlan.
+        Whether this schedule is in an embed context or not
+
+        :param embed: The embed of this ScheduledPlan.
+        :type: bool
+        """
+
+        self._embed = embed
+
+    @property
+    def color_theme(self):
+        """
+        Gets the color_theme of this ScheduledPlan.
+        Color scheme of the dashboard if applicable
+
+        :return: The color_theme of this ScheduledPlan.
+        :rtype: str
+        """
+        return self._color_theme
+
+    @color_theme.setter
+    def color_theme(self, color_theme):
+        """
+        Sets the color_theme of this ScheduledPlan.
+        Color scheme of the dashboard if applicable
+
+        :param color_theme: The color_theme of this ScheduledPlan.
+        :type: str
+        """
+
+        self._color_theme = color_theme
+
+    @property
+    def long_tables(self):
+        """
+        Gets the long_tables of this ScheduledPlan.
+        Whether or not to expand table vis to full length
+
+        :return: The long_tables of this ScheduledPlan.
+        :rtype: bool
+        """
+        return self._long_tables
+
+    @long_tables.setter
+    def long_tables(self, long_tables):
+        """
+        Sets the long_tables of this ScheduledPlan.
+        Whether or not to expand table vis to full length
+
+        :param long_tables: The long_tables of this ScheduledPlan.
+        :type: bool
+        """
+
+        self._long_tables = long_tables
 
     @property
     def can(self):
